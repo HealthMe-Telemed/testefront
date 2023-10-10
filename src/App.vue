@@ -1,5 +1,5 @@
 <script setup>
-import MenuPrincipal from './components/MenuPrincipal.vue'
+import MenuPrincipal from './components/MenuPrincipal.vue';
 import Agendamentos from './components/Agendamentos.vue';
 </script>
 
