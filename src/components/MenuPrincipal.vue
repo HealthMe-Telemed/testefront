@@ -1,55 +1,102 @@
 <template>
   <section>
-        <div class="rt-container">
-            <div class="box">
-                <div class="square" style="--i:0;"></div>
-                <div class="square" style="--i:1;"><img src="../assets/img/HealthMe.png"
-                        style="width:200px;height:200px; margin-left: -25px;margin-top:-30px;"></div>
+    <div class="rt-container">
+      <div class="box">
+        <div class="square" style="--i: 0"></div>
+        <div class="square" style="--i: 1">
+          <img
+            src="../assets/img/HealthMe.png"
+            style="
+              width: 200px;
+              height: 200px;
+              margin-left: -25px;
+              margin-top: -30px;
+            "
+          />
+        </div>
 
-                <div class="square" style="--i:2;"></div>
-                <div class="square" style="--i:3;"></div>
-                <div class="square" style="--i:4;"></div>
-                <div class="square" style="--i:5;">
-                    <img src="../assets/img/HealthMe.png"
-                        style="width:110px;height:110px; margin-left: -10px;margin-top: -5px;">
-                </div>
-                <div class="container">
-                    <div class="form">
-                        <img src="../assets/img/HealthMe.png">
+        <div class="square" style="--i: 2"></div>
+        <div class="square" style="--i: 3"></div>
+        <div class="square" style="--i: 4"></div>
+        <div class="square" style="--i: 5">
+          <img
+            src="../assets/img/HealthMe.png"
+            style="
+              width: 110px;
+              height: 110px;
+              margin-left: -10px;
+              margin-top: -5px;
+            "
+          />
+        </div>
+        <div class="container">
+          <div class="form">
+            <img src="../assets/img/HealthMe.png" />
 
-                        <form action="">
+            <form action="">
+              <div class="inputBx">
+                <input
+                  type="text"
+                  v-model="username"
+                  required="true"
+                  name="cpf"
+                  maxlength="11"
+                  pattern="^\d{11}$"
+                />
+                <span>Login: CPF</span>
+                <i class="fas fa-user-circle"></i>
+              </div>
 
-                            <div class="inputBx">
-                                <input type="text" required=true name="cpf" maxlength="11" pattern="^\d{11}$" 
-                                    oninput="formatarCPF(this)">
-                                <span>Login: CPF</span>
-                                <i class="fas fa-user-circle"></i>
-                            </div>
+              <div class="inputBx password">
+                <input
+                  id="password-input"
+                  v-model="password"
+                  type="password"
+                  name="password"
+                  required="true"
+                />
+                <span>Password</span>
+                <a
+                  href="#"
+                  class="password-control"
+                  onclick="return show_hide_password(this);"
+                ></a>
+                <i class="fas fa-key"></i>
+              </div>
 
-                            <div class="inputBx password">
-                                <input id="password-input" type="password" name="password" required=true>
-                                <span>Password</span>
-                                <a href="#" class="password-control" onclick="return show_hide_password(this);"></a>
-                                <i class="fas fa-key"></i>
-                            </div>
+              <label class="remember"><input type="checkbox" />Lembrar</label>
 
-                            <label class="remember"><input type="checkbox">Lembrar</label>
+              <div class="inputBx acessar">
+                <button type="submit" value="Entrar" v-on:click="submitForm">Entrar</button>
+                <p><a href="#">Esqueceu sua Senha? </a></p>
+              </div>
+            </form>
 
-                            <div class="inputBx acessar">
-                                <button type="submit" value="Entrar"> Entrar </button>
-                                <p><a href="#">Esqueceu sua Senha? </a></p>
-                            </div>
-
-                        </form>
-                        
-                        <p style="margin: auto;"><a href="#">Cadastrar Nova Conta</a></p>
-
-                    </div>
-                </div>
-                </div>
-            </div>
-    </section>
+            <p style="margin: auto"><a href="#">Cadastrar Nova Conta</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    submitForm(e) {
+      e.preventDefault();
+      console.log("Usuário:", this.username);
+      console.log("Senha:", this.password);
+    },
+  },
+};
+</script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
@@ -225,9 +272,9 @@ section {
 .form .inputBx .view {
   transition: 0.5s;
 }
-.form img{
-  display: flex; 
-  width: 250px; 
+.form img {
+  display: flex;
+  width: 250px;
   margin: auto;
 }
 .form .inputBx .fas {
@@ -235,7 +282,6 @@ section {
   top: 13px;
   left: 13px;
 }
-
 
 .form .inputBx button {
   width: 80%;
@@ -251,15 +297,15 @@ section {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 form .inputBx button[type="submit"] {
-    background: #fff;
-    color: #111;
-    max-width: 100px;
-    padding: 8px 10px;
-    box-shadow: none;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: 1.5s;
-  }
+  background: #fff;
+  color: #111;
+  max-width: 100px;
+  padding: 8px 10px;
+  box-shadow: none;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 1.5s;
+}
 
 .form .inputBx button[type="submit"]:hover {
   background: linear-gradient
@@ -407,8 +453,9 @@ form .inputBx button[type="submit"] {
   position: relative;
 }
 
-.inputBx,.acessar{
-    display: flex;
-    justify-content:space-between;
+.inputBx,
+.acessar {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
