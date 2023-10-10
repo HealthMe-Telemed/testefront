@@ -1,6 +1,10 @@
-<!-- src/App.vue -->
-<template>    
+<script setup>
+import MenuPrincipal from './components/MenuPrincipal.vue'
+</script>
+
+<template>
     <MenuPrincipal />
+
 </template>
   
   <script>
@@ -15,7 +19,6 @@
   };
   </script>
 
-<style scoped>
-
+<style scoped> 
 </style>
 
