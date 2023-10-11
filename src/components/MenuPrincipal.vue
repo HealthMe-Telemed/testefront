@@ -85,7 +85,7 @@ export default {
   data() {
     return {
       username: "",
-      password: "",
+      password: ""
     };
   },
   methods: {
@@ -93,8 +93,9 @@ export default {
       e.preventDefault();
       console.log("Usuário:", this.username);
       console.log("Senha:", this.password);
-    },
-  },
+      this.$router.push('/agendamentos');
+    }
+  }
 };
 </script>
 
