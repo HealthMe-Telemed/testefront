@@ -33,15 +33,16 @@
           <div class="form">
             <img src="../assets/img/HealthMe.png" />
 
-            <form action="">
+            <form @submit.prevent="submitForm">
               <div class="inputBx">
                 <input
                   type="text"
                   v-model="username"
                   required="true"
-                  name="cpf"
+                  @input="formatarCPF"
+                  placeholder="Digite apenas numeros"
                   maxlength="11"
-                  pattern="^\d{11}$"
+                  minlength="11"
                 />
                 <span>Login: CPF</span>
                 <i class="fas fa-user-circle"></i>
@@ -51,16 +52,14 @@
                 <input
                   id="password-input"
                   v-model="password"
-                  type="password"
+                  :type="passwordVisible ? 'text' : 'password'"
                   name="password"
                   required="true"
                 />
                 <span>Password</span>
-                <a
-                  href="#"
-                  class="password-control"
-                  onclick="return show_hide_password(this);"
-                ></a>
+                <!--<button type="button" @click="togglePasswordVisibility">-
+      {{ passwordVisible ? "Ocultar Senha" : "Mostrar Senha" }}
+    </button> -->
                 <i class="fas fa-key"></i>
               </div>
 
@@ -79,23 +78,54 @@
     </div>
   </section>
 </template>
-
 <script>
+
 export default {
   data() {
     return {
       username: "",
-      password: ""
+      senha: "",
+      passwordVisible: false
     };
   },
   methods: {
-    submitForm(e) {
-      e.preventDefault();
-      console.log("Usuário:", this.username);
-      console.log("Senha:", this.password);
-      this.$router.push('/agendamentos');
-    }
-  }
+    formatarCPF() {
+      // Remova quaisquer caracteres não numéricos do valor do campo
+      this.username = this.username.replace(/\D/g, '');
+    },
+    validarCPF(cpf){
+      return cpf.length == 11 ? true: false; 
+    },
+    togglePasswordVisibility() {
+      console.log("Clicado")
+      this.passwordVisible = !this.passwordVisible;
+      console.log(this.passwordVisible)
+    },
+    submitForm() {
+      const cpfValido = this.validarCPF(this.username);
+      const md5Password = CryptoJS.MD5(this.password).toString();
+      const data = {
+        cpf: this.username,
+        senha: md5Password
+      };
+
+      if(cpfValido){
+      axios.post('https://localhost:7146/Usuario/Login', data)
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            // Redirecionar para a página de sucesso
+            this.$router.push('/Agendamentos');
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        })
+        .catch(error => {
+          console.log(error.response.data)
+        });
+      }
+    },
+  },
 };
 </script>
 
@@ -330,8 +360,8 @@ form .inputBx button[type="submit"] {
   pointer-events: none;
 }
 
-.form .inputBx input:focus ~ span,
-.form .inputBx input:valid ~ span {
+.form .inputBx input:focus ~ span ,
+.form .inputBx input:invalid ~ span,  form .inputBx input:valid ~ span {
   transform: translateX(-30px) translateY(-25px);
   font-size: 12px;
 }
