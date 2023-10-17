@@ -1,11 +1,11 @@
 <script setup>
-//import Layout from '.Layout.vue'
+import Layout from './Layout.vue'
 </script>
 
 <template>
   
     <div class="body">
-
+        <Layout></Layout>
         <main>
             <div class="container">
                 <div class="esquerda">
