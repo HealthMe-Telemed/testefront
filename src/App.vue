@@ -1,5 +1,8 @@
 <script setup>
-import MenuPrincipal from './components/MenuPrincipal.vue'
+import MenuPrincipal from '../src/components/MenuPrincipal.vue';
+import Agendamentos from '../src/components/Agendamentos.vue';
+import Novo_Agendamento from '../src/components/Novo_Agendamento.vue';
+import Layout from './components/Layout.vue';
 </script>
 
 <template>
@@ -8,14 +11,13 @@ import MenuPrincipal from './components/MenuPrincipal.vue'
 </template>
   
   <script>
-  import MenuPrincipal from './components/MenuPrincipal.vue';
-  import Agendamentos from './components/Agendamentos.vue';
-  import Layout from './components/Layout.vue';
+
   export default {
     components: {
       MenuPrincipal,
       Agendamentos,
-      Layout
+      Novo_Agendamento,
+      Layout,
     },
   };
   </script>

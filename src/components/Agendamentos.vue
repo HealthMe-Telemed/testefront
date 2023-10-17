@@ -1,58 +1,58 @@
 <script setup>
-import Layout from './Layout.vue'
+//import Layout from '.Layout.vue'
 </script>
 
 <template>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="body">
-    <Layout></Layout>
-    <main>
-        <div class="container">
-            <div class="esquerda">
-                <h2>Consulta 1</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    A et at neque sequi tempora labore ratione. 
-                    Placeat iusto illo, pariatur fugit dolorum voluptatem aliquam sint voluptatum sequi,
-                    consequatur architecto repellendus labore autem beatae, laudantium similique quis temporibus.</p>
+  
+    <div class="body">
+
+        <main>
+            <div class="container">
+                <div class="esquerda">
+                    <h2>Consulta 1</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        A et at neque sequi tempora labore ratione.
+                        Placeat iusto illo, pariatur fugit dolorum voluptatem aliquam sint voluptatum sequi,
+                        consequatur architecto repellendus labore autem beatae, laudantium similique quis temporibus.</p>
+                </div>
+                <div class="direita">
+                    <button class="botao-consulta">Entrar na Consulta</button>
+                    <button class="botao-secundario editar">Editar</button>
+                    <button class="botao-secundario cancelar">Cancelar</button>
+                </div>
             </div>
-            <div class="direita">
-                <button class="botao-consulta">Entrar na Consulta</button>
-                <button class="botao-secundario editar">Editar</button>
-                <button class="botao-secundario cancelar">Cancelar</button>
+            <div class="container">
+                <div class="esquerda">
+                    <h2>Consulta 2</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        A et at neque sequi tempora labore ratione.
+                        Placeat iusto illo, pariatur fugit dolorum voluptatem aliquam sint voluptatum sequi,
+                        consequatur architecto repellendus labore autem beatae, laudantium similique quis temporibus.</p>
+                </div>
+                <div class="direita">
+                    <button class="botao-consulta">Entrar na Consulta</button>
+                    <button class="botao-secundario editar">Editar</button>
+                    <button class="botao-secundario cancelar">Cancelar</button>
+                </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="esquerda">
-                <h2>Consulta 2</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    A et at neque sequi tempora labore ratione. 
-                    Placeat iusto illo, pariatur fugit dolorum voluptatem aliquam sint voluptatum sequi,
-                    consequatur architecto repellendus labore autem beatae, laudantium similique quis temporibus.</p>
-            </div>
-            <div class="direita">
-                <button class="botao-consulta">Entrar na Consulta</button>
-                <button class="botao-secundario editar">Editar</button>
-                <button class="botao-secundario cancelar">Cancelar</button>
-            </div>
-        </div>
         </main>
         <footer>
             <button class="sair">Sair</button>
         </footer>
     </div>
-    
 </template>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
+
 * {
-  margin: 0;
-  padding: 0;
-  font-family: "El Messiri", sans-serif;
-  color: white;
+    margin: 0;
+    padding: 0;
+    font-family: "El Messiri", sans-serif;
+    color: white;
 }
 
-.body{
+.body {
     min-height: 100vh;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
@@ -61,32 +61,34 @@ import Layout from './Layout.vue'
 
 @keyframes gradient {
     0% {
-      background-position: 0% 50%;
+        background-position: 0% 50%;
     }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
 
-.container{
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
     width: 80%;
     margin: 50px auto;
     display: flex;
     justify-content: space-between;
 }
 
-.esquerda{
+.esquerda {
     width: 50%;
 }
 
-.esquerda h2{
+.esquerda h2 {
     margin-bottom: 10px;
 }
 
-.direita{
+.direita {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,30 +103,31 @@ button {
     border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.botao-consulta{
+.botao-consulta {
     padding: 20px;
     font-size: 20px;
     border: white 2px solid;
     background-color: #23d5ab;
 }
 
-.editar{
+.editar {
     background-color: #ee7752;
 }
 
-.cancelar{
+.cancelar {
     background-color: #e73c7e;
 }
 
-.direita button{
+.direita button {
     margin: 10px;
 }
 
-footer{
+footer {
     text-align: center;
 }
 
-.sair, .home{
+.sair,
+.home {
     font-size: 20px;
     outline: none;
     background: rgba(255, 255, 255, 0.2);
@@ -132,17 +135,17 @@ footer{
     color: #fff;
 }
 
-.sair{
+.sair {
     padding: 20px 50px;
 }
 
 @media (max-width: 800px) {
-    .container{
+    .container {
         width: 100%;
         text-align: center;
     }
-    
-    .direita{
+
+    .direita {
         flex-direction: column;
     }
 }

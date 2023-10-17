@@ -11,8 +11,7 @@
               height: 200px;
               margin-left: -25px;
               margin-top: -30px;
-            "
-          />
+            "/>
         </div>
 
         <div class="square" style="--i: 2"></div>
@@ -490,3 +489,4 @@ form .inputBx button[type="submit"] {
   justify-content: space-between;
 }
 </style>
+
