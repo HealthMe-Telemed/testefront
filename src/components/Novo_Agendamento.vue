@@ -1,14 +1,20 @@
+
 <template>
+  <header>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <button class="home"><i class="fa fa-home"></i> Home</button>
+      <h1>NOVO AGENDAMENTO DE CONSULTA</h1>
+        </header>
   <section>
     <div class="container">
       <div class="box">
         <div class="square" style="--i: 0"></div>
         <div class="square" style="--i: 1">
-          <img src="../assets/img/HealthMe.png" style="
-              width: 200px;
-              height: 200px;
-              margin-left: -25px;
-              margin-top: -30px;
+          <img src="../assets/img/agendamento.png" style="
+              width: 165px;
+              height: 170px;
+              margin-left: -2px;
+              margin-top: -15px;
             " />
         </div>
 
@@ -16,11 +22,11 @@
         <div class="square" style="--i: 3"></div>
         <div class="square" style="--i: 4"></div>
         <div class="square" style="--i: 5">
-          <img src="../assets/img/HealthMe.png" style="
+          <img src="../assets/img/agenda.png" style="
               width: 110px;
-              height: 110px;
-              margin-left: -10px;
-              margin-top: -5px;
+              height: 100px;
+              margin-left: -2px;
+              margin-top: 15px;
             " />
         </div>
         <div class="container">
@@ -28,12 +34,22 @@
             <img src="../assets/img/HealthMe.png" />
 
             <form @submit.prevent="confirmarConsulta">
+
               <div class="inputBx">
-                <input type="text" v-model="nomeMedico" required placeholder="Nome do Médico" />
+                <select id="nomeMedico" v-model="nomeMedico" required placeholder="Selecione o Nome do Médico">
+                  <option value="" disabled>Selecione um médico</option>
+                  <option value="Antonio">Antonio</option>
+                  <option value="Carlos">Carlos</option>
+                  <option value="Luana">Luana</option>
+                </select>
               </div>
 
               <div class="inputBx">
-                <input type="text" v-model="especialidade" required placeholder="Especialidade" />
+                <select id="especialidade" v-model="especialidade" required placeholder="Selecione a especialidade">
+                  <option value="" disabled>Selecione a especialidade </option>
+                  <option value="psicologia">Psicologia</option>
+                  <option value="psiquiatria">Psiquiatria</option>
+                </select>
               </div>
 
               <div class="inputBx">
@@ -44,8 +60,9 @@
                 <input type="time" v-model="horarioConsulta" required />
               </div>
 
-              <div class="inputBx acessar">
-                <button type="submit">Confirmar Consulta</button>
+              <div class="inputBx confirmar">
+                <button class="btnConfirmar">Confirmar</button>
+
               </div>
             </form>
           </div>
@@ -91,9 +108,26 @@ export default {
   font-family: "El Messiri", sans-serif;
 }
 
+header {
+  margin: auto;
+  padding: 10px;
+  background-color: rgb(12, 12, 63);
+ 
+   }
+   h1{
+    margin: auto;
+    color:white;
+   }
+
 body {
+  display: flex;
   background: #031323;
   overflow: hidden;
+
+}
+button {
+ margin:5px;
+ 
 }
 
 .fas {
@@ -109,6 +143,8 @@ section {
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
 }
+
+
 
 @keyframes gradient {
   0% {
@@ -139,6 +175,7 @@ section {
   animation-delay: calc(-1s * var(--i));
 }
 
+
 @keyframes square {
 
   0%,
@@ -152,54 +189,54 @@ section {
 }
 
 .box .square:nth-child(1) {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   top: -15px;
-  right: -45px;
+  right: -250px;
 }
 
 .box .square:nth-child(2) {
   width: 150px;
   height: 150px;
   top: 105px;
-  left: -125px;
+  left: -250px;
   z-index: 2;
 }
 
 .box .square:nth-child(3) {
-  width: 60px;
-  height: 60px;
-  bottom: 85px;
-  right: -45px;
+  width: 150px;
+  height: 150px;
+  bottom: 15px;
+  right: -250px;
   z-index: 2;
 }
 
 .box .square:nth-child(4) {
-  width: 50px;
-  height: 50px;
-  bottom: 35px;
-  left: -95px;
+  width: 150px;
+  height: 150px;
+  bottom: 55px;
+  left: -250px;
 }
 
 .box .square:nth-child(5) {
-  width: 50px;
-  height: 50px;
-  top: -15px;
-  left: -25px;
+  width: 80px;
+  height: 80px;
+  top: -35px;
+  left: -150px;
 }
 
 .box .square:nth-child(6) {
-  width: 85px;
-  height: 85px;
-  top: 165px;
-  right: -155px;
+  width: 150px;
+  height: 150px;
+  top: 175px;
+  right: -200px;
   z-index: 2;
 }
 
 .container {
   position: relative;
-  padding: 50px;
-  width: 360px;
+  padding: 40px;
+  width: 400px;
   min-height: 380px;
   display: flex;
   justify-content: center;
@@ -209,15 +246,16 @@ section {
   border-radius: 10px;
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
   margin: 15px auto;
+  text-align: center;
 }
 
 .container::after {
   content: "";
   position: absolute;
-  top: 5px;
-  right: 5px;
-  bottom: 5px;
-  left: 5px;
+  top: 15px;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
   border-radius: 5px;
   pointer-events: none;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
@@ -234,8 +272,9 @@ section {
   margin-bottom: 20px;
 }
 
-.form .inputBx input {
-  width: 80%;
+
+.form .inputBx select {
+  width: 88%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -243,34 +282,48 @@ section {
   padding: 8px 10px;
   padding-left: 40px;
   border-radius: 15px;
-  color: #fff;
+  color: hwb(225 0% 93%);
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form .inputBx input {
+  width: 75%;
+  outline: none;
+  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 10px;
+  padding-left: 40px;
+  border-radius: 15px;
+  color: hwb(225 0% 93%);
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .form img {
   display: flex;
-  width: 250px;
+  width: 200px;
   margin: auto;
 }
 
 .form .inputBx .fas {
   position: absolute;
-  top: 13px;
+  top: 10px;
   left: 13px;
 }
 
 .form .inputBx button {
-  width: 80%;
+  width: 50%;
   outline: none;
   border: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #10ac2033;
+  background: blue;
   padding: 8px 10px;
-  padding-left: 40px;
-  border-radius: 15px;
+  padding-left: 20px;
+  border-radius: 10px;
   color: #fff;
-  font-size:20px;
+  font-size: 20px;
+  cursor: pointer;
 }
-
 </style>

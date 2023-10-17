@@ -3,8 +3,8 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <button class="home"><i class="fa fa-home"></i> Home</button>
         <h1>AGENDAMENTOS</h1>
-    </header>
-</template>
+        </header>
+        </template>
 <style>
 header{
     display: flex;
