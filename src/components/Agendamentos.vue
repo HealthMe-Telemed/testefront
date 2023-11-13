@@ -1,11 +1,10 @@
 <template>
     <section>
-        <p style="margin: auto;"><a href="#">Agendamentos</a></p>
         <header>
         <button class="home"><i class="fa fa-home"></i> Home</button>
         <h1>AGENDAMENTOS</h1>
         <button class="sair"><i class="fa fa-sign-out"></i> Sair</button>
-    </header>
+        </header>
     <main>
         <div class="container">
             <div class="esquerda">
@@ -54,7 +53,7 @@
   color: white;
 }
 
-body{
+section{
     min-height: 100vh;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
