@@ -2,32 +2,78 @@
   <section>
     <div class="rt-container">
       <div class="box">
-        <div class="square" style="--i: 0"></div>
+        <div class="square" style="--i: 0">
+          <img
+            src="../assets/img/agenda.png"
+            style="
+              width: 100px;
+              height: 100px;
+              margin-left: 15px;
+              margin-top: 10px;
+            "
+          />
+        </div>
+        
         <div class="square" style="--i: 1">
           <img
-            src="../assets/img/HealthMe.png"
+            src="../assets/img/HealthMe-1.png"
             style="
-              width: 200px;
-              height: 200px;
-              margin-left: -25px;
-              margin-top: -30px;
+              width: 150px;
+              height: 150px;
+              margin-left: -5px;
+              margin-top: -5px;
             "/>
         </div>
 
-        <div class="square" style="--i: 2"></div>
-        <div class="square" style="--i: 3"></div>
-        <div class="square" style="--i: 4"></div>
+        <div class="square" style="--i: 2">
+        
+          <img
+            src="../assets/img/consulta.png"
+            style="
+              width: 120px;
+              height: 120px;
+              margin-left: 30px;
+              margin-top: 2px;
+            "
+          />
+        </div>     
+
+        <div class="square" style="--i: 3">
+          <img
+            src="../assets/img/medico2.png"
+            style="
+              width: 150px;
+              height: 150px;
+              margin-left: -5px;
+              margin-top: 2px;
+            "
+          />
+        
+        </div>
+        <div class="square" style="--i: 4">
+          <img
+            src="../assets/img/cerebro2.png"
+            style="
+              width: 100px;
+              height: 100px;
+              margin-left: 20px;
+              margin-top: 25px;
+            "
+          />
+        </div>
         <div class="square" style="--i: 5">
           <img
             src="../assets/img/HealthMe.png"
             style="
-              width: 110px;
-              height: 110px;
-              margin-left: -10px;
+              width: 150px;
+              height: 150px;
+              margin-left: 2px;
               margin-top: -5px;
             "
           />
         </div>
+
+        
         <div class="container">
           <div class="form">
             <img src="../assets/img/HealthMe.png" />
@@ -194,8 +240,8 @@ section {
 }
 
 .box .square:nth-child(1) {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   top: -15px;
   right: -45px;
 }
@@ -203,38 +249,38 @@ section {
 .box .square:nth-child(2) {
   width: 150px;
   height: 150px;
-  top: 105px;
-  left: -125px;
+  top: 150px;
+  left: 45px;
   z-index: 2;
 }
 
 .box .square:nth-child(3) {
-  width: 6орх;
-  height: 6opx;
-  bottom: 85px;
-  right: -45px;
+  width: 120рх;
+  height: 120px;
+  bottom: 75px;
+  right: -15px;
   z-index: 2;
 }
 
 .box .square:nth-child(4) {
-  width: 50px;
-  height: 50px;
-  bottom: 35px;
-  left: -95px;
+  width: 150px;
+  height: 150px;
+  bottom: 45px;
+  left: -35px;
 }
 
 .box .square:nth-child(5) {
-  width: 5opx;
-  height: 5opx;
-  top: -15px;
-  left: -25px;
+  width: 150px;
+  height: 150px;
+  top: -50px;
+  left: 2px;
 }
 
 .box .square:nth-child(6) {
-  width: 85px;
-  height: 85px;
-  top: 165px;
-  right: -155px;
+  width: 150px;
+  height: 150px;
+  top: 180px;
+  right: 45px;
   z-index: 2;
 }
 

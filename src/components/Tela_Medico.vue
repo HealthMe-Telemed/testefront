@@ -1,23 +1,24 @@
-
+<!-- TelaMedico.vue -->
 <template>
   <header>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <button class="home"><i class="fa fa-home"></i> Home</button>
-      <h1>NOVO AGENDAMENTO DE CONSULTA</h1>
-        </header>
+    <button class="home"><i class="fa fa-home"></i> Home</button>
+    <h1>Área do Médico</h1>
+  </header>
+  
   <section>
-    <div class="container">
+        <div class="container">
       <div class="box">
         <div class="square" style="--i: 0"></div>
         <div class="square" style="--i: 1">
-          <img src="../assets/img/medico2.png" style="
-              width: 110px;
-              height: 110px;
+           <img src="../assets/img/medico2.png" style="
+              width: 150px;
+              height: 150px;
               margin-left: -12px;
               margin-top: 15px;
             " />
         </div>
-
+        
         <div class="square" style="--i: 2"></div>
         <div class="square" style="--i: 3"></div>
         <div class="square" style="--i: 4"></div>
@@ -29,39 +30,33 @@
               margin-top: 15px;
             " />
         </div>
+        <h1>Agenda de consultas </h1>
         <div class="container">
           <div class="form">
             <img src="../assets/img/HealthMe.png" />
 
-            <form @submit.prevent="confirmarConsulta">
+            <form @submit.prevent="confirmar">
 
               <div class="inputBx">
-                <select id="nomeMedico" v-model="nomeMedico" required placeholder="Selecione o Nome do Médico">
-                  <option value="" disabled>Selecione um médico</option>
-                  <option value="Antonio">Antonio</option>
-                  <option value="Carlos">Carlos</option>
-                  <option value="Luana">Luana</option>
+                <select id="TipoConsulta" v-model="TipoConsulta" required placeholder="Selecione o Tipo de consulta ">
+                  <option value="" disabled>Selecione Tipo de consulta</option>
+                  <option value="Agendada">Agendada</option>
+                  <option value="Cancelada">Cancelada</option>
+                  <option value="Finalizada">Finalizada</option>
                 </select>
               </div>
 
               <div class="inputBx">
-                <select id="especialidade" v-model="especialidade" required placeholder="Selecione a especialidade">
-                  <option value="" disabled>Selecione a especialidade </option>
+                <select id="especialidadeConsulta" v-model="especialidadeConsulta" required
+                  placeholder="Selecione a especialidade">
+                  <option value="" disabled>Selecione a especialidade da consulta </option>
                   <option value="psicologia">Psicologia</option>
                   <option value="psiquiatria">Psiquiatria</option>
                 </select>
               </div>
 
-              <div class="inputBx">
-                <input type="date" v-model="dataConsulta" required />
-              </div>
-
-              <div class="inputBx">
-                <input type="time" v-model="horarioConsulta" required />
-              </div>
-
               <div class="inputBx confirmar">
-                <button class="btnConfirmar">Confirmar</button>
+                <button class="btnMostrar">Mostrar Lista</button>
 
               </div>
             </form>
@@ -76,27 +71,11 @@
 export default {
   data() {
     return {
-      nomeMedico: "",
-      especialidade: "",
-      dataConsulta: "",
-      horarioConsulta: "",
+      TipoConsulta: "",
+      especialidadeConsulta: "",
     };
-  },
-  methods: {
-    confirmarConsulta() {
-      // Adicione a lógica para confirmar o agendamento, por exemplo, envio para o servidor
-      const dadosConsulta = {
-        nomeMedico: this.nomeMedico,
-        especialidade: this.especialidade,
-        dataConsulta: this.dataConsulta,
-        horarioConsulta: this.horarioConsulta,
-      };
-
-      console.log(dadosConsulta);
-      // Envie os dados para o servidor ou realize as ações necessárias
-    }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -112,12 +91,13 @@ header {
   margin: auto;
   padding: 10px;
   background-color: rgb(12, 12, 63);
- 
-   }
-   h1{
-    margin: auto;
-    color:white;
-   }
+
+}
+
+h1 {
+  margin: auto;
+  color: white;
+}
 
 body {
   display: flex;
@@ -125,9 +105,10 @@ body {
   overflow: hidden;
 
 }
+
 button {
- margin:5px;
- 
+  margin: 5px;
+
 }
 
 .fas {

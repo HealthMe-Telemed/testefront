@@ -13,8 +13,14 @@ header{
 }
 
 .home {
-    margin: 20px;
+    margin: 10px;
     padding: 10px;
+    border: 3px solid white;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+    background-image: linear-gradient(to bottom right, rgb(255, 0, 0), rgb(255, 0, 72));
+    
 }
 
 h1{

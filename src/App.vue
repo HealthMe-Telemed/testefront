@@ -2,6 +2,7 @@
 import MenuPrincipal from '../src/components/MenuPrincipal.vue';
 import Agendamentos from '../src/components/Agendamentos.vue';
 import Novo_Agendamento from '../src/components/Novo_Agendamento.vue';
+import Tela_Medico from '../src/components/Tela_Medico.vue';
 import Layout from './components/Layout.vue';
 </script>
 
@@ -17,6 +18,7 @@ import Layout from './components/Layout.vue';
       MenuPrincipal,
       Agendamentos,
       Novo_Agendamento,
+      Tela_Medico,
       Layout,
     },
   };
