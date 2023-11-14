@@ -13,7 +13,6 @@
             "
           />
         </div>
-        
         <div class="square" style="--i: 1">
           <img
             src="../assets/img/HealthMe-1.png"
@@ -24,7 +23,6 @@
               margin-top: -5px;
             "/>
         </div>
-
         <div class="square" style="--i: 2">
         
           <img
@@ -37,7 +35,6 @@
             "
           />
         </div>     
-
         <div class="square" style="--i: 3">
           <img
             src="../assets/img/medico2.png"
