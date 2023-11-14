@@ -1,75 +1,76 @@
 
 <template>
-  <header>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <button class="home"><i class="fa fa-home"></i> Home</button>
-      <h1>NOVO AGENDAMENTO DE CONSULTA</h1>
-  </header>
-
   <section>
-    <div class="container">
-      <div class="box">
-        <div class="square" style="--i: 0"></div>
-        <div class="square" style="--i: 1">
-          <img src="../assets/img/medico2.png" style="
+    <header>
+      <button class="home"><i class="fa fa-home"></i> Home</button>
+      <h1>NOVOS AGENDAMENTOS DE CONSULTA</h1>
+      <button class="sair"><i class="fa fa-sign-out"></i> Sair</button>
+    </header>
+    <main>
+      <div class="container">
+        <div class="box">
+          <div class="square" style="--i: 0"></div>
+          <div class="square" style="--i: 1">
+            <img src="../assets/img/medico2.png" style="
               width: 110px;
               height: 110px;
               margin-left: -12px;
               margin-top: 15px;
             " />
-        </div>
+          </div>
 
-        <div class="square" style="--i: 2"></div>
-        <div class="square" style="--i: 3"></div>
-        <div class="square" style="--i: 4"></div>
-        <div class="square" style="--i: 5">
-          <img src="../assets/img/agenda.png" style="
+          <div class="square" style="--i: 2"></div>
+          <div class="square" style="--i: 3"></div>
+          <div class="square" style="--i: 4"></div>
+          <div class="square" style="--i: 5">
+            <img src="../assets/img/agenda.png" style="
               width: 110px;
               height: 100px;
               margin-left: -2px;
               margin-top: 15px;
             " />
-        </div>
-        <div class="container">
-          <div class="form">
-            <img src="../assets/img/HealthMe.png" />
+          </div>
+          <div class="container">
+            <div class="form">
+              <img src="../assets/img/HealthMe.png" />
 
-            <form @submit.prevent="confirmarConsulta">
+              <form @submit.prevent="confirmarConsulta">
 
-              <div class="inputBx">
-                <select id="nomeMedico" v-model="nomeMedico" required placeholder="Selecione o Nome do Médico">
-                  <option value="" disabled>Selecione um médico</option>
-                  <option value="Antonio">Antonio</option>
-                  <option value="Carlos">Carlos</option>
-                  <option value="Luana">Luana</option>
-                </select>
-              </div>
+                <div class="inputBx">
+                  <select id="nomeMedico" v-model="nomeMedico" required placeholder="Selecione o Nome do Médico">
+                    <option value="" disabled>Selecione um médico</option>
+                    <option value="Antonio">Antonio</option>
+                    <option value="Carlos">Carlos</option>
+                    <option value="Luana">Luana</option>
+                  </select>
+                </div>
 
-              <div class="inputBx">
-                <select id="especialidade" v-model="especialidade" required placeholder="Selecione a especialidade">
-                  <option value="" disabled>Selecione a especialidade </option>
-                  <option value="psicologia">Psicologia</option>
-                  <option value="psiquiatria">Psiquiatria</option>
-                </select>
-              </div>
+                <div class="inputBx">
+                  <select id="especialidade" v-model="especialidade" required placeholder="Selecione a especialidade">
+                    <option value="" disabled>Selecione a especialidade </option>
+                    <option value="psicologia">Psicologia</option>
+                    <option value="psiquiatria">Psiquiatria</option>
+                  </select>
+                </div>
 
-              <div class="inputBx">
-                <input type="date" v-model="dataConsulta" required />
-              </div>
+                <div class="inputBx">
+                  <input type="date" v-model="dataConsulta" required />
+                </div>
 
-              <div class="inputBx">
-                <input type="time" v-model="horarioConsulta" required />
-              </div>
+                <div class="inputBx">
+                  <input type="time" v-model="horarioConsulta" required />
+                </div>
 
-              <div class="inputBx confirmar">
-                <button class="btnConfirmar">Confirmar</button>
+                <div class="inputBx confirmar">
+                  <button class="btnConfirmar">Confirmar</button>
 
-              </div>
-            </form>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </section>
 </template>
 
@@ -107,44 +108,15 @@ export default {
   margin: 0;
   padding: 0;
   font-family: "El Messiri", sans-serif;
-}
-
-header {
-  margin: auto;
-  padding: 10px;
-  background-color: rgb(12, 12, 63);
- 
-   }
-   h1{
-    margin: auto;
-    color:white;
-   }
-
-body {
-  display: flex;
-  background: #031323;
-  overflow: hidden;
-
-}
-button {
- margin:5px;
- 
-}
-
-.fas {
-  width: 32px;
+  color: white;
 }
 
 section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
 }
-
 
 
 @keyframes gradient {
@@ -159,6 +131,48 @@ section {
   100% {
     background-position: 0% 50%;
   }
+}
+
+header {
+  display: flex;
+  border-bottom: white 2px solid;
+  text-align: center;
+}
+
+.home .sair {
+  margin: 20px;
+  padding: 10px;
+}
+
+.home,
+.sair {
+  font-size: 20px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+
+h1 {
+  margin: auto;
+}
+
+button {
+  margin: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px;
+  background-color: black;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2)
+}
+
+.fas {
+  width: 32px;
 }
 
 .box {
@@ -272,7 +286,6 @@ section {
   width: 100%;
   margin-bottom: 20px;
 }
-
 
 .form .inputBx select {
   width: 88%;

@@ -72,10 +72,10 @@ section{
     }
   }
 
-header{
-    display: flex;
-    border-bottom: white 2px solid;
-    text-align: center;
+  header {
+  display: flex;
+  border-bottom: white 2px solid;
+  text-align: center;
 }
 
 .home, .sair {
