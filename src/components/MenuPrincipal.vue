@@ -118,6 +118,17 @@
         </div>
       </div>
     </div>
+    <div v-show="showError" class="modal">
+      <div class="modal-content">
+        <span class="modal-close" @click="closeErrorModal">&times;</span>
+        <div class="modal-header">
+          <h2>Erro</h2>
+        </div>
+        <div class="modal-body">
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 <script>
@@ -127,10 +138,20 @@ export default {
     return {
       username: "",
       senha: "",
-      passwordVisible: false
+      passwordVisible: false,
+      showError: false,
+      errorMessage: ''
     };
   },
   methods: {
+    openErrorModal(errorMessage) {
+      this.errorMessage = errorMessage;
+      this.showError = true;
+    },
+    closeErrorModal() {
+      this.showError = false;
+      this.errorMessage = '';
+    },
     formatarCPF() {
       // Remova quaisquer caracteres não numéricos do valor do campo
       this.username = this.username.replace(/\D/g, '');
@@ -163,7 +184,8 @@ export default {
           }
         })
         .catch(error => {
-          console.log(error.response.data)
+          console.log(error.response.data);
+          this.openErrorModal(error.response.data);
         });
       }
     },
@@ -530,6 +552,45 @@ form .inputBx button[type="submit"] {
 .acessar {
   display: flex;
   justify-content: space-between;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999; /* Garante que o modal esteja acima de outros elementos */
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 300px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.modal-header {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal-body {
+  font-size: 16px;
 }
 </style>
 
