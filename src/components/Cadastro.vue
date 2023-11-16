@@ -4,7 +4,8 @@ import Layout from './Layout.vue'
 </script>
 <template>
   <section>
-    <Layout :cabecalho='titulo'></Layout>
+    <Layout :cabecalho='titulo'>
+    </Layout>
     <main>
       <div class="container">
         <div class="box">

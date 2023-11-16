@@ -113,7 +113,7 @@
               </div>
             </form>
 
-            <p style="margin: auto"><a href="#">Cadastrar Nova Conta</a></p>
+            <p style="margin: auto"><a href="Cadastro">Cadastrar Nova Conta</a></p>
           </div>
         </div>
       </div>
@@ -193,6 +193,9 @@ export default {
         });
       }
     },
+    cadastrar(){
+      this.$router.push('/Cadastro')
+    }
   },
 };
 </script>
