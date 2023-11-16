@@ -34,6 +34,23 @@
                 <button class="botao-secundario cancelar">Cancelar</button>
             </div>
         </div>
+        <div class="container" v-if="this.agendamentos.length != 0" v-for="agendamento in this.agendamentos">
+            <div class="esquerda">
+                <h2>Consulta 2</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    A et at neque sequi tempora labore ratione. 
+                    Placeat iusto illo, pariatur fugit dolorum voluptatem aliquam sint voluptatum sequi,
+                    consequatur architecto repellendus labore autem beatae, laudantium similique quis temporibus.</p>
+            </div>
+            <div class="direita">
+                <button class="botao-consulta">Entrar na Consulta</button>
+                <button class="botao-secundario editar">Editar</button>
+                <button class="botao-secundario cancelar">Cancelar</button>
+            </div>
+        </div>
+        <div class="container" v-else>
+            Não há Agendamentos a serem listados
+        </div>
         </main>
         <footer>
             <button class="novo">Novo Agendamento</button>
@@ -42,6 +59,44 @@
 </template>
 
 <script>
+
+export default {
+  data() {
+    return {
+      agendamentos: [],
+      token: '',
+      usuario: ''
+    };
+  },
+  created() {
+    this.token = sessionStorage.getItem('token');
+    this.usuario = JSON.parse(sessionStorage.getItem('usuario'));
+  },
+  mounted() {
+    const axiosConfig = {
+    headers: {
+    'Authorization': `Bearer ${this.token}`
+    }
+    };
+    if(this.usuario !== undefined){
+    axios.get(`https://localhost:7231/Agendamentos/Paciente/${this.usuario.id}`, axiosConfig)
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            // Redirecionar para a página de sucesso
+            console.log(response.data)
+            this.agendamentos = response.data
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
+      }
+    }
+
+}
 </script>
 
 <style scoped>

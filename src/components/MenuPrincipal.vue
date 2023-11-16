@@ -132,7 +132,6 @@
   </section>
 </template>
 <script>
-
 export default {
   data() {
     return {
@@ -140,8 +139,11 @@ export default {
       senha: "",
       passwordVisible: false,
       showError: false,
-      errorMessage: ''
+      errorMessage: '',
     };
+  },
+  created(){
+    sessionStorage.clear();
   },
   methods: {
     openErrorModal(errorMessage) {
@@ -177,7 +179,9 @@ export default {
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
-            // Redirecionar para a página de sucesso
+            sessionStorage.setItem('token', response.data.token);
+            sessionStorage.setItem('usuario', JSON.stringify(response.data.usuario));
+            console.log(sessionStorage.getItem('usuario'))
             this.$router.push('/Agendamentos');
           } else {
             console.log("Erro: " + response.message);
