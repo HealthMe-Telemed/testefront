@@ -1,11 +1,11 @@
+<script setup>
+import Layout from './Layout.vue';
+</script>
 
 <template>
   <section>
-    <header>
-      <button class="home"><i class="fa fa-home"></i> Home</button>
-      <h1>NOVOS AGENDAMENTOS DE CONSULTA</h1>
-      <button class="sair"><i class="fa fa-sign-out"></i> Sair</button>
-    </header>
+    <Layout :cabecalho="titulo">
+    </Layout>
     <main>
       <div class="container">
         <div class="box">
@@ -76,12 +76,16 @@
 
 <script>
 export default {
+  components: {
+    Layout,
+  },
   data() {
     return {
       nomeMedico: "",
       especialidade: "",
       dataConsulta: "",
       horarioConsulta: "",
+      titulo: 'NOVO AGENDAMENTO'
     };
   },
   methods: {
