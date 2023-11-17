@@ -4,9 +4,8 @@ import Layout from './Layout.vue'
 </script>
 <template>
   <section>
-    <Layout :cabecalho='titulo'>
-    </Layout>
-    <main>
+    <!----<Layout :cabecalho='titulo'>
+    </Layout>-->
       <div class="container">
         <div class="box">
           <div class="square" style="--i: 0"></div>
@@ -50,7 +49,7 @@ import Layout from './Layout.vue'
                 </div>
 
                 <div class="inputBx">
-                  <input type="tel" required="true" placeholder="Telefone" />
+                  <input type="phone" required="true" placeholder="Telefone" />
                 </div>
 
                 <div class="inputBx">
@@ -58,19 +57,17 @@ import Layout from './Layout.vue'
                 </div>
 
                 <div class="inputBx">
-                  <input type="number" required="true" placeholder="CPF" />
+                  <input type="text" required="true" placeholder="CPF" />
                 </div>
-
                 <div class="inputBx confirmar">
+                  <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
                   <button class="btnConfirmar">Confirmar</button>
                 </div>
-
               </form>
             </div>
           </div>
         </div>
       </div>
-    </main>
   </section>
 </template>
   
@@ -104,6 +101,9 @@ export default {
       };
 
       console.log(cadastro);
+    },
+    voltar(){
+      this.$router.push('/')
     }
   }
 };
@@ -126,15 +126,6 @@ section {
   animation: gradient 10s ease infinite;
 }
 
-header {  
-  display: flex;
-  border-bottom: white 2px solid;
-  text-align: center;
-}
-.home , .sair {
-  margin: 20px;
-  padding: 10px;
-}
 
 @keyframes gradient {
   0% {
@@ -148,26 +139,6 @@ header {
   100% {
     background-position: 0% 50%;
   }
-}
-
-
-
-
-
-.home,.sair {
-  font-size: 20px;
-  outline: none;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-
-h1 {
-  margin: auto;
 }
 
 
@@ -256,7 +227,7 @@ h1 {
   /* backdrop-filter: blur(5px);  */
   border-radius: 10px;
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-  margin: 15px auto;
+  margin: 0px auto;
   text-align: center;
 }
 
@@ -324,12 +295,27 @@ h1 {
   left: 13px;
 }
 
-.form .inputBx button {
+.form .inputBx .btnConfirmar {
   width: 50%;
   outline: none;
   border: none;
   border: 1px solid #102fac33;
   background: rgb(0, 94, 255);
+  padding: 8px 10px;
+  padding-left: 20px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form .inputBx .btnVoltar {
+  width: 30%;
+  outline: none;
+  border: none;
+  border: 1px solid #102fac33;
+  background: rgb(71, 71, 71);
+  margin-right: 8px;
   padding: 8px 10px;
   padding-left: 20px;
   border-radius: 10px;

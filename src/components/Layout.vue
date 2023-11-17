@@ -1,6 +1,6 @@
 <template>
     <header>
-      <button class="home"><i class="fa fa-home"></i> Home</button>
+      <button class="home" v-on:click="home"><i class="fa fa-home"></i> Home</button>
       <h1>{{cabecalho}}</h1>
       <button class="sair" v-on:click="Logout">
         <i class="fa fa-sign-out"></i> Sair
@@ -83,6 +83,9 @@ export default{
         Logout() {
             this.$router.push("/");
         },
+        home(){
+          this.$router.push('/Agendamentos');
+        }
     }
 }
 </script>

@@ -37,17 +37,19 @@ import Layout from './Layout.vue';
               <form @submit.prevent="confirmarConsulta">
 
                 <div class="inputBx">
-                  <select id="nomeMedico" v-model="nomeMedico" required placeholder="Selecione o Nome do Médico">
+                  <select id="nomeMedico" v-model="selectedMedicos" required placeholder="Selecione o Nome do Médico">
                     <option value="" disabled>Selecione um médico</option>
-                    <option value="Antonio">Antonio</option>
-                    <option value="Carlos">Carlos</option>
-                    <option value="Luana">Luana</option>
+                    <option v-if="medicos.count != 0" v-for="medico in medicos" value="medico.id" :key="medico.id">
+                    {{ medico.nome }} - CRM {{ medico.crm }}
+                    </option>
                   </select>
                 </div>
 
                 <div class="inputBx">
-                  <select id="especialidade" v-model="especialidade" required placeholder="Selecione a especialidade">
+                  <select id="especialidade" v-model="selectedEspecialidade" required placeholder="Selecione a especialidade">
                     <option value="" disabled>Selecione a especialidade </option>
+                    <option v-if="especialidades.count != 0" v-for="especialidade in especialidades" value="especialidade.id" :key="especialidade.id">
+                    {{ especialidade.nomeEspecialidade }}</option>
                     <option value="psicologia">Psicologia</option>
                     <option value="psiquiatria">Psiquiatria</option>
                   </select>
@@ -62,6 +64,7 @@ import Layout from './Layout.vue';
                 </div>
 
                 <div class="inputBx confirmar">
+                  <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
                   <button class="btnConfirmar">Confirmar</button>
 
                 </div>
@@ -81,12 +84,19 @@ export default {
   },
   data() {
     return {
-      nomeMedico: "",
-      especialidade: "",
+      medicos:[],
+      selectedMedicos: null,
+      especialidades:[],
+      selectedEspecialidade: null,
       dataConsulta: "",
       horarioConsulta: "",
-      titulo: 'NOVO AGENDAMENTO'
+      titulo: 'NOVO AGENDAMENTO',
+      token: '', 
+
     };
+  },
+  created() {
+    this.token = sessionStorage.getItem("token");
   },
   methods: {
     confirmarConsulta() {
@@ -101,6 +111,59 @@ export default {
       console.log(dadosConsulta);
       // Envie os dados para o servidor ou realize as ações necessárias
     }
+    
+  },
+  mounted(){
+    if(this.token !== null)
+    { 
+      this.carregarMedicos();
+      this.carregarEspecialidades();
+    }
+  },
+  methods:{
+    carregarMedicos(){
+      const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    };  
+    axios.get('https://localhost:7231/agendamentos/Medicos', axiosConfig)
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            console.log(response.data);
+            this.medicos = response.data
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
+    },
+    carregarEspecialidades(){
+      const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    };  
+    axios.get('https://localhost:7231/agendamentos/Especialidades', axiosConfig)
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            console.log(response.data);
+            this.especialidades = response.data
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
+    },
+    voltar(){
+      this.$router.push('/Agendamentos');
+    },
   }
 };
 </script>
@@ -135,34 +198,6 @@ section {
   100% {
     background-position: 0% 50%;
   }
-}
-
-header {
-  display: flex;
-  border-bottom: white 2px solid;
-  text-align: center;
-}
-
-.home .sair {
-  margin: 20px;
-  padding: 10px;
-}
-
-.home,
-.sair {
-  font-size: 20px;
-  outline: none;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-
-h1 {
-  margin: auto;
 }
 
 button {
@@ -264,7 +299,7 @@ button {
   /* backdrop-filter: blur(5px);  */
   border-radius: 10px;
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-  margin: 15px auto;
+  margin: auto;
   text-align: center;
 }
 
@@ -331,12 +366,27 @@ button {
   left: 13px;
 }
 
-.form .inputBx button {
+.form .inputBx .btnConfirmar {
   width: 50%;
   outline: none;
   border: none;
   border: 1px solid #102fac33;
   background: rgb(0, 94, 255);
+  padding: 8px 10px;
+  padding-left: 20px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form .inputBx .btnVoltar {
+  width: 30%;
+  outline: none;
+  border: none;
+  border: 1px solid #102fac33;
+  background: rgb(71, 71, 71);
+  margin-right: 8px;
   padding: 8px 10px;
   padding-left: 20px;
   border-radius: 10px;
