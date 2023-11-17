@@ -39,7 +39,7 @@ import Layout from './Layout.vue';
                 <div class="inputBx">
                   <select id="nomeMedico" v-model="selectedMedicos" required placeholder="Selecione o Nome do Médico">
                     <option value="" disabled>Selecione um médico</option>
-                    <option v-if="medicos.count != 0" v-for="medico in medicos" value="medico.id" :key="medico.id">
+                    <option v-if="medicos.count != 0" v-for="medico in medicos" :value="medico.id" :key="medico.id">
                     {{ medico.nome }} - CRM {{ medico.crm }}
                     </option>
                   </select>
@@ -48,7 +48,7 @@ import Layout from './Layout.vue';
                 <div class="inputBx">
                   <select id="especialidade" v-model="selectedEspecialidade" required placeholder="Selecione a especialidade">
                     <option value="" disabled>Selecione a especialidade </option>
-                    <option v-if="especialidades.count != 0" v-for="especialidade in especialidades" value="especialidade.id" :key="especialidade.id">
+                    <option v-if="especialidades.count != 0" v-for="especialidade in especialidades" :value="especialidade.id" :key="especialidade.id">
                     {{ especialidade.nomeEspecialidade }}</option>
                     <option value="psicologia">Psicologia</option>
                     <option value="psiquiatria">Psiquiatria</option>
@@ -65,7 +65,7 @@ import Layout from './Layout.vue';
 
                 <div class="inputBx confirmar">
                   <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
-                  <button class="btnConfirmar">Confirmar</button>
+                  <button class="btnConfirmar" v-on:click="confirmarConsulta">Confirmar</button>
 
                 </div>
               </form>
@@ -98,21 +98,6 @@ export default {
   created() {
     this.token = sessionStorage.getItem("token");
   },
-  methods: {
-    confirmarConsulta() {
-      // Adicione a lógica para confirmar o agendamento, por exemplo, envio para o servidor
-      const dadosConsulta = {
-        nomeMedico: this.nomeMedico,
-        especialidade: this.especialidade,
-        dataConsulta: this.dataConsulta,
-        horarioConsulta: this.horarioConsulta,
-      };
-
-      console.log(dadosConsulta);
-      // Envie os dados para o servidor ou realize as ações necessárias
-    }
-    
-  },
   mounted(){
     if(this.token !== null)
     { 
@@ -121,6 +106,18 @@ export default {
     }
   },
   methods:{
+    confirmarConsulta() {
+      // Adicione a lógica para confirmar o agendamento, por exemplo, envio para o servidor
+      const dadosConsulta = {
+        nomeMedico: this.selectedMedicos,
+        especialidade: this.selectedEspecialidade,
+        dataConsulta: this.dataConsulta,
+        horarioConsulta: this.horarioConsulta,
+      };
+
+      console.log(dadosConsulta);
+      // Envie os dados para o servidor ou realize as ações necessárias
+    },
     carregarMedicos(){
       const axiosConfig = {
       headers: {
