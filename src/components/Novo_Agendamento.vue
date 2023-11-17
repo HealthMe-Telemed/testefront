@@ -1,7 +1,6 @@
 <script setup>
 import Layout from './Layout.vue';
 </script>
-
 <template>
   <section>
     <Layout :cabecalho="titulo">
@@ -66,7 +65,6 @@ import Layout from './Layout.vue';
                 <div class="inputBx confirmar">
                   <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
                   <button class="btnConfirmar" v-on:click="confirmarConsulta">Confirmar</button>
-
                 </div>
               </form>
             </div>
@@ -76,12 +74,8 @@ import Layout from './Layout.vue';
     </main>
   </section>
 </template>
-
 <script>
 export default {
-  components: {
-    Layout,
-  },
   data() {
     return {
       medicos:[],
