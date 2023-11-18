@@ -36,8 +36,8 @@ import Layout from './Layout.vue';
               <form @submit.prevent="confirmarConsulta">
 
                 <div class="inputBx">
-                  <select id="nomeMedico" v-model="selectedMedicos" required placeholder="Selecione o Nome do Médico">
-                    <option value="" disabled>Selecione um médico</option>
+                  <select id="nomeMedico" v-model="selectedMedicos" @change="atualizaEspecialidadesEDatas" required placeholder="Selecione o Nome do Médico">
+                    <option value="">Selecione um médico</option>
                     <option v-if="medicos.count != 0" v-for="medico in medicos" :value="medico.id" :key="medico.id">
                     {{ medico.nome }} - CRM {{ medico.crm }}
                     </option>
@@ -45,21 +45,25 @@ import Layout from './Layout.vue';
                 </div>
 
                 <div class="inputBx">
-                  <select id="especialidade" v-model="selectedEspecialidade" required placeholder="Selecione a especialidade">
-                    <option value="" disabled>Selecione a especialidade </option>
+                  <select id="especialidade" v-model="selectedEspecialidade" @change="buscarMedicosPorEspecialidade" required placeholder="Selecione a especialidade">
+                    <option value="">Selecione a especialidade </option>
                     <option v-if="especialidades.count != 0" v-for="especialidade in especialidades" :value="especialidade.id" :key="especialidade.id">
                     {{ especialidade.nomeEspecialidade }}</option>
-                    <option value="psicologia">Psicologia</option>
-                    <option value="psiquiatria">Psiquiatria</option>
                   </select>
                 </div>
 
                 <div class="inputBx">
-                  <input type="date" v-model="dataConsulta" required />
+                  <input type="date" v-model="dataConsulta" :disabled="selectedMedicos === null || selectedMedicos === ''" required :list="dateListId" @input="checkIfDateIsValid" @change="filtrarHorario"/>
+                  <datalist :id="dateListId">
+                    <option v-for="date in datasDisponiveis" :key="date" :value="date"></option>
+                  </datalist>
                 </div>
 
                 <div class="inputBx">
-                  <input type="time" v-model="horarioConsulta" required />
+                  <input type="time" v-model="horarioConsulta" :disabled="(selectedMedicos === '' || selectedMedicos === null) && dataConsulta !== ''" required :list="timesListId"/>
+                  <datalist :id="timesListId">
+                    <option v-for="hora in horasDisponiveis" :key="hora" :value="hora"></option>
+                  </datalist>
                 </div>
 
                 <div class="inputBx confirmar">
@@ -82,10 +86,15 @@ export default {
       selectedMedicos: null,
       especialidades:[],
       selectedEspecialidade: null,
+      dataHorasDisponiveis: [],
+      horasDisponiveis: [],
+      datasDisponiveis: [],
       dataConsulta: "",
       horarioConsulta: "",
       titulo: 'NOVO AGENDAMENTO',
       token: '', 
+      dateListId: 'datesList',
+      timesListId: 'timesList'
 
     };
   },
@@ -100,6 +109,78 @@ export default {
     }
   },
   methods:{
+    atualizaEspecialidadesEDatas(){
+      this.buscarEspecialidadesPorMedico();
+      this.carregarDataEHora(this.selectedMedicos);
+    },
+    filtrarHorario(){
+      console.log(this.horasDisponiveis)
+      return this.horasDisponiveis.filter(hora => {
+        const dateTime = new Date(`${this.dataConsulta}T${hora}`);
+        const selectedDateTime = new Date(`${this.dataConsulta}T${this.horarioConsulta}`);
+        return dateTime > selectedDateTime; // Retorna apenas as horas após a hora selecionada
+      });
+    },
+    async carregarDataEHora(){
+      const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    };  
+    await axios.get(`https://localhost:7231/agendamentos/DataHora/paciente/1/medico/${this.selectedMedicos}`, axiosConfig)
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            this.dataHorasDisponiveis = response.data
+
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
+        this.separateDateTime();
+    },
+    separateDateTime() {
+      // Itera sobre os registros para extrair as datas e horas
+      this.dataHorasDisponiveis.forEach(record => {
+
+        const dateTime = new Date(record.dataHora);
+        const date = dateTime.toISOString().split('T')[0];
+        const time = dateTime.toTimeString().split(' ')[0]; // Obtém a hora no formato hh:mm:ss
+        if (!this.datasDisponiveis.includes(date)) {
+          this.datasDisponiveis.push(date); // Adiciona a data ao array de datas, se ainda não estiver lá
+        }
+
+        if (!this.horasDisponiveis.includes(time)) {
+          this.horasDisponiveis.push(time); // Adiciona a hora ao array de horas, se ainda não estiver lá
+        }
+      });
+    },
+    checkIfDateIsValid() {
+      // Verifica se a data inserida pelo usuário está presente na lista de datas disponíveis
+      if (!this.datasDisponiveis.includes(this.dataConsulta)) {
+        // Limpa o campo se a data não for válida
+        this.dataConsulta = '';
+      }
+    },
+    buscarMedicosPorEspecialidade(){
+      if (this.selectedEspecialidade === '') {
+        this.carregarMedicos(); // Se nenhum valor estiver selecionado, busca todos os dados
+      } else {
+        this.carregarMedicos(this.selectedEspecialidade);
+         // Se um valor estiver selecionado, passa o ID como parâmetro
+      }
+    },
+    buscarEspecialidadesPorMedico(){
+      if (this.selectedMedicos === '') {
+        this.carregarEspecialidades(); // Se nenhum valor estiver selecionado, busca todos os dados
+      } else {
+        this.carregarEspecialidades(this.selectedMedicos);
+         // Se um valor estiver selecionado, passa o ID como parâmetro
+      }
+    },
     confirmarConsulta() {
       // Adicione a lógica para confirmar o agendamento, por exemplo, envio para o servidor
       const dadosConsulta = {
@@ -112,18 +193,18 @@ export default {
       console.log(dadosConsulta);
       // Envie os dados para o servidor ou realize as ações necessárias
     },
-    carregarMedicos(){
+    carregarMedicos(id = 0){
       const axiosConfig = {
       headers: {
         Authorization: `Bearer ${this.token}`,
       },
     };  
-    axios.get('https://localhost:7231/agendamentos/Medicos', axiosConfig)
+    axios.get(`https://localhost:7231/agendamentos/Medicos?idEspecialidade=${id}`, axiosConfig)
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
-            console.log(response.data);
             this.medicos = response.data
+            console.log(this.medicos)
           } else {
             console.log("Erro: " + response.message);
           }
@@ -132,17 +213,16 @@ export default {
           console.log(error.response.data);
         });
     },
-    carregarEspecialidades(){
+    carregarEspecialidades(id = 0){
       const axiosConfig = {
       headers: {
         Authorization: `Bearer ${this.token}`,
       },
     };  
-    axios.get('https://localhost:7231/agendamentos/Especialidades', axiosConfig)
+    axios.get(`https://localhost:7231/agendamentos/Especialidades?idMedico=${id}`, axiosConfig)
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
-            console.log(response.data);
             this.especialidades = response.data
           } else {
             console.log("Erro: " + response.message);
