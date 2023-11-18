@@ -60,7 +60,7 @@ import Layout from './Layout.vue';
                 </div>
 
                 <div class="inputBx">
-                  <input type="time" v-model="horarioConsulta" :disabled="(selectedMedicos === '' || selectedMedicos === null) && dataConsulta !== ''" required :list="timesListId"/>
+                  <input type="time" v-model="horarioConsulta" :disabled="dataConsulta === ''" required :list="timesListId"/>
                   <datalist :id="timesListId">
                     <option v-for="hora in horasDisponiveis" :key="hora" :value="hora"></option>
                   </datalist>
@@ -111,7 +111,8 @@ export default {
   methods:{
     atualizaEspecialidadesEDatas(){
       this.buscarEspecialidadesPorMedico();
-      this.carregarDataEHora(this.selectedMedicos);
+
+      if(this.selectedMedicos !== '') this.carregarDataEHora(this.selectedMedicos);
     },
     filtrarHorario(){
       console.log(this.horasDisponiveis)
@@ -204,7 +205,6 @@ export default {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
             this.medicos = response.data
-            console.log(this.medicos)
           } else {
             console.log("Erro: " + response.message);
           }
