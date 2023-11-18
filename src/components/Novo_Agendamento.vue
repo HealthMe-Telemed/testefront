@@ -112,10 +112,14 @@ export default {
     atualizaEspecialidadesEDatas(){
       this.buscarEspecialidadesPorMedico();
 
-      if(this.selectedMedicos !== '') this.carregarDataEHora(this.selectedMedicos);
+      if(this.selectedMedicos !== ''){ 
+        this.dataConsulta = '';
+        this.horarioConsulta = '';
+        this.carregarDataEHora(this.selectedMedicos);
+      }
     },
     filtrarHorario(){
-      console.log(this.horasDisponiveis)
+      this.horarioConsulta = '';
       return this.horasDisponiveis.filter(hora => {
         const dateTime = new Date(`${this.dataConsulta}T${hora}`);
         const selectedDateTime = new Date(`${this.dataConsulta}T${this.horarioConsulta}`);
