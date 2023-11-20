@@ -56,10 +56,13 @@ import Layout from './Layout.vue';
             Data agendamento: {{ formattedDate(agendamento.dataAgendamento) }}
           </p>
         </div>
-        <div class="direita">
+        <div v-if="agendamento.statusConsultaId === 1" class="direita">
           <button class="botao-consulta">Entrar na Consulta</button>
           <button class="botao-secundario editar">Editar</button>
           <button class="botao-secundario cancelar">Cancelar</button>
+        </div>
+        <div v-else class="direita" style="margin: auto">
+          <h2>{{ agendamento.statusConsulta }}</h2>
         </div>
       </div>
       <div class="container" v-else>Não há agendamentos a serem listados</div>
