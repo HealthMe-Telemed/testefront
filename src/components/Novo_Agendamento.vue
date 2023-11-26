@@ -225,13 +225,15 @@ export default {
         Authorization: `Bearer ${this.token}`,
       },
     };  
+    const data = this.formatarDataParaBR();
+    console.log(data)
     const body = {
         idMedico: this.selectedMedicos,
         idPaciente: this.paciente,
         idEspecialidade: this.selectedEspecialidade,
         idTipoConsulta: 1,
         idStatusConsulta: 0,
-        dataAgendada: new Date(`${this.dataConsulta}T${this.horarioConsulta}Z`)          
+        dataAgendada: new Date(`${data}T${this.horarioConsulta}Z`)          
       };
       console.log(body)
     await axios.post(`https://localhost:7231/agendamentos`, body,
