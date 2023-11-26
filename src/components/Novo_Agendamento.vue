@@ -54,7 +54,7 @@ import Layout from './Layout.vue';
                 </div>
 
                 <div class="inputBx">
-                  <input type="date" v-model="dataConsulta" :disabled="selectedMedicos === null || selectedMedicos === ''" required :list="dateListId" @input="checkIfDateIsValid" @change="filtrarHorario"/>
+                  <input type="date" v-model="dataConsulta" :disabled="selectedMedicos === null || selectedMedicos === ''" required :list="dateListId" @input="checkIfDateIsValid" @change="filtrarHorario" placeholder="Selecione uma data: "/>
                   <datalist :id="dateListId">
                     <option v-for="date in datasDisponiveis" :key="date" :value="date"></option>
                   </datalist>
@@ -84,9 +84,9 @@ export default {
   data() {
     return {
       medicos:[],
-      selectedMedicos: null,
+      selectedMedicos: '',
       especialidades:[],
-      selectedEspecialidade: null,
+      selectedEspecialidade: '',
       dataHorasDisponiveis: [],
       horasDisponiveis: [],
       datasDisponiveis: [],
@@ -452,6 +452,7 @@ button {
   margin-bottom: 20px;
 }
 
+
 .form .inputBx select {
   width: 88%;
   outline: none;
@@ -465,6 +466,21 @@ button {
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
+
+.form .inputBx select option {
+  width: 88%;
+  outline: none;
+  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 10px;
+  padding-left: 40px;
+  border-radius: 15px;
+  color: hwb(225 0% 93%);
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
 
 .form .inputBx input {
   width: 75%;
