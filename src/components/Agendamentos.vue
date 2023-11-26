@@ -7,40 +7,6 @@ import Layout from './Layout.vue';
     <Layout :cabecalho="titulo">
     </Layout>
     <main>
-      <div class="container">
-        <div class="esquerda">
-          <h2>Consulta 1</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A et at
-            neque sequi tempora labore ratione. Placeat iusto illo, pariatur
-            fugit dolorum voluptatem aliquam sint voluptatum sequi, consequatur
-            architecto repellendus labore autem beatae, laudantium similique
-            quis temporibus.
-          </p>
-        </div>
-        <div class="direita">
-          <button class="botao-consulta">Entrar na Consulta</button>
-          <button class="botao-secundario editar">Editar</button>
-          <button class="botao-secundario cancelar">Cancelar</button>
-        </div>
-      </div>
-      <div class="container">
-        <div class="esquerda">
-          <h2>Consulta 2</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A et at
-            neque sequi tempora labore ratione. Placeat iusto illo, pariatur
-            fugit dolorum voluptatem aliquam sint voluptatum sequi, consequatur
-            architecto repellendus labore autem beatae, laudantium similique
-            quis temporibus.
-          </p>
-        </div>
-        <div class="direita">
-          <button class="botao-consulta">Entrar na Consulta</button>
-          <button class="botao-secundario editar">Editar</button>
-          <button class="botao-secundario cancelar">Cancelar</button>
-        </div>
-      </div>
       <div
         class="container"
         v-if="agendamentos.length != 0"

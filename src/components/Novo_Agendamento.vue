@@ -54,14 +54,15 @@ import Layout from './Layout.vue';
                 </div>
 
                 <div class="inputBx">
-                  <input type="text" v-model="dataConsulta" :disabled="selectedMedicos === null || selectedMedicos === ''" required :list="dateListId" @input="checkIfDateIsValid" @change="filtrarHorario" placeholder="Selecione uma data: "/>
+                  <input type="text" v-model="dataConsulta" :disabled="selectedMedicos === null || selectedMedicos === ''" required :list="dateListId" @input="checkIfDateIsValid" @change="filtrarHorario" placeholder="Selecione uma data:"/>
                   <datalist :id="dateListId">
+                    <option value="">Selecione uma data</option>
                     <option v-for="date in datasDisponiveis" :key="date" :value="date"></option>
                   </datalist>
                 </div>
 
                 <div class="inputBx">
-                  <input type="time" v-model="horarioConsulta" :disabled="dataConsulta === ''" required @input="checkIfTimeIsValid" :list="timesListId"/>
+                  <input type="text" v-model="horarioConsulta" :disabled="dataConsulta === ''" required @input="checkIfTimeIsValid" :list="timesListId" placeholder="Selecione um horário"/>
                   <datalist :id="timesListId">
                     <option v-for="hora in horasDisponiveis" :key="hora" :value="hora"></option>
                   </datalist>
@@ -84,7 +85,7 @@ export default {
   data() {
     return {
       medicos:[],
-      selectedMedicos: '',
+      selectedMedicos: "",
       especialidades:[],
       selectedEspecialidade: '',
       dataHorasDisponiveis: [],
@@ -133,7 +134,6 @@ export default {
       this.horarioConsulta = '';
       this.horasDisponiveis = [];
       const dataFormatada = this.formatarDataParaBR();
-      console.log(dataFormatada);      
       const horariosNoDia = this.dataHorasDisponiveis.filter(hora => {
         const horaLimite = new Date(`${dataFormatada}T18:00:00`);
         const horaInicio = new Date(`${dataFormatada}T08:59:00`);
@@ -196,7 +196,7 @@ export default {
     },
     checkIfTimeIsValid() {
       // Verifica se a data inserida pelo usuário está presente na lista de datas disponíveis
-      const horario = `${this.horarioConsulta}:00`
+      const horario = `${this.horarioConsulta}`
       if (!this.horasDisponiveis.includes(horario)) {
         // Limpa o campo se a data não for válida
         this.horarioConsulta = '';
@@ -211,7 +211,6 @@ export default {
       }
     },
     buscarEspecialidadesPorMedico(){
-      console.log(this.usuario)
       if (this.selectedMedicos === '') {
         this.carregarEspecialidades(); // Se nenhum valor estiver selecionado, busca todos os dados
       } else {
@@ -226,7 +225,6 @@ export default {
       },
     };  
     const data = this.formatarDataParaBR();
-    console.log(data)
     const body = {
         idMedico: this.selectedMedicos,
         idPaciente: this.paciente,
@@ -235,13 +233,11 @@ export default {
         idStatusConsulta: 0,
         dataAgendada: new Date(`${data}T${this.horarioConsulta}Z`)          
       };
-      console.log(body)
     await axios.post(`https://localhost:7231/agendamentos`, body,
       axiosConfig)
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
-            console.log(response.data)
             this.limparFormulario();
             this.$router.push('/Agendamentos')
           } else {
