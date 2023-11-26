@@ -54,7 +54,7 @@ import Layout from './Layout.vue';
                 </div>
 
                 <div class="inputBx">
-                  <input type="date" v-model="dataConsulta" :disabled="selectedMedicos === null || selectedMedicos === ''" required :list="dateListId" @input="checkIfDateIsValid" @change="filtrarHorario" placeholder="Selecione uma data: "/>
+                  <input type="text" v-model="dataConsulta" :disabled="selectedMedicos === null || selectedMedicos === ''" required :list="dateListId" @input="checkIfDateIsValid" @change="filtrarHorario" placeholder="Selecione uma data: "/>
                   <datalist :id="dateListId">
                     <option v-for="date in datasDisponiveis" :key="date" :value="date"></option>
                   </datalist>
@@ -129,12 +129,14 @@ export default {
 
     },
     filtrarHorario(){
+      if(this.dataConsulta){
       this.horarioConsulta = '';
-      this.horasDisponiveis = []      
-      
+      this.horasDisponiveis = [];
+      const dataFormatada = this.formatarDataParaBR();
+      console.log(dataFormatada);      
       const horariosNoDia = this.dataHorasDisponiveis.filter(hora => {
-        const horaLimite = new Date(`${this.dataConsulta}T18:00:00`);
-        const horaInicio = new Date(`${this.dataConsulta}T08:59:00`);
+        const horaLimite = new Date(`${dataFormatada}T18:00:00`);
+        const horaInicio = new Date(`${dataFormatada}T08:59:00`);
         return horaLimite > new Date(hora.dataHora) && horaInicio < new Date(hora.dataHora); // Retorna apenas as horas após a hora selecionada
       });
       horariosNoDia.forEach(horario => {
@@ -144,7 +146,13 @@ export default {
           this.horasDisponiveis.push(time); // Adiciona a hora ao array de horas, se ainda não estiver lá
         }
       });
+    }
 
+    },
+    formatarDataParaBR(){
+      const [day, month, year] = this.dataConsulta.split('/');
+      const dataEscolhida = new Date(`${year}-${month}-${day}`);
+      return dataEscolhida.toISOString().split('T')[0];
     },
     async carregarDataEHora(){
       const axiosConfig = {
@@ -172,8 +180,7 @@ export default {
       // Itera sobre os registros para extrair as datas e horas
       this.dataHorasDisponiveis.forEach(record => {
 
-        const dateTime = new Date(record.dataHora);
-        const date = dateTime.toISOString().split('T')[0];
+        const date = new Date(record.dataHora).toLocaleDateString('pt-BR');
         if (!this.datasDisponiveis.includes(date)) {
           this.datasDisponiveis.push(date); // Adiciona a data ao array de datas, se ainda não estiver lá
         }
