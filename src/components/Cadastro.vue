@@ -59,6 +59,10 @@ import Layout from './Layout.vue'
                 <div class="inputBx">
                   <input type="text" required="true" placeholder="CPF" />
                 </div>
+                
+                <label class="checkmedico"><input type="checkbox" />Médico</label>
+                
+
                 <div class="inputBx confirmar">
                   <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
                   <button class="btnConfirmar">Confirmar</button>
@@ -323,4 +327,14 @@ section {
   font-size: 20px;
   cursor: pointer;
 }
+
+
+.checkmedico {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
 </style>
