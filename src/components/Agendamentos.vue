@@ -25,7 +25,7 @@ import Layout from './Layout.vue';
         <div v-if="agendamento.statusConsultaId === 1" class="direita">
           <button class="botao-consulta">Entrar na Consulta</button>
           <button class="botao-secundario editar">Editar</button>
-          <button class="botao-secundario cancelar">Cancelar</button>
+          <button class="botao-secundario cancelar" v-on:click="cancelarAgendamento(agendamento)">Cancelar</button>
         </div>
         <div v-else class="direita" style="margin: auto">
           <h2>{{ agendamento.statusConsulta }}</h2>
@@ -86,6 +86,16 @@ export default {
     }
   },
   methods: {
+    cancelarAgendamento(agendamento){
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      }
+      axios.delete(`https://localhost:7231/agendamentos/${agendamento.id}`,
+          axiosConfig) 
+      window.location.reload()
+    },
     novoAgendamento(){
       this.$router.push("/Novo_Agendamento");
     },
@@ -98,8 +108,7 @@ export default {
           timeStyle: "short",
         });
       }
-    },
-  computed: {},
+    }
 };
 </script>
 
