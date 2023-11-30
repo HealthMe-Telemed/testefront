@@ -66,8 +66,8 @@ import { vMaska } from "maska"
                 <label class="checkmedico"><input type="checkbox" v-model="checked"/>É Médico</label>
                 
                 <div class="inputBx" v-if="checked">
-                  <select id="nomeMedico" v-model="uf" required placeholder="Selecione a UF do su CRM">
-                    <option value="">Selecione um Estado</option>
+                  <select id="nomeMedico" v-model="uf" required placeholder="Selecione a UF do CRM">
+                    <option value="">Selecione a UF do CRM</option>
                     <option v-for="estado in estados" :value="estado" :key="estado">
                     {{ estado }}
                     </option>
