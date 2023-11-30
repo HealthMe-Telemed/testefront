@@ -1,6 +1,8 @@
 <!-- Cadastro.vue -->
 <script setup>
-import Layout from './Layout.vue'
+import Layout from './Layout.vue';
+import { vMaska } from "maska"
+
 </script>
 <template>
   <section>
@@ -37,35 +39,48 @@ import Layout from './Layout.vue'
               <form @submit.prevent="confirmar">
 
                 <div class="inputBx">
-                  <input type="text" required="true" placeholder="Nome Completo" />
+                  <input type="text" required="true" placeholder="Nome Completo" v-model="nome"/>
                 </div>
 
                 <div class="inputBx password">
-                  <input type="password" required="true" placeholder="Senha" />
+                  <input type="password" required="true" placeholder="Senha" v-model="senha"/>
                 </div>
 
                 <div class="inputBx">
-                  <input type="email" required="true" placeholder="Email" />
+                  <input type="email" required="true" placeholder="Email" v-model="email"/>
                 </div>
 
                 <div class="inputBx">
-                  <input type="phone" required="true" placeholder="Telefone" />
+                  <input v-maska data-maska="['(##) #####-####','(##) ####-####']" required v-model="telefone" placeholder="Insira o telefone: (99) 99999-9999">
+                  <p v-if="!validatePhoneNumber(telefone) && telefone != ''">Por favor, insira 10 ou 11 dígitos de telefone.</p>
                 </div>
 
                 <div class="inputBx">
-                  <input type="date" required="true" placeholder="Data de Nascimento" />
+                  <input type="date" required="true" placeholder="Data de Nascimento" v-model="dataNascimento"/>
                 </div>
 
                 <div class="inputBx">
-                  <input type="text" required="true" placeholder="CPF" />
+                  <input type="text" required="true" @input="formatarCPF()" placeholder="CPF, apenas números" maxlength="11" minlength="11" v-model="cpf"/>
                 </div>
                 
-                <label class="checkmedico"><input type="checkbox" />Médico</label>
+                <label class="checkmedico"><input type="checkbox" v-model="checked"/>É Médico</label>
                 
+                <div class="inputBx" v-if="checked">
+                  <select id="nomeMedico" v-model="uf" required placeholder="Selecione a UF do su CRM">
+                    <option value="">Selecione um Estado</option>
+                    <option v-for="estado in estados" :value="estado" :key="estado">
+                    {{ estado }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="inputBx" v-if="checked">
+                  <input type="text" required="true" @input="formatarCRM()" placeholder="Digite o seu CRM, apenas números" minlength="4" maxlength="10" v-model="crm"/>
+                </div>
 
                 <div class="inputBx confirmar">
                   <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
-                  <button class="btnConfirmar">Confirmar</button>
+                  <button class="btnConfirmar" :disabled="!validatePhoneNumber(telefone)">Confirmar</button>
                 </div>
               </form>
             </div>
@@ -76,7 +91,7 @@ import Layout from './Layout.vue'
 </template>
   
 
-  
+
 <script>
 export default {
   components: {
@@ -84,16 +99,43 @@ export default {
   },
   data() {
     return {
-      nomeUsuario: "",
+      nome: "",
       email: "",
       senha: "",
       telefone: "",
       dataNascimento: "",
       cpf: "",
-      titulo: 'CADASTRO'
+      titulo: 'CADASTRO',
+      checked: false,
+      uf: '',
+      estados: ['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO'],
+      crm: ''
     };
   },
+  watch: {
+    checked(newVal) {
+      if (!newVal) {
+        this.uf = '';
+        this.crm = '';
+      }
+    }
+  },
   methods: {
+    validatePhoneNumber(telefone) {
+    const regex = /^(\d{2}) \d{5}-\d{4}|\d{4}-\d{4}$/;
+    return regex.test(telefone);
+  },
+  formatarCPF() {
+      // Remova quaisquer caracteres não numéricos do valor do campo
+      this.cpf = this.cpf.replace(/\D/g, '');
+  },
+  formatarCRM() {
+      // Remova quaisquer caracteres não numéricos do valor do campo
+      this.crm = this.crm.replace(/\D/g, '');
+  },
+  validarCPF(cpf){
+      return cpf.length == 11 ? true: false; 
+  },
     confirmar() {
       const cadastro = {
         nomeUsuario: this.nomeUsuario,
@@ -260,6 +302,20 @@ section {
 
 
 .form .inputBx select {
+  width: 88%;
+  outline: none;
+  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 10px;
+  padding-left: 40px;
+  border-radius: 15px;
+  color: hwb(225 0% 93%);
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form .inputBx select option {
   width: 88%;
   outline: none;
   border: none;

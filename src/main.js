@@ -7,5 +7,4 @@ const app = createApp(App);
 
 // Use o Vue Router
 app.use(router)
-
 app.mount('#app')
