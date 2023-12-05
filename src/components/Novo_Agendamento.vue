@@ -38,7 +38,7 @@ import Layout from './Layout.vue';
 
                 <div class="inputBx">
                   <select id="nomeMedico" v-model="selectedMedicos" @change="atualizaEspecialidadesEDatas" required placeholder="Selecione o Nome do Médico">
-                    <option value="">Selecione um médico</option>
+                    <option value="">{{ selecaoMedico }}</option>
                     <option v-if="medicos.count != 0" v-for="medico in medicos" :value="medico.id" :key="medico.id">
                     {{ medico.nome }} - CRM {{ medico.crm }}
                     </option>
@@ -47,7 +47,7 @@ import Layout from './Layout.vue';
 
                 <div class="inputBx">
                   <select id="especialidade" v-model="selectedEspecialidade" @change="buscarMedicosPorEspecialidade" required placeholder="Selecione a especialidade">
-                    <option value="">Selecione a especialidade </option>
+                    <option id="selecaoEspecialidade" value="">{{ selecaoEspecialidade }} </option>
                     <option v-if="especialidades.count != 0" v-for="especialidade in especialidades" :value="especialidade.id" :key="especialidade.id">
                     {{ especialidade.nomeEspecialidade }}</option>
                   </select>
@@ -86,8 +86,10 @@ export default {
     return {
       medicos:[],
       selectedMedicos: "",
+      selecaoMedico: "Selecione o médico",
       especialidades:[],
       selectedEspecialidade: '',
+      selecaoEspecialidade: 'Selecione a Especialidade',
       dataHorasDisponiveis: [],
       horasDisponiveis: [],
       datasDisponiveis: [],
@@ -264,8 +266,14 @@ export default {
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
-            this.medicos = response.data
-          } else {
+            this.medicos = response.data;
+            this.selecaoMedico = "Selecione um médico";
+          }
+          else if(response.status == 204){
+            this.medicos = [];
+            this.selecaoMedico = "Não há médicos para esta especialidade";
+          } 
+          else {
             console.log("Erro: " + response.message);
           }
         })
@@ -284,7 +292,13 @@ export default {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
             this.especialidades = response.data
-          } else {
+            this.selecaoEspecialidade = "Selecione uma especialidade"
+          }
+          else if (response.status === 204){
+            this.especialidades = [];
+            this.selecaoEspecialidade = "Não há especialidades para este médico"
+          } 
+          else {
             console.log("Erro: " + response.message);
           }
         })

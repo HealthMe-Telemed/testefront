@@ -52,11 +52,18 @@ export default {
       usuario: "",
       datasAgendamento: [],
       indiceDatas: 0,
+      perfis: [],
+      medicoId: 0,
+      pacienteId: 0,
     };
   },
   created() {
     this.token = sessionStorage.getItem("token");
     this.usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    this.perfis = this.usuario.perfis
+    if(this.perfis.length > 1 || this.perfis[0].idPerfil == 2)
+      this.medicoId = this.perfis.find(x => x.idPerfil == 2).idMedico
+    this.pacienteId = this.perfis.find(x => x.idPerfil == 1).idPaciente
   },
   mounted() {
     const axiosConfig = {
@@ -67,7 +74,7 @@ export default {
     if (this.usuario !== null) {
         axios
         .get(
-          `https://localhost:7231/Agendamentos/Paciente/${this.usuario.id}`,
+          `https://localhost:7231/Agendamentos/Paciente/${this.pacienteId}`,
           axiosConfig
         )
         .then((response) => {

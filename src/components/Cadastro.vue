@@ -136,17 +136,41 @@ export default {
   validarCPF(cpf){
       return cpf.length == 11 ? true: false; 
   },
-    confirmar() {
+    async confirmar() {
+      const md5Password = CryptoJS.MD5(this.senha).toString();
+      const crmMedico = this.checked ? `${this.crm}/${this.uf}` : ''
       const cadastro = {
-        nomeUsuario: this.nomeUsuario,
+        nome: this.nome,
         email: this.email,
-        senha: this.senha,
-        telefone: this.telefone,
+        senha: md5Password,
+        numero: this.telefone,
         dataNascimento: this.dataNascimento,
         cpf: this.cpf,
+        medico: this.checked,
+        crm: crmMedico
       };
-
-      console.log(cadastro);
+      await axios.post('https://localhost:7146/Usuario/Cadastro', cadastro)
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            console.log(response.data);
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        });
+        
+      await axios.post('https://localhost:7146/Usuario/Login', {cpf: this.cpf, senha: md5Password})
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            sessionStorage.setItem('token', response.data.token);
+            sessionStorage.setItem('usuario', JSON.stringify(response.data.usuario));
+            console.log(sessionStorage.getItem('usuario'))
+            this.$router.push('/Agendamentos');
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        });
     },
     voltar(){
       this.$router.push('/')
