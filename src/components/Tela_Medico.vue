@@ -10,26 +10,12 @@
       <div class="container">
         <div class="box">
           <div class="square" style="--i: 0"></div>
-          <div class="square" style="--i: 1">
-            <img src="../assets/img/medico2.png" style="
-              width: 150px;
-              height: 150px;
-              margin-left: -12px;
-              margin-top: 15px;
-            " />
-          </div>
-
+          <div class="square" style="--i: 1"></div>
           <div class="square" style="--i: 2"></div>
           <div class="square" style="--i: 3"></div>
           <div class="square" style="--i: 4"></div>
-          <div class="square" style="--i: 5">
-            <img src="../assets/img/agenda.png" style="
-              width: 110px;
-              height: 100px;
-              margin-left: -2px;
-              margin-top: 15px;
-            " />
-          </div>
+          <div class="square" style="--i: 5"></div>
+          
           <h1>Agenda de consultas </h1>
           <div class="container">
             <div class="form">
@@ -91,7 +77,7 @@ export default {
 
 section {
   min-height: 100vh;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(-45deg,  #80caea);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
 }
@@ -164,6 +150,7 @@ h1 {
   }
 }
 
+/* quadrado lado direito - 1º  */
 .box .square:nth-child(1) {
   width: 150px;
   height: 150px;
@@ -171,36 +158,46 @@ h1 {
   right: -250px;
 }
 
+/* quadrado lado esquerdo - 2º  */
 .box .square:nth-child(2) {
+
   width: 150px;
   height: 150px;
-  top: 105px;
-  left: -250px;
+  top: 175px;
+  left: -200px;
   z-index: 2;
+
 }
 
+/* quadrado lado direito - 3º  */
 .box .square:nth-child(3) {
   width: 150px;
   height: 150px;
-  bottom: 15px;
+  bottom: -75px;
   right: -250px;
   z-index: 2;
 }
 
+/* quadrado lado esquerdo - 3º  */
 .box .square:nth-child(4) {
+
   width: 150px;
   height: 150px;
-  bottom: 55px;
+  bottom: 10px;
   left: -250px;
+  z-index: 2;
+
 }
 
+/* quadrado lado esquerdo - 1º  */
 .box .square:nth-child(5) {
-  width: 80px;
-  height: 80px;
-  top: -35px;
-  left: -150px;
-}
 
+  width: 150px;
+  height: 150px;
+  top: -15px;
+  left: -250px;
+  }
+/* quadrado lado direito - 2º  */
 .box .square:nth-child(6) {
   width: 150px;
   height: 150px;
@@ -248,17 +245,30 @@ h1 {
   margin-bottom: 20px;
 }
 
-
 .form .inputBx select {
   width: 88%;
   outline: none;
   border: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(219, 20, 20, 0.2);
   background: rgba(255, 255, 255, 0.2);
   padding: 8px 10px;
   padding-left: 40px;
   border-radius: 15px;
-  color: hwb(97 0% 93%);
+  color: hwb(225 0% 93%);
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(132, 165, 25, 0.05);
+}
+
+.form .inputBx select option {
+  width: 88%;
+  outline: none;
+  border: none;
+  border: 1px solid rgba(219, 20, 20, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 10px;
+  padding-left: 40px;
+  border-radius: 15px;
+  color: hwb(225 0% 93%);
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(132, 165, 25, 0.05);
 }
@@ -268,7 +278,7 @@ h1 {
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(167, 35, 35, 0.2);
   padding: 8px 10px;
   padding-left: 40px;
   border-radius: 15px;

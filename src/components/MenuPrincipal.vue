@@ -3,15 +3,8 @@
     <div class="rt-container">
       <div class="box">
         <div class="square" style="--i: 0">
-          <img
-            src="../assets/img/agenda.png"
-            style="
-              width: 100px;
-              height: 100px;
-              margin-left: 15px;
-              margin-top: 10px;
-            "
-          />
+          
+          
         </div>
         <div class="square" style="--i: 1">
           <img
@@ -23,41 +16,17 @@
               margin-top: -5px;
             "/>
         </div>
-        <div class="square" style="--i: 2">
+        <!-- quadrado lado direito - terceiro-->
+        <div class="square" style="--i: 2"> 
+          
+      
         
-          <img
-            src="../assets/img/consulta.png"
-            style="
-              width: 120px;
-              height: 120px;
-              margin-left: 30px;
-              margin-top: 2px;
-            "
-          />
         </div>     
         <div class="square" style="--i: 3">
-          <img
-            src="../assets/img/medico2.png"
-            style="
-              width: 150px;
-              height: 150px;
-              margin-left: -5px;
-              margin-top: 2px;
-            "
-          />
-        
+                  
         </div>
-        <div class="square" style="--i: 4">
-          <img
-            src="../assets/img/cerebro2.png"
-            style="
-              width: 100px;
-              height: 100px;
-              margin-left: 20px;
-              margin-top: 25px;
-            "
-          />
-        </div>
+        <div class="square" style="--i: 4"> </div>
+       
         <div class="square" style="--i: 5">
           <img
             src="../assets/img/HealthMe.png"
@@ -222,7 +191,7 @@ section {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(-45deg, #3d93b7, #70b8d6);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
 }
@@ -251,7 +220,7 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 15px;
   animation: square 10s linear infinite;
-  animation-delay: calc(-1s * var(--i));
+  animation-delay: calc( -1s * var(--i));
 }
 
 @keyframes square {
@@ -281,10 +250,10 @@ section {
 }
 
 .box .square:nth-child(3) {
-  width: 120рх;
-  height: 120px;
-  bottom: 75px;
-  right: -15px;
+  width: 150px;
+  height: 150px;
+  top: 400px;
+  left: 1100px;
   z-index: 2;
 }
 
