@@ -23,8 +23,8 @@ import Layout from './Layout.vue';
           </p>
         </div>
         <div v-if="agendamento.statusConsultaId === 1" class="direita">
-          <button class="botao-consulta">Entrar na Consulta</button>
-          <button class="botao-secundario editar">Editar</button>
+          <button class="botao-consulta" v-on:click="acessarConsulta">Entrar na Consulta</button>
+          <button class="botao-secundario editar" v-if="agendamento.pacienteId == pacienteId">Editar</button>
           <button class="botao-secundario cancelar" v-on:click="cancelarAgendamento(agendamento)">Cancelar</button>
         </div>
         <div v-else class="direita" style="margin: auto">
@@ -71,7 +71,7 @@ export default {
         Authorization: `Bearer ${this.token}`,
       },
     };
-    if (this.usuario !== null) {
+    if (this.usuario !== null && this.pacienteId !== 0) {
         axios
         .get(
           `https://localhost:7231/Agendamentos/Paciente/${this.pacienteId}`,
@@ -91,6 +91,26 @@ export default {
           console.log(error.response.data);
         });
     }
+    if(this.usuario !== null && this.medicoId !== 0){
+      axios
+        .get(
+          `https://localhost:7231/Agendamentos/Medico/${this.medicoId}`,
+          axiosConfig
+        )
+        .then((response) => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            // Redirecionar para a página de sucesso
+            console.log(response.data);
+            this.agendamentos.push = response.data;
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    }
   },
   methods: {
     cancelarAgendamento(agendamento){
@@ -102,6 +122,9 @@ export default {
       axios.delete(`https://localhost:7231/agendamentos/${agendamento.id}`,
           axiosConfig) 
       window.location.reload()
+    },
+    acessarConsulta(){
+      this.$router.push("/Consulta");
     },
     novoAgendamento(){
       this.$router.push("/Novo_Agendamento");

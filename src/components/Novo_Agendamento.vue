@@ -100,7 +100,8 @@ export default {
       usuario: '',
       paciente: '',
       dateListId: 'datesList',
-      timesListId: 'timesList'
+      timesListId: 'timesList',
+      medico: 0
 
     };
   },
@@ -108,6 +109,7 @@ export default {
     this.token = sessionStorage.getItem("token");
     this.usuario = JSON.parse(sessionStorage.getItem("usuario"));
     this.buscarIdPaciente();
+    this.buscarIdMedico();
   },
   mounted(){
     if(this.token !== null)
@@ -130,6 +132,12 @@ export default {
         const perfis = this.usuario.perfis.filter(x => x.idPerfil === 1);
         this.paciente = perfis[0].idPaciente
 
+    },
+    buscarIdMedico(){
+      const perfis = this.usuario.perfis.filter(x => x.idPerfil === 2);
+      if (perfis.length > 0)
+        this.medico = perfis[0].idMedico
+        console.log(this.medico)
     },
     filtrarHorario(){
       if(this.dataConsulta){
@@ -262,7 +270,7 @@ export default {
         Authorization: `Bearer ${this.token}`,
       },
     };  
-    await axios.get(`https://localhost:7231/agendamentos/Medicos?idEspecialidade=${id}`, axiosConfig)
+    await axios.get(`https://localhost:7231/agendamentos/Medicos?idEspecialidade=${id}&idMedico=${this.medico}`, axiosConfig)
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {

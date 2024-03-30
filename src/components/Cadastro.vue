@@ -77,7 +77,6 @@ import { vMaska } from "maska"
                 <div class="inputBx" v-if="checked">
                   <input type="text" required="true" @input="formatarCRM()" placeholder="Digite o seu CRM, apenas números" minlength="4" maxlength="10" v-model="crm"/>
                 </div>
-
                 <div class="inputBx confirmar">
                   <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
                   <button class="btnConfirmar" :disabled="!validatePhoneNumber(telefone)">Confirmar</button>
