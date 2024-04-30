@@ -11,14 +11,7 @@ import { vMaska } from "maska"
       <div class="container">
         <div class="box">
           <div class="square" style="--i: 0"></div>
-          <div class="square" style="--i: 1">
-            <img src="../assets/img/medico2.png" style="
-                width: 150px;
-                height: 150px;
-                margin-left: -12px;
-                margin-top: 15px;
-              " />
-          </div>
+          <div class="square" style="--i: 1"></div>
 
           <div class="square" style="--i: 2"></div>
           <div class="square" style="--i: 3"></div>
@@ -62,7 +55,18 @@ import { vMaska } from "maska"
                 <div class="inputBx">
                   <input type="text" required="true" @input="formatarCPF()" placeholder="CPF, apenas números" maxlength="11" minlength="11" v-model="cpf"/>
                 </div>
-                
+                          
+                <div class="inputBx">
+                  <select id="especialidadeMedico" v-model="TipoConsulta" required 
+                  placeholder="Selecione a especialidade do Médico ">
+                    <option value="" disabled> Selecione a especialidade Médica </option>
+                    <option value="Psicologo">Psicólogo</option>
+                    <option value="Psiquiatra">Psiquiatra</option>
+                    <option value="NeuroPsicologo">NeuroPsicólogo </option>
+                    <option value="NeuroPsicologo">NeuroPsiquiatra </option>
+                  </select>
+                </div>
+
                 <label class="checkmedico"><input type="checkbox" v-model="checked"/>É Médico</label>
                 
                 <div class="inputBx" v-if="checked">
@@ -239,43 +243,15 @@ section {
   }
 }
 
+/* 1º lado direito   */
 .box .square:nth-child(1) {
   width: 150px;
   height: 150px;
   top: -15px;
-  right: -250px;
+  right: -450px;
 }
 
-.box .square:nth-child(2) {
-  width: 150px;
-  height: 150px;
-  top: 105px;
-  left: -250px;
-  z-index: 2;
-}
-
-.box .square:nth-child(3) {
-  width: 150px;
-  height: 150px;
-  bottom: 15px;
-  right: -250px;
-  z-index: 2;
-}
-
-.box .square:nth-child(4) {
-  width: 150px;
-  height: 150px;
-  bottom: 55px;
-  left: -250px;
-}
-
-.box .square:nth-child(5) {
-  width: 80px;
-  height: 80px;
-  top: -35px;
-  left: -150px;
-}
-
+/* 2º lado direito   */
 .box .square:nth-child(6) {
   width: 150px;
   height: 150px;
@@ -283,6 +259,40 @@ section {
   right: -200px;
   z-index: 2;
 }
+/* 3º lado direito   */
+.box .square:nth-child(3) {
+  width: 150px;
+  height: 150px;
+  bottom: 200px;
+  right: -300px;
+  z-index: 2;
+}
+
+/* 1º lado esquerdo   */
+.box .square:nth-child(5) {
+  width: 150px;
+  height: 150px;
+  top: -35px;
+  left: -450px;
+}
+
+/* 2º lado esquerdo   */
+.box .square:nth-child(2) {
+  width: 150px;
+  height: 150px;
+  top: 175px;
+  left: -200px;
+  z-index: 2;
+}
+
+/* 3º lado esquerdo   */
+.box .square:nth-child(4) {
+  width: 150px;
+  height: 150px;
+  bottom: 200px;
+  left: -300px;
+}
+
 
 .container {
   position: relative;

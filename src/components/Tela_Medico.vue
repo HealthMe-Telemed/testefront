@@ -38,6 +38,8 @@
                     <option value="" disabled>Selecione a especialidade da consulta </option>
                     <option value="psicologia">Psicologia</option>
                     <option value="psiquiatria">Psiquiatria</option>
+                    <option value="psiquiatria">Neuropsicologia</option>
+                    <option value="psiquiatria">Neuropsiquiatriaia</option>
                   </select>
                 </div>
 
