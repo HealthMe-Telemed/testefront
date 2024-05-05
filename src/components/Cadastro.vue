@@ -1,99 +1,172 @@
 <!-- Cadastro.vue -->
 <script setup>
-import Layout from './Layout.vue';
-import { vMaska } from "maska"
-
+import Layout from "./Layout.vue";
+import { vMaska } from "maska";
 </script>
 <template>
   <section>
     <!----<Layout :cabecalho='titulo'>
     </Layout>-->
-      <div class="container">
-        <div class="box">
-          <div class="square" style="--i: 0"></div>
-          <div class="square" style="--i: 1"></div>
+    <div class="container">
+      <div class="box">
+        <div class="square" style="--i: 0"></div>
+        <div class="square" style="--i: 1"></div>
 
-          <div class="square" style="--i: 2"></div>
-          <div class="square" style="--i: 3"></div>
-          <div class="square" style="--i: 4"></div>
-          <div class="square" style="--i: 5">
-            <img src="../assets/img/agenda.png" style="
-                width: 110px;
-                height: 100px;
-                margin-left: -2px;
-                margin-top: 15px;
-              " />
-          </div>
-          <h1>Cadastro </h1>
-          <div class="container">
-            <div class="form">
-              <img src="../assets/img/HealthMe.png" />
+        <div class="square" style="--i: 2"></div>
+        <div class="square" style="--i: 3"></div>
+        <div class="square" style="--i: 4"></div>
+        <div class="square" style="--i: 5">
+          <img
+            src="../assets/img/agenda.png"
+            style="
+              width: 110px;
+              height: 100px;
+              margin-left: -2px;
+              margin-top: 15px;
+            "
+          />
+        </div>
+        <h1>Cadastro</h1>
+        <div class="container">
+          <div class="form">
+            <img src="../assets/img/HealthMe.png" />
 
-              <form @submit.prevent="confirmar">
+            <form @submit.prevent="confirmar">
+              <div class="inputBx">
+                <input
+                  type="text"
+                  required="true"
+                  placeholder="Nome Completo"
+                  v-model="nome"
+                />
+              </div>
 
-                <div class="inputBx">
-                  <input type="text" required="true" placeholder="Nome Completo" v-model="nome"/>
-                </div>
+              <div class="inputBx password">
+                <input
+                  type="password"
+                  required="true"
+                  placeholder="Senha"
+                  v-model="senha"
+                />
+              </div>
 
-                <div class="inputBx password">
-                  <input type="password" required="true" placeholder="Senha" v-model="senha"/>
-                </div>
+              <div class="inputBx">
+                <input
+                  type="email"
+                  required="true"
+                  placeholder="Email"
+                  v-model="email"
+                />
+              </div>
 
-                <div class="inputBx">
-                  <input type="email" required="true" placeholder="Email" v-model="email"/>
-                </div>
+              <div class="inputBx">
+                <input
+                  v-maska
+                  data-maska="['(##) #####-####','(##) ####-####']"
+                  required
+                  v-model="telefone"
+                  placeholder="Insira o telefone: (99) 99999-9999"
+                />
+                <p v-if="!validatePhoneNumber(telefone) && telefone != ''">
+                  Por favor, insira 10 ou 11 dígitos de telefone.
+                </p>
+              </div>
 
-                <div class="inputBx">
-                  <input v-maska data-maska="['(##) #####-####','(##) ####-####']" required v-model="telefone" placeholder="Insira o telefone: (99) 99999-9999">
-                  <p v-if="!validatePhoneNumber(telefone) && telefone != ''">Por favor, insira 10 ou 11 dígitos de telefone.</p>
-                </div>
+              <div class="inputBx">
+                <input
+                  type="date"
+                  required="true"
+                  placeholder="Data de Nascimento"
+                  v-model="dataNascimento"
+                />
+              </div>
 
-                <div class="inputBx">
-                  <input type="date" required="true" placeholder="Data de Nascimento" v-model="dataNascimento"/>
-                </div>
+              <div class="inputBx">
+                <input
+                  type="text"
+                  required="true"
+                  @input="formatarCPF()"
+                  placeholder="CPF, apenas números"
+                  maxlength="11"
+                  minlength="11"
+                  v-model="cpf"
+                />
+              </div>
 
-                <div class="inputBx">
-                  <input type="text" required="true" @input="formatarCPF()" placeholder="CPF, apenas números" maxlength="11" minlength="11" v-model="cpf"/>
-                </div>
-                          
-                <div class="inputBx">
-                  <select id="especialidadeMedico" v-model="TipoConsulta" required 
-                  placeholder="Selecione a especialidade do Médico ">
-                    <option value="" disabled> Selecione a especialidade Médica </option>
-                    <option value="Psicologo">Psicólogo</option>
-                    <option value="Psiquiatra">Psiquiatra</option>
-                    <option value="NeuroPsicologo">NeuroPsicólogo </option>
-                    <option value="NeuroPsicologo">NeuroPsiquiatra </option>
-                  </select>
-                </div>
+              
 
-                <label class="checkmedico"><input type="checkbox" v-model="checked"/>É Médico</label>
-                
-                <div class="inputBx" v-if="checked">
-                  <select id="nomeMedico" v-model="uf" required placeholder="Selecione a UF do CRM">
-                    <option value="">Selecione a UF do CRM</option>
-                    <option v-for="estado in estados" :value="estado" :key="estado">
+              <label class="checkmedico"
+                ><input type="checkbox" v-model="checked" />É Médico</label
+              >
+              <div class="inputBx" v-if="checked">
+                <select
+                  id="especialidade"
+                  v-model="selectedEspecialidade"
+                  @change="buscarMedicosPorEspecialidade"
+                  required
+                  placeholder="Selecione a especialidade"
+                >
+                  <option id="selecaoEspecialidade" value="">
+                    {{ selecaoEspecialidade }}
+                  </option>
+                  <option
+                    v-if="especialidades.count != 0"
+                    v-for="especialidade in especialidades"
+                    :value="especialidade.id"
+                    :key="especialidade.id"
+                  >
+                    {{ especialidade.nomeEspecialidade }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="inputBx" v-if="checked">
+                <select
+                  id="nomeMedico"
+                  v-model="uf"
+                  required
+                  placeholder="Selecione a UF do CRM"
+                >
+                  <option value="">Selecione a UF do CRM</option>
+                  <option
+                    v-for="estado in estados"
+                    :value="estado"
+                    :key="estado"
+                  >
                     {{ estado }}
-                    </option>
-                  </select>
-                </div>
+                  </option>
+                </select>
+              </div>
 
-                <div class="inputBx" v-if="checked">
-                  <input type="text" required="true" @input="formatarCRM()" placeholder="Digite o seu CRM, apenas números" minlength="4" maxlength="10" v-model="crm"/>
-                </div>
-                <div class="inputBx confirmar">
-                  <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
-                  <button class="btnConfirmar" :disabled="!validatePhoneNumber(telefone)">Confirmar</button>
-                </div>
-              </form>
-            </div>
+              <div class="inputBx" v-if="checked">
+                <input
+                  type="text"
+                  required="true"
+                  @input="formatarCRM()"
+                  placeholder="Digite o seu CRM, apenas números"
+                  minlength="4"
+                  maxlength="10"
+                  v-model="crm"
+                />
+              </div>
+              <div class="inputBx confirmar">
+                <button class="btnVoltar" formnovalidate v-on:click="voltar">
+                  Voltar
+                </button>
+                <button
+                  class="btnConfirmar"
+                  :disabled="!validatePhoneNumber(telefone)"
+                >
+                  Confirmar
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
+    </div>
   </section>
 </template>
-  
-
 
 <script>
 export default {
@@ -108,40 +181,95 @@ export default {
       telefone: "",
       dataNascimento: "",
       cpf: "",
-      titulo: 'CADASTRO',
+      titulo: "CADASTRO",
       checked: false,
-      uf: '',
-      estados: ['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO'],
-      crm: ''
+      uf: "",
+      estados: [
+        "AC",
+        "AL",
+        "AM",
+        "AP",
+        "BA",
+        "CE",
+        "DF",
+        "ES",
+        "GO",
+        "MA",
+        "MG",
+        "MS",
+        "MT",
+        "PA",
+        "PB",
+        "PE",
+        "PI",
+        "PR",
+        "RJ",
+        "RN",
+        "RO",
+        "RR",
+        "RS",
+        "SC",
+        "SE",
+        "SP",
+        "TO",
+      ],
+      idEspecialidade: 0,
+      crm: "",
+      selectedEspecialidade: "",
+      selecaoEspecialidade: "Selecione a Especialidade",
+      especialidades:[]
     };
   },
   watch: {
     checked(newVal) {
       if (!newVal) {
-        this.uf = '';
-        this.crm = '';
+        this.uf = "";
+        this.crm = "";
       }
-    }
+    },
+  },
+  mounted() {
+    this.carregarEspecialidades();
   },
   methods: {
     validatePhoneNumber(telefone) {
-    const regex = /^(\d{2}) \d{5}-\d{4}|\d{4}-\d{4}$/;
-    return regex.test(telefone);
-  },
-  formatarCPF() {
+      const regex = /^(\d{2}) \d{5}-\d{4}|\d{4}-\d{4}$/;
+      return regex.test(telefone);
+    },
+    formatarCPF() {
       // Remova quaisquer caracteres não numéricos do valor do campo
-      this.cpf = this.cpf.replace(/\D/g, '');
-  },
-  formatarCRM() {
+      this.cpf = this.cpf.replace(/\D/g, "");
+    },
+    formatarCRM() {
       // Remova quaisquer caracteres não numéricos do valor do campo
-      this.crm = this.crm.replace(/\D/g, '');
-  },
-  validarCPF(cpf){
-      return cpf.length == 11 ? true: false; 
-  },
+      this.crm = this.crm.replace(/\D/g, "");
+    },
+    validarCPF(cpf) {
+      return cpf.length == 11 ? true : false;
+    },
+    async carregarEspecialidades(id = 0){ 
+    await axios.get(`https://localhost:7231/agendamentos/Especialidades?idMedico=${id}`)
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            this.especialidades = response.data
+            this.selecaoEspecialidade = "Selecione uma especialidade"
+          }
+          else if (response.status === 204){
+            this.especialidades = [];
+            this.selecaoEspecialidade = "Não há especialidades para este médico"
+          } 
+          else {
+            console.log("Erro: " + response.message);
+          }
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
+    },
     async confirmar() {
       const md5Password = CryptoJS.MD5(this.senha).toString();
-      const crmMedico = this.checked ? `${this.crm}/${this.uf}` : ''
+      const crmMedico = this.checked ? `${this.crm}/${this.uf}` : "";
       const cadastro = {
         nome: this.nome,
         email: this.email,
@@ -150,10 +278,12 @@ export default {
         dataNascimento: this.dataNascimento,
         cpf: this.cpf,
         medico: this.checked,
-        crm: crmMedico
+        crm: crmMedico,
+        idEspecialidade: this.selectedEspecialidade
       };
-      await axios.post('https://localhost:7146/Usuario/Cadastro', cadastro)
-        .then(response => {
+      await axios
+        .post("https://localhost:7146/Usuario/Cadastro", cadastro)
+        .then((response) => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
             console.log(response.data);
@@ -161,27 +291,34 @@ export default {
             console.log("Erro: " + response.message);
           }
         });
-        
-      await axios.post('https://localhost:7146/Usuario/Login', {cpf: this.cpf, senha: md5Password})
-        .then(response => {
+
+      await axios
+        .post("https://localhost:7146/Usuario/Login", {
+          cpf: this.cpf,
+          senha: md5Password,
+        })
+        .then((response) => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
-            sessionStorage.setItem('token', response.data.token);
-            sessionStorage.setItem('usuario', JSON.stringify(response.data.usuario));
-            console.log(sessionStorage.getItem('usuario'))
-            this.$router.push('/Agendamentos');
+            sessionStorage.setItem("token", response.data.token);
+            sessionStorage.setItem(
+              "usuario",
+              JSON.stringify(response.data.usuario)
+            );
+            console.log(sessionStorage.getItem("usuario"));
+            this.$router.push("/Agendamentos");
           } else {
             console.log("Erro: " + response.message);
           }
         });
     },
-    voltar(){
-      this.$router.push('/')
-    }
-  }
+    voltar() {
+      this.$router.push("/");
+    },
+  },
 };
 </script>
-  
+
 <style scoped>
 @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
 
@@ -199,7 +336,6 @@ section {
   animation: gradient 10s ease infinite;
 }
 
-
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -213,7 +349,6 @@ section {
     background-position: 0% 50%;
   }
 }
-
 
 .box {
   position: relative;
@@ -230,9 +365,7 @@ section {
   animation-delay: calc(-1s * var(--i));
 }
 
-
 @keyframes square {
-
   0%,
   100% {
     transform: translateY(-20px);
@@ -293,7 +426,6 @@ section {
   left: -300px;
 }
 
-
 .container {
   position: relative;
   padding: 40px;
@@ -319,7 +451,11 @@ section {
   left: 15px;
   border-radius: 5px;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.1) 2%
+  );
 }
 
 .form {
@@ -332,7 +468,6 @@ section {
   width: 100%;
   margin-bottom: 20px;
 }
-
 
 .form .inputBx select {
   width: 88%;
@@ -417,7 +552,6 @@ section {
   cursor: pointer;
 }
 
-
 .checkmedico {
   position: relative;
   display: inline-block;
@@ -425,5 +559,4 @@ section {
   margin-bottom: 10px;
   cursor: pointer;
 }
-
 </style>

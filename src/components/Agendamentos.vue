@@ -115,13 +115,13 @@ export default {
     }
   },
   methods: {
-    cancelarAgendamento(agendamento){
+    async cancelarAgendamento(agendamento){
       const axiosConfig = {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },
       }
-      axios.delete(`https://localhost:7231/agendamentos/${agendamento.id}`,
+      await axios.delete(`https://localhost:7231/agendamentos/${agendamento.id}`,
           axiosConfig) 
       window.location.reload()
     },
