@@ -85,11 +85,12 @@
               </div>
             </form>
 
-            <p style="margin: auto"><a href="Cadastro">Cadastrar Nova Conta</a></p>
+            <p class="novocadastro"><a href="Cadastro">Cadastrar Nova Conta</a></p>
           </div>
         </div>
       </div>
     </div>
+
     <div v-show="showError" class="modal">
       <div class="modal-content">
         <span class="modal-close" @click="closeErrorModal">&times;</span>
@@ -577,11 +578,20 @@ form .inputBx button[type="submit"] {
   font-size: 16px;
 }
 
+/* Config 'Esqueceu a senha?' */
 .configsenha{
   position: relative;
   color: #fff;
   cursor: pointer;
   transform: translateX(170px) translateY(-55px);
+}
+
+/* Config 'Novo Cadastro' */
+.novocadastro{
+  position: relative;
+  color: #fff;
+  cursor: pointer;
+  transform: translateX(170px) translateY(-75px);
 }
 
 </style>
