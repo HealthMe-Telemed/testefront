@@ -7,19 +7,18 @@
           
         </div>
         <div class="square" style="--i: 1">
+           <!-- logo lado esquedor -->
           <img
             src="../assets/img/HealthMe-1.png"
             style="
               width: 150px;
               height: 150px;
-              margin-left: -5px;
-              margin-top: -5px;
+              margin-left: 0px;
+              margin-top: 10px;
             "/>
         </div>
         <!-- quadrado lado direito - terceiro-->
         <div class="square" style="--i: 2"> 
-          
-      
         
         </div>     
         <div class="square" style="--i: 3">
@@ -28,13 +27,14 @@
         <div class="square" style="--i: 4"> </div>
        
         <div class="square" style="--i: 5">
+          <!-- logo lado direito -->
           <img
             src="../assets/img/HealthMe.png"
             style="
               width: 150px;
               height: 150px;
               margin-left: 2px;
-              margin-top: -5px;
+              margin-top: 10px;
             "
           />
         </div>
@@ -42,7 +42,9 @@
         
         <div class="container">
           <div class="form">
-            <img src="../assets/img/HealthMe.png" />
+            <!-- logo central -->
+            <img src="../assets/img/HealthMe.png" 
+            style="margin-top: -50px;"/>
 
             <form @submit.prevent="submitForm">
               <div class="inputBx">
@@ -403,11 +405,11 @@ form .inputBx button[type="submit"] {
 .form .inputBx input:focus ~ span ,
 .form .inputBx input:invalid ~ span,  form .inputBx input:valid ~ span {
   transform: translateX(-30px) translateY(-25px);
-  font-size: 12px;
+  font-size: 16px;
 }
 .form p {
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   margin-top: 5px;
 }
 
@@ -431,7 +433,7 @@ form .inputBx button[type="submit"] {
 
 @media (min-width: 768px) {
   .rt-container {
-    width: 750px;
+    width: 500px;
   }
   [class="col-rt-"] {
     float: left;
@@ -553,7 +555,7 @@ form .inputBx button[type="submit"] {
 }
 
 .modal-header {
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 10px;
 }
 
@@ -562,7 +564,7 @@ form .inputBx button[type="submit"] {
   top: 10px;
   right: 10px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .modal-body {
