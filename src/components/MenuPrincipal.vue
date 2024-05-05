@@ -76,11 +76,12 @@
                 <i class="fas fa-key"></i>
               </div>
 
-              <label class="remember"><input type="checkbox" />Lembrar</label>
+              <label class="remember"><input type="checkbox" />  Lembrar</label>
+
+              <p class="configsenha"><a href="Cadastro">Esqueceu sua Senha? </a></p>
 
               <div class="inputBx acessar">
                 <button type="submit" value="Entrar" v-on:click="submitForm">Entrar</button>
-                <p><a href="#">Esqueceu sua Senha? </a></p>
               </div>
             </form>
 
@@ -186,6 +187,7 @@ body {
 
 .fas {
   width: 32px;
+  
 }
 
 section {
@@ -315,9 +317,10 @@ section {
 .form .inputBx {
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
+  /* config para Login e Passoword  */
 .form .inputBx input {
   width: 80%;
   outline: none;
@@ -330,6 +333,7 @@ section {
   color: #fff;
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(15px);
 }
 
 .form .inputBx .password-control {
@@ -380,10 +384,11 @@ form .inputBx button[type="submit"] {
   transition: 1.5s;
 }
 
+  /* config ao passar o mouse por cima do botão  */
 .form .inputBx button[type="submit"]:hover {
   background: linear-gradient
     (115deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.25));
-  color: #fff;
+  color: #1a0cb5;
   transition: 0.5s;
 }
 
@@ -417,10 +422,10 @@ form .inputBx button[type="submit"] {
   color: #fff;
 }
 
+  /* config ao passar o mouse por cima  */
 .form p a:hover {
-  background-color: transparent;
   background-image: linear-gradient (to right, #434343 0%, black 100%);
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: black;
 }
 
 .remember {
@@ -429,6 +434,7 @@ form .inputBx button[type="submit"] {
   color: #fff;
   margin-bottom: 10px;
   cursor: pointer;
+  transform: translateX(10px) translateY(-20px);
 }
 
 @media (min-width: 768px) {
@@ -570,5 +576,13 @@ form .inputBx button[type="submit"] {
 .modal-body {
   font-size: 16px;
 }
+
+.configsenha{
+  position: relative;
+  color: #fff;
+  cursor: pointer;
+  transform: translateX(170px) translateY(-55px);
+}
+
 </style>
 
