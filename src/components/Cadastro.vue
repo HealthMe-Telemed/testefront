@@ -26,11 +26,11 @@ import { vMaska } from "maska";
             "
           />
         </div>
-        <h1>Cadastro</h1>
-        <div class="container">
+        <div class="titulo">Cadastro</div>
           <div class="form">
+            <div class="logo">
             <img src="../assets/img/HealthMe.png" />
-
+            </div>
             <form @submit.prevent="confirmar">
               <div class="inputBx">
                 <input
@@ -96,7 +96,7 @@ import { vMaska } from "maska";
               
 
               <label class="checkmedico"
-                ><input type="checkbox" v-model="checked" />É Médico</label
+                ><input type="checkbox" v-model="checked" />  Sou Médico</label
               >
               <div class="inputBx" v-if="checked">
                 <select
@@ -162,7 +162,6 @@ import { vMaska } from "maska";
               </div>
             </form>
           </div>
-        </div>
       </div>
     </div>
   </section>
@@ -322,34 +321,6 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
 
-* {
-  margin: 0;
-  padding: 0;
-  font-family: "El Messiri", sans-serif;
-  color: white;
-}
-
-section {
-  min-height: 100vh;
-  background: linear-gradient(-45deg, #3d93b7, #70b8d6);
-  background-size: 400% 400%;
-  animation: gradient 10s ease infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .box {
   position: relative;
 }
@@ -381,7 +352,7 @@ section {
   width: 150px;
   height: 150px;
   top: -15px;
-  right: -450px;
+  right: -500px;
 }
 
 /* 2º lado direito   */
@@ -389,15 +360,15 @@ section {
   width: 150px;
   height: 150px;
   top: 175px;
-  right: -200px;
+  right: -350px;
   z-index: 2;
 }
 /* 3º lado direito   */
 .box .square:nth-child(3) {
   width: 150px;
   height: 150px;
-  bottom: 200px;
-  right: -300px;
+  bottom: 100px;
+  right: -450px;
   z-index: 2;
 }
 
@@ -406,7 +377,7 @@ section {
   width: 150px;
   height: 150px;
   top: -35px;
-  left: -450px;
+  left: -500px;
 }
 
 /* 2º lado esquerdo   */
@@ -414,7 +385,7 @@ section {
   width: 150px;
   height: 150px;
   top: 175px;
-  left: -200px;
+  left: -350px;
   z-index: 2;
 }
 
@@ -422,8 +393,8 @@ section {
 .box .square:nth-child(4) {
   width: 150px;
   height: 150px;
-  bottom: 200px;
-  left: -300px;
+  bottom: 100px;
+  left: -450px;
 }
 
 .container {
@@ -469,46 +440,53 @@ section {
   margin-bottom: 20px;
 }
 
+/* Barras de Especialidade e CRM  */
 .form .inputBx select {
   width: 88%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 10px;
-  padding-left: 40px;
+  padding: 8px 50px;
+  padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(-90px) translateX(-35px);
+
 }
 
+/* Barras gerais  */
 .form .inputBx select option {
   width: 88%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 10px;
-  padding-left: 40px;
+  padding: 8px 50px;
+  padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(-90px) translateX(-20px);
+
 }
 
 .form .inputBx input {
-  width: 75%;
+  width: 88%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 10px;
-  padding-left: 40px;
+  padding: 8px 50px;
+  padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(-90px) translateX(-20px);
 }
 
 .form img {
@@ -530,11 +508,12 @@ section {
   border: 1px solid #102fac33;
   background: rgb(0, 94, 255);
   padding: 8px 10px;
-  padding-left: 20px;
+  padding-left: 10px;
   border-radius: 10px;
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
+  transform: translateY(-70px);
 }
 
 .form .inputBx .btnVoltar {
@@ -545,11 +524,12 @@ section {
   background: rgb(71, 71, 71);
   margin-right: 8px;
   padding: 8px 10px;
-  padding-left: 20px;
+  padding-left: 10px;
   border-radius: 10px;
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
+  transform: translateY(-70px);
 }
 
 .checkmedico {
@@ -558,5 +538,15 @@ section {
   color: #fff;
   margin-bottom: 10px;
   cursor: pointer;
+  transform: translateY(-90px);
+}
+
+.logo {
+  transform: translateX(-100px) translateY(-100px);
+}
+
+.titulo {
+  font-size: 50px;
+  transform: translateX(80px) translateY(20px);
 }
 </style>
