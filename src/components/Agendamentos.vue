@@ -15,7 +15,8 @@ import Layout from './Layout.vue';
       >
         <div class="esquerda">
           <h2>Agendamento {{ indice + 1 }}</h2>
-          <p>Médico: {{ agendamento.nomeMedico }}</p>
+          <p v-if="agendamento.medicoId !== medicoId">Médico: {{ agendamento.nomeMedico }}</p>
+          <p v-else>Paciente: {{agendamento.nomePaciente}}</p>
           <p>Especialidade: {{ agendamento.especialidade }}</p>
           <p>Tipo da consulta: {{ agendamento.tipoConsulta }}</p>
           <p>
@@ -55,6 +56,7 @@ export default {
       perfis: [],
       medicoId: 0,
       pacienteId: 0,
+      linkConsulta: ''
     };
   },
   created() {
@@ -101,8 +103,8 @@ export default {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
             // Redirecionar para a página de sucesso
-            console.log(response.data);
-            this.agendamentos.push = response.data;
+            console.log(this.agendamentos)
+            this.agendamentos = this.agendamentos.concat(response.data)
           } else {
             console.log("Erro: " + response.message);
           }
