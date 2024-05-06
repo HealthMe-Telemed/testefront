@@ -454,7 +454,6 @@ export default {
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transform: translateY(-90px) translateX(-35px);
-
 }
 
 /* Barras gerais  */
