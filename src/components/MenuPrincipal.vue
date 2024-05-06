@@ -53,7 +53,7 @@
                   v-model="username"
                   required="true"
                   @input="formatarCPF"
-                  placeholder="Digite apenas numeros"
+                  placeholder="Digite apenas números"
                   maxlength="11"
                   minlength="11"
                 />
@@ -69,7 +69,7 @@
                   name="password"
                   required="true"
                 />
-                <span>Password</span>
+                <span>Senha:</span>
                 <!--<button type="button" @click="togglePasswordVisibility">-
       {{ passwordVisible ? "Ocultar Senha" : "Mostrar Senha" }}
     </button> -->
