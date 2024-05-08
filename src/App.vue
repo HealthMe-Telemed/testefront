@@ -3,7 +3,9 @@ import MenuPrincipal from '../src/components/MenuPrincipal.vue';
 import Agendamentos from '../src/components/Agendamentos.vue';
 import Novo_Agendamento from '../src/components/Novo_Agendamento.vue';
 import Tela_Medico from '../src/components/Tela_Medico.vue';
+import Esqueci_Senha from '../src/components/Esqueci_Senha.vue';
 import Layout from './components/Layout.vue';
+
 </script>
 
 <template>
@@ -19,7 +21,8 @@ import Layout from './components/Layout.vue';
       Agendamentos,
       Novo_Agendamento,
       Tela_Medico,
-      Layout,
+      Esqueci_Senha,
+      Layout
     },
   };
   </script>

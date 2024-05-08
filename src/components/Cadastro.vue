@@ -5,33 +5,28 @@ import { vMaska } from "maska";
 </script>
 <template>
   <section>
-    <!----<Layout :cabecalho='titulo'>
-    </Layout>-->
+    <header>
+      <button class="home"><i class="fa fa-home"></i> Home</button>
+      <h1>CADASTRO</h1>
+      <button class="sair"><i class="fa fa-sign-out"></i> Sair</button>
+    </header>
+    <main>
     <div class="container">
-      <div class="box">
-        <div class="square" style="--i: 0"></div>
-        <div class="square" style="--i: 1"></div>
+        <div class="box">
+          <div class="square" style="--i: 0"></div>
+          <div class="square" style="--i: 1"></div>
+          <div class="square" style="--i: 2"></div>
+          <div class="square" style="--i: 3"></div>
+          <div class="square" style="--i: 4"></div>
+          <div class="square" style="--i: 5"></div>
+         
+      
+            <div class="form">
+              <img src="../assets/img/HealthMe.png" 
+            />
 
-        <div class="square" style="--i: 2"></div>
-        <div class="square" style="--i: 3"></div>
-        <div class="square" style="--i: 4"></div>
-        <div class="square" style="--i: 5">
-          <img
-            src="../assets/img/agenda.png"
-            style="
-              width: 110px;
-              height: 100px;
-              margin-left: -2px;
-              margin-top: 15px;
-            "
-          />
-        </div>
-        <div class="titulo">Cadastro</div>
-          <div class="form">
-            <div class="logo">
-            <img src="../assets/img/HealthMe.png" />
-            </div>
             <form @submit.prevent="confirmar">
+             <br><br><br><br>
               <div class="inputBx">
                 <input
                   type="text"
@@ -92,7 +87,7 @@ import { vMaska } from "maska";
                   v-model="cpf"
                 />
               </div>
-
+          
               
 
               <label class="checkmedico"
@@ -164,6 +159,7 @@ import { vMaska } from "maska";
           </div>
       </div>
     </div>
+  </main>
   </section>
 </template>
 
@@ -321,6 +317,61 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
 
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "El Messiri", sans-serif;
+    color: white;
+  }
+  
+  section {
+    min-height: 100vh;
+    background: linear-gradient(-45deg,  #80caea);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+  }
+  
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+  
+    50% {
+      background-position: 100% 50%;
+    }
+  
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  header {
+    display: flex;
+    border-bottom: white 2px solid;
+    text-align: center;
+  }
+  
+  .home,  .sair {
+    margin: 20px;
+    padding: 10px;
+  }
+  h1 {
+    margin: auto;
+  }
+  .home,.sair {
+    font-size: 20px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+
+
 .box {
   position: relative;
 }
@@ -336,7 +387,9 @@ export default {
   animation-delay: calc(-1s * var(--i));
 }
 
+
 @keyframes square {
+  
   0%,
   100% {
     transform: translateY(-20px);
@@ -346,7 +399,6 @@ export default {
     transform: translateY(20px);
   }
 }
-
 /* 1º lado direito   */
 .box .square:nth-child(1) {
   width: 150px;
@@ -409,7 +461,7 @@ export default {
   /* backdrop-filter: blur(5px);  */
   border-radius: 10px;
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-  margin: 0px auto;
+  margin: 15px auto;
   text-align: center;
 }
 
@@ -420,13 +472,9 @@ export default {
   right: 15px;
   bottom: 15px;
   left: 15px;
-  border-radius: 5px;
+  border-radius: 15px;
   pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.1) 2%
-  );
+  background: linear-gradient(to bottom, rgba(175, 33, 33, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
 }
 
 .form {
@@ -487,11 +535,12 @@ export default {
   transform: translateY(-90px) translateX(-20px);
 }
 
+
 .form img {
-  display: flex;
-  width: 200px;
-  margin: auto;
-}
+    display: flex;
+    width: 200px;
+    margin: auto;
+  }
 
 .form .inputBx .fas {
   position: absolute;
@@ -537,14 +586,5 @@ export default {
   margin-bottom: 10px;
   cursor: pointer;
   transform: translateY(-90px);
-}
-
-.logo {
-  transform: translateX(-100px) translateY(-100px);
-}
-
-.titulo {
-  font-size: 50px;
-  transform: translateX(80px) translateY(20px);
 }
 </style>

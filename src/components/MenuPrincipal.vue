@@ -238,7 +238,7 @@ section {
     transform: translateY(20px);
   }
 }
-
+/* 1º lado direito   */
 .box .square:nth-child(1) {
   width: 150px;
   height: 150px;
@@ -246,29 +246,24 @@ section {
   right: -45px;
 }
 
-.box .square:nth-child(2) {
+/* 2º lado Direito   */
+.box .square:nth-child(6) {
   width: 150px;
   height: 150px;
-  top: 150px;
-  left: 45px;
-  z-index: 2;
+  top: 180px;
+  right: 45px; 
 }
 
+/* 3º lado Direito   */
 .box .square:nth-child(3) {
   width: 150px;
   height: 150px;
   top: 400px;
   left: 1100px;
-  z-index: 2;
+  
 }
 
-.box .square:nth-child(4) {
-  width: 150px;
-  height: 150px;
-  bottom: 45px;
-  left: -35px;
-}
-
+/* 1º lado Esquerdo   */
 .box .square:nth-child(5) {
   width: 150px;
   height: 150px;
@@ -276,14 +271,22 @@ section {
   left: 2px;
 }
 
-.box .square:nth-child(6) {
+/* 2º lado Esquerdo   */
+.box .square:nth-child(2) {
   width: 150px;
   height: 150px;
-  top: 180px;
-  right: 45px;
-  z-index: 2;
+  top: 150px;
+  left: 45px;
+}
+/* 3º lado Esquerdo   */
+.box .square:nth-child(4) {
+  width: 150px;
+  height: 150px;
+  bottom: 50px;
+  left: -35px;
 }
 
+/* Quadrado do meio   */
 .container {
   position: relative;
   padding: 50px;
@@ -308,7 +311,7 @@ section {
   border-radius: 5px;
   pointer-events: none;
   background: linear-gradient
-    (to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
+    (to bottom, rgba(154, 23, 23, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
 }
 .form {
   position: relative;
@@ -361,12 +364,13 @@ section {
   left: 13px;
 }
 
+
 .form .inputBx button {
   width: 80%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 255);
   padding: 8px 10px;
   padding-left: 40px;
   border-radius: 15px;
@@ -389,7 +393,7 @@ form .inputBx button[type="submit"] {
 .form .inputBx button[type="submit"]:hover {
   background: linear-gradient
     (115deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.25));
-  color: #1a0cb5;
+  color: #0920cd;
   transition: 0.5s;
 }
 

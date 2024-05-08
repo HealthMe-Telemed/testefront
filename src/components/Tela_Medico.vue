@@ -19,7 +19,9 @@
           <h1>Agenda de consultas </h1>
           <div class="container">
             <div class="form">
-              <img src="../assets/img/HealthMe.png" />
+              <img src="../assets/img/HealthMe.png" 
+             
+              />
 
               <form @submit.prevent="confirmar">
 
@@ -39,7 +41,7 @@
                     <option value="psicologia">Psicologia</option>
                     <option value="psiquiatria">Psiquiatria</option>
                     <option value="psiquiatria">Neuropsicologia</option>
-                    <option value="psiquiatria">Neuropsiquiatriaia</option>
+                    <option value="psiquiatria">Neuropsiquiatria</option>
                   </select>
                 </div>
 
