@@ -78,7 +78,7 @@
 
               <label class="remember"><input type="checkbox" />  Lembrar</label>
 
-              <p class="configsenha"><a href="Cadastro">Esqueceu sua Senha? </a></p>
+              <p class="configsenha"><a href="Esqueci_Senha">Esqueceu sua Senha? </a></p>
 
               <div class="inputBx acessar">
                 <button type="submit" value="Entrar" v-on:click="submitForm">Entrar</button>
