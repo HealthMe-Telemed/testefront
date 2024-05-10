@@ -71,8 +71,8 @@
                 />
                 <span>Senha:</span>
                 <!--<button type="button" @click="togglePasswordVisibility">-
-      {{ passwordVisible ? "Ocultar Senha" : "Mostrar Senha" }}
-    </button> -->
+                {{ passwordVisible ? "Ocultar Senha" : "Mostrar Senha" }}
+                </button> -->
                 <i class="fas fa-key"></i>
               </div>
 
@@ -104,6 +104,7 @@
     </div>
   </section>
 </template>
+
 <script>
 export default {
   data() {
@@ -230,6 +231,7 @@ section {
 
 @keyframes square {
   0%,
+
   100% {
     transform: translateY(-20px);
   }
@@ -301,6 +303,7 @@ section {
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
   margin: 15px auto;
 }
+
 .container::after {
   content: "";
   position: absolute;
@@ -313,6 +316,7 @@ section {
   background: linear-gradient
     (to bottom, rgba(154, 23, 23, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
 }
+
 .form {
   position: relative;
   width: 100%;
@@ -353,17 +357,18 @@ section {
 .form .inputBx .view {
   transition: 0.5s;
 }
+
 .form img {
   display: flex;
   width: 250px;
   margin: auto;
 }
+
 .form .inputBx .fas {
   position: absolute;
   top: 13px;
   left: 13px;
 }
-
 
 .form .inputBx button {
   width: 80%;
@@ -378,6 +383,7 @@ section {
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
+
 form .inputBx button[type="submit"] {
   background: #fff;
   color: #111;
