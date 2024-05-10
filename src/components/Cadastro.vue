@@ -6,25 +6,34 @@ import { vMaska } from "maska";
 <template>
   <section>
     <header>
-      <button class="home"><i class="fa fa-home"></i> Home</button>
-      <h1>CADASTRO</h1>
-      <button class="sair"><i class="fa fa-sign-out"></i> Sair</button>
+      <div class="titulo">Cadastro</div>
     </header>
     <main>
     <div class="container">
         <div class="box">
           <div class="square" style="--i: 0"></div>
-          <div class="square" style="--i: 1"></div>
+          <div class="square" style="--i: 1">
+            <img src="../assets/img/HealthMe.png"
+                  style="
+                    width: 150px;
+                    height: 150px;
+                    margin-left: 0px;
+                    margin-top: 10px;"/>
+            </div>
           <div class="square" style="--i: 2"></div>
           <div class="square" style="--i: 3"></div>
           <div class="square" style="--i: 4"></div>
-          <div class="square" style="--i: 5"></div>
+          <div class="square" style="--i: 5">
+            <img src="../assets/img/HealthMe.png"
+                  style="
+                    width: 150px;
+                    height: 150px;
+                    margin-left: 0px;
+                    margin-top: 10px;"/>
+          </div>
          
       
             <div class="form">
-              <img src="../assets/img/HealthMe.png" 
-            />
-
             <form @submit.prevent="confirmar">
              <br><br><br><br>
               <div class="inputBx">
@@ -90,9 +99,9 @@ import { vMaska } from "maska";
           
               
 
-              <label class="checkmedico"
-                ><input type="checkbox" v-model="checked" />  Sou Médico</label
-              >
+              <label class="checkmedico">
+                <input type="checkbox" v-model="checked" />  Sou Médico</label>
+
               <div class="inputBx" v-if="checked">
                 <select
                   id="especialidade"
@@ -145,7 +154,7 @@ import { vMaska } from "maska";
                 />
               </div>
               <div class="inputBx confirmar">
-                <button class="btnVoltar" formnovalidate v-on:click="Voltar">
+                <button class="btnVoltar" formnovalidate v-on:click="voltar">
                   Voltar
                 </button>
                 <button
@@ -330,8 +339,7 @@ export default {
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
   }
-  
-  
+    
   @keyframes gradient {
     0% {
       background-position: 0% 50%;
@@ -350,14 +358,6 @@ export default {
     display: flex;
     border-bottom: white 2px solid;
     text-align: center;
-  }
-  
-  .home,  .sair {
-    margin: 20px;
-    padding: 10px;
-  }
-  h1 {
-    margin: auto;
   }
 
 .box {
@@ -379,6 +379,7 @@ export default {
 @keyframes square {
   
   0%,
+
   100% {
     transform: translateY(-20px);
   }
@@ -403,13 +404,14 @@ export default {
   right: -350px;
   z-index: 2;
 }
+
 /* 3º lado direito   */
 .box .square:nth-child(3) {
   width: 150px;
   height: 150px;
   bottom: 100px;
   right: -450px;
-  z-index: 2;
+  top: 450px
 }
 
 /* 1º lado esquerdo   */
@@ -426,7 +428,6 @@ export default {
   height: 150px;
   top: 175px;
   left: -350px;
-  z-index: 2;
 }
 
 /* 3º lado esquerdo   */
@@ -435,6 +436,7 @@ export default {
   height: 150px;
   bottom: 100px;
   left: -450px;
+  top: 350px
 }
 
 .container {
@@ -473,6 +475,7 @@ export default {
 .form .inputBx {
   position: relative;
   width: 100%;
+  top: 50px;
   margin-bottom: 20px;
 }
 
@@ -573,6 +576,12 @@ export default {
   color: #fff;
   margin-bottom: 10px;
   cursor: pointer;
-  transform: translateY(-90px);
+  transform: translateY(-40px);
 }
+
+.titulo {
+  font-size: 50px;
+  transform: translateX(655px) translateY(5px);
+}
+
 </style>
