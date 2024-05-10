@@ -145,7 +145,7 @@ import { vMaska } from "maska";
                 />
               </div>
               <div class="inputBx confirmar">
-                <button class="btnVoltar" formnovalidate v-on:click="voltar">
+                <button class="btnVoltar" formnovalidate v-on:click="Voltar">
                   Voltar
                 </button>
                 <button
@@ -359,18 +359,6 @@ export default {
   h1 {
     margin: auto;
   }
-  .home,.sair {
-    font-size: 20px;
-    outline: none;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-  }
-
-
 
 .box {
   position: relative;
