@@ -4,17 +4,23 @@ import Layout from './Layout.vue';
 
 <template>
   <section>
-    <Layout :cabecalho="titulo">
-    </Layout>
+    <Layout></Layout>
     <main>
-      <div
-        class="container"
+      <div class="titulo">Agendamento</div>
+
+      <div class="container"
         v-if="agendamentos.length != 0"
         v-for="(agendamento, indice) in agendamentos"
-        :key="indice"
-      >
+        :key="indice">
+
         <div class="esquerda">
-          <h2>Agendamento {{ indice + 1 }}</h2>
+          <div class="item">
+            <img src="../assets/img/agenda.png" style="
+              width: 80px;
+              height: 80px;
+              margin-top: 15px;"/>
+          
+          <div class="subtitulo">Agendamento {{ indice + 1 }}</div>
           <p v-if="agendamento.medicoId !== medicoId">Médico: {{ agendamento.nomeMedico }}</p>
           <p v-else>Paciente: {{agendamento.nomePaciente}}</p>
           <p>Especialidade: {{ agendamento.especialidade }}</p>
@@ -22,6 +28,7 @@ import Layout from './Layout.vue';
           <p>
             Data agendamento: {{ formattedDate(agendamento.dataAgendamento) }}
           </p>
+          </div>
         </div>
         <div v-if="agendamento.statusConsultaId === 1" class="direita">
           <button class="botao-consulta" v-on:click="acessarConsulta">Entrar na Consulta</button>
@@ -46,8 +53,7 @@ export default {
       Layout,
     },
   data() {
-    return {
-      titulo: 'AGENDAMENTOS',  
+    return { 
       agendamentos: [],
       token: "",
       usuario: "",
@@ -192,11 +198,14 @@ h1 {
   width: 80%;
   margin: 50px auto;
   display: flex;
+  box-shadow: 0 5px 25px #70b8d6;
   justify-content: space-between;
+  padding-right: 20px;
 }
 
 .esquerda {
   width: 50%;
+  padding: 30px;
 }
 
 .esquerda h2 {
@@ -226,10 +235,16 @@ button {
 }
 
 .editar {
+  font-size: 16px;
+  padding: 10px 30px;
+  border: white 2px solid;
   background-color: #ee7752;
 }
 
 .cancelar {
+  font-size: 16px;
+  padding: 10px 20px;
+  border: white 2px solid;
   background-color: #e73c7e;
 }
 
@@ -264,5 +279,17 @@ footer {
   .direita {
     flex-direction: column;
   }
+}
+
+.titulo {
+  max-width: max-content;
+  font-size: 50px;
+  transform: translateX(655px) translateY(-70px);
+}
+
+.subtitulo {
+  font-size: 30px;
+  font-weight: bold;
+  transform: translateY(-55px) translateX(80px);
 }
 </style>
