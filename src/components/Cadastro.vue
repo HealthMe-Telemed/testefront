@@ -96,8 +96,6 @@ import { vMaska } from "maska";
                   v-model="cpf"
                 />
               </div>
-          
-              
 
               <label class="checkmedico">
                 <input type="checkbox" v-model="checked" />  Sou Médico</label>
@@ -481,7 +479,7 @@ export default {
 
 /* Barras de Especialidade e CRM  */
 .form .inputBx select {
-  width: 88%;
+  width: 112%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -492,7 +490,7 @@ export default {
   color: hwb(225 0% 93%);
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transform: translateY(-90px) translateX(-35px);
+  transform: translateY(-90px) translateX(-19px);
 }
 
 /* Barras gerais  */
@@ -508,7 +506,7 @@ export default {
   color: hwb(225 0% 93%);
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transform: translateY(-90px) translateX(-20px);
+  transform: translateY(-90px) translateX(-35px);
 }
 
 .form .inputBx input {
