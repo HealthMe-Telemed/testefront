@@ -578,6 +578,7 @@ export default {
 }
 
 .titulo {
+  display: flex;
   font-size: 50px;
   transform: translateX(655px) translateY(5px);
 }
