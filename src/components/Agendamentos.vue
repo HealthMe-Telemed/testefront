@@ -15,8 +15,8 @@ import Layout from './Layout.vue';
 
         <div class="esquerda">
           <div class="item">
-            <img src="../assets/img/agenda.png" style="
-              width: 80px;
+            <img src="../assets/img/agendamento.png" style="
+              width: 100px;
               height: 80px;
               margin-top: 15px;"/>
           
@@ -201,6 +201,7 @@ h1 {
   box-shadow: 0 5px 25px #70b8d6;
   justify-content: space-between;
   padding-right: 20px;
+  transform: translateY(-50px);
 }
 
 .esquerda {
@@ -267,6 +268,7 @@ footer {
 }
 
 .novo {
+  text-align: center;
   padding: 20px 50px;
 }
 
@@ -282,14 +284,18 @@ footer {
 }
 
 .titulo {
+  display: flex;
   max-width: max-content;
   font-size: 50px;
   transform: translateX(655px) translateY(-70px);
 }
 
 .subtitulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 30px;
   font-weight: bold;
-  transform: translateY(-55px) translateX(80px);
+  transform: translateY(-55px) translateX(-80px);
 }
 </style>
