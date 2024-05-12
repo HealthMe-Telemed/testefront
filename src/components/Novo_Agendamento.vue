@@ -4,17 +4,18 @@ import Layout from './Layout.vue';
 </script>
 <template>
   <section>
-    <Layout :cabecalho="titulo">
+    <Layout>
     </Layout>
     <main>
+      <div class="titulo">Novo Agendamento</div>
       <div class="container">
         <div class="box">
           <div class="square" style="--i: 0"></div>
           <div class="square" style="--i: 1">
-            <img src="../assets/img/medico2.png" style="
+            <img src="../assets/img/agenda.png" style="
               width: 110px;
               height: 110px;
-              margin-left: -12px;
+              margin-left: -2px;
               margin-top: 15px;
             " />
           </div>
@@ -30,9 +31,8 @@ import Layout from './Layout.vue';
               margin-top: 15px;
             " />
           </div>
-          <div class="container">
             <div class="form">
-              <img src="../assets/img/HealthMe.png" />
+              <img src="../assets/img/HealthMe.png" style="margin-top:-35px;"/>
 
               <form @submit.prevent="confirmarConsulta">
 
@@ -74,13 +74,13 @@ import Layout from './Layout.vue';
                 </div>
               </form>
             </div>
-          </div>
         </div>
       </div>
     </main>
   </section>
 </template>
 <script>
+
 export default {
   data() {
     return {
@@ -325,47 +325,39 @@ export default {
 @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
 
 * {
-  margin: 0;
-  padding: 0;
-  font-family: "El Messiri", sans-serif;
-  color: white;
-}
-
-section {
-  min-height: 100vh;
-  background: linear-gradient(-45deg, #3d93b7, #70b8d6);
-  background-size: 400% 400%;
-  animation: gradient 10s ease infinite;
-}
-
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
+    margin: 0;
+    padding: 0;
+    font-family: "El Messiri", sans-serif;
+    color: white;
   }
-
-  50% {
-    background-position: 100% 50%;
+  
+  section {
+    min-height: 100vh;
+    background: linear-gradient(-45deg,  #80caea);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
   }
+    
+  @keyframes gradient {
 
-  100% {
-    background-position: 0% 50%;
+    0% {
+      background-position: 0% 50%;
+    }
+  
+    50% {
+      background-position: 100% 50%;
+    }
+  
+    100% {
+      background-position: 0% 50%;
+    }
   }
-}
-
-button {
-  margin: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 10px;
-  background-color: black;
-  border-radius: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.2)
-}
-
-.fas {
-  width: 32px;
-}
+  
+  header {
+    display: flex;
+    border-bottom: white 2px solid;
+    text-align: center;
+  }
 
 .box {
   position: relative;
@@ -384,8 +376,9 @@ button {
 
 
 @keyframes square {
-
+  
   0%,
+
   100% {
     transform: translateY(-20px);
   }
@@ -394,50 +387,55 @@ button {
     transform: translateY(20px);
   }
 }
-
+/* 1º lado direito   */
 .box .square:nth-child(1) {
   width: 150px;
   height: 150px;
   top: -15px;
-  right: -250px;
+  right: -500px;
 }
 
-.box .square:nth-child(2) {
-  width: 150px;
-  height: 150px;
-  top: 105px;
-  left: -250px;
-  z-index: 2;
-}
-
-.box .square:nth-child(3) {
-  width: 150px;
-  height: 150px;
-  bottom: 15px;
-  right: -250px;
-  z-index: 2;
-}
-
-.box .square:nth-child(4) {
-  width: 150px;
-  height: 150px;
-  bottom: 55px;
-  left: -250px;
-}
-
-.box .square:nth-child(5) {
-  width: 80px;
-  height: 80px;
-  top: -35px;
-  left: -150px;
-}
-
+/* 2º lado direito   */
 .box .square:nth-child(6) {
   width: 150px;
   height: 150px;
   top: 175px;
-  right: -200px;
+  right: -350px;
   z-index: 2;
+}
+
+/* 3º lado direito   */
+.box .square:nth-child(3) {
+  width: 150px;
+  height: 150px;
+  bottom: 100px;
+  right: -450px;
+  top: 400px;
+}
+
+/* 1º lado esquerdo   */
+.box .square:nth-child(5) {
+  width: 150px;
+  height: 150px;
+  top: -35px;
+  left: -500px;
+}
+
+/* 2º lado esquerdo   */
+.box .square:nth-child(2) {
+  width: 150px;
+  height: 150px;
+  top: 175px;
+  left: -350px;
+}
+
+/* 3º lado esquerdo   */
+.box .square:nth-child(4) {
+  width: 150px;
+  height: 150px;
+  bottom: 100px;
+  left: -450px;
+  top: 350px
 }
 
 .container {
@@ -452,7 +450,7 @@ button {
   /* backdrop-filter: blur(5px);  */
   border-radius: 10px;
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-  margin: auto;
+  margin: 15px auto;
   text-align: center;
 }
 
@@ -463,9 +461,9 @@ button {
   right: 15px;
   bottom: 15px;
   left: 15px;
-  border-radius: 5px;
+  border-radius: 15px;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
+  background: linear-gradient(to bottom, rgba(175, 33, 33, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
 }
 
 .form {
@@ -476,51 +474,55 @@ button {
 .form .inputBx {
   position: relative;
   width: 100%;
+  top: 50px;
   margin-bottom: 20px;
 }
 
-
+/* Barras de Especialidade e CRM  */
 .form .inputBx select {
-  width: 88%;
+  width: 112%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 10px;
-  padding-left: 40px;
+  padding: 8px 50px;
+  padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(-90px) translateX(-19px);
 }
 
+/* Barras gerais  */
 .form .inputBx select option {
   width: 88%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 10px;
-  padding-left: 40px;
+  padding: 8px 50px;
+  padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(-90px) translateX(-35px);
 }
 
-
 .form .inputBx input {
-  width: 75%;
+  width: 88%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 10px;
-  padding-left: 40px;
+  padding: 8px 50px;
+  padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(-90px) translateX(-20px);
 }
 
 .form img {
@@ -542,11 +544,12 @@ button {
   border: 1px solid #102fac33;
   background: rgb(0, 94, 255);
   padding: 8px 10px;
-  padding-left: 20px;
+  padding-left: 10px;
   border-radius: 10px;
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
+  transform: translateY(-70px);
 }
 
 .form .inputBx .btnVoltar {
@@ -557,10 +560,18 @@ button {
   background: rgb(71, 71, 71);
   margin-right: 8px;
   padding: 8px 10px;
-  padding-left: 20px;
+  padding-left: 10px;
   border-radius: 10px;
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
+  transform: translateY(-70px);
 }
+
+.titulo {
+  display: flex;
+  font-size: 50px;
+  transform: translateX(540px) translateY(-65px);
+}
+
 </style>
