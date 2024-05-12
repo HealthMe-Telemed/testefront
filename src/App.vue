@@ -5,6 +5,7 @@ import Novo_Agendamento from '../src/components/Novo_Agendamento.vue';
 import Tela_Medico from '../src/components/Tela_Medico.vue';
 import Esqueci_Senha from '../src/components/Esqueci_Senha.vue';
 import Layout from './components/Layout.vue';
+import Confirmar_Senha from './components/Confirmar_Senha.vue';
 
 </script>
 
@@ -22,6 +23,7 @@ import Layout from './components/Layout.vue';
       Novo_Agendamento,
       Tela_Medico,
       Esqueci_Senha,
+      Confirmar_Senha,
       Layout
     },
   };

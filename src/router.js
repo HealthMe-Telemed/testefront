@@ -7,6 +7,7 @@ import Tela_Medico from './components/Tela_Medico.vue'
 import Cadastro from './components/Cadastro.vue'
 import Consulta from './components/Consulta.vue'
 import Esqueci_Senha from './components/Esqueci_Senha.vue'
+import Confirmar_Senha from './components/Confirmar_Senha.vue'
 
 const routes = [
   { path: '/', component: MenuPrincipal },
@@ -16,7 +17,8 @@ const routes = [
   { path: '/Tela_Medico', component: Tela_Medico},
   { path: '/Cadastro', component: Cadastro},
   { path: '/Consulta', component: Consulta},
-  { path: '/Esqueci_Senha', component: Esqueci_Senha}
+  { path: '/Esqueci_Senha', component: Esqueci_Senha},
+  { path: '/Confirmar_Senha', component: Confirmar_Senha}
 ]
 
 const router = createRouter({
