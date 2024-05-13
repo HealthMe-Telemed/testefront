@@ -2,10 +2,7 @@
   <section>
     <div class="rt-container">
       <div class="box">
-        <div class="square" style="--i: 0">
-          
-          
-        </div>
+        <div class="square" style="--i: 0"></div>
         <div class="square" style="--i: 1">
            <!-- logo lado esquedor -->
           <img
@@ -15,8 +12,7 @@
               height: 150px;
               margin-left: 0px;
               margin-top: 10px;
-            "/>
-        </div>
+            "/></div>
         <!-- quadrado lado direito - terceiro-->
         <div class="square" style="--i: 2"> 
         
