@@ -3,11 +3,14 @@
 import Layout from "./Layout.vue";
 import { vMaska } from "maska";
 </script>
+
 <template>
   <section>
+
     <header>
       <div class="titulo">Cadastro</div>
     </header>
+
     <main>
     <div class="container">
         <div class="box">
@@ -41,8 +44,7 @@ import { vMaska } from "maska";
                   type="text"
                   required="true"
                   placeholder="Nome Completo"
-                  v-model="nome"
-                />
+                  v-model="nome"/>
               </div>
 
               <div class="inputBx password">
@@ -67,7 +69,7 @@ import { vMaska } from "maska";
                 <input
                   v-maska
                   data-maska="['(##) #####-####','(##) ####-####']"
-                  required
+                  required="true"
                   v-model="telefone"
                   placeholder="Insira o telefone: (99) 99999-9999"
                 />
@@ -155,10 +157,7 @@ import { vMaska } from "maska";
                 <button class="btnVoltar" formnovalidate v-on:click="voltar">
                   Voltar
                 </button>
-                <button
-                  class="btnConfirmar"
-                  :disabled="!validatePhoneNumber(telefone)"
-                >
+                <button class="btnConfirmar" formnovalidate v-on:click="confirmar" :disabled="!validatePhoneNumber(telefone)">
                   Confirmar
                 </button>
               </div>
@@ -386,6 +385,7 @@ export default {
     transform: translateY(20px);
   }
 }
+
 /* 1º lado direito   */
 .box .square:nth-child(1) {
   width: 150px;
