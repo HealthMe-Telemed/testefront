@@ -387,6 +387,7 @@ export default {
     transform: translateY(20px);
   }
 }
+
 /* 1º lado direito   */
 .box .square:nth-child(1) {
   width: 150px;
@@ -410,7 +411,7 @@ export default {
   height: 150px;
   bottom: 100px;
   right: -450px;
-  top: 400px;
+  top: 370px;
 }
 
 /* 1º lado esquerdo   */
@@ -440,7 +441,7 @@ export default {
 
 .container {
   position: relative;
-  padding: 40px;
+  padding: 20px;
   width: 400px;
   min-height: 380px;
   display: flex;
@@ -469,6 +470,7 @@ export default {
 .form {
   position: relative;
   width: 100%;
+  top: 15px;
 }
 
 .form .inputBx {
@@ -480,7 +482,7 @@ export default {
 
 /* Barras de Especialidade e CRM  */
 .form .inputBx select {
-  width: 112%;
+  width: 110%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
