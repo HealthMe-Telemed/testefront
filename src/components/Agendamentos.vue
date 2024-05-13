@@ -1,13 +1,19 @@
 <script setup>
 import Layout from './Layout.vue';
+import { vMaska } from "maska";
 </script>
 
 <template>
   <section>
-    <Layout></Layout>
-    <main>
-      <div class="titulo">Agendamento</div>
 
+    <header>
+      <div class="titulo">Agendamento</div>
+      <button class="sair" v-on:click="Logout">
+        <i class="fa fa-sign-out"></i> Sair
+      </button>
+    </header>
+
+      <main>
       <div class="container"
         v-if="agendamentos.length != 0"
         v-for="(agendamento, indice) in agendamentos"
@@ -36,7 +42,7 @@ import Layout from './Layout.vue';
           <button class="botao-secundario cancelar" v-on:click="cancelarAgendamento(agendamento)">Cancelar</button>
         </div>
         <div v-else class="direita" style="margin: auto">
-          <h2>{{ agendamento.statusConsulta }}</h2>
+          <div class="cancelado">{{ agendamento.statusConsulta }}</div>
         </div>
       </div>
       <div class="container" v-else>Não há agendamentos a serem listados</div>
@@ -152,6 +158,7 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -184,10 +191,15 @@ header {
   text-align: center;
 }
 
-.home,
 .sair {
   margin: 20px;
   padding: 10px;
+  font-size: 20px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  color: #fff;
+  transform: translateX(1100px);
 }
 
 h1 {
@@ -196,7 +208,7 @@ h1 {
 
 .container {
   width: 80%;
-  margin: 50px auto;
+  margin: 70px auto;
   display: flex;
   box-shadow: 0 5px 25px #70b8d6;
   justify-content: space-between;
@@ -257,19 +269,14 @@ footer {
   text-align: center;
 }
 
-.novo,
-.home,
-.sair {
+.novo {
+  text-align: center;
+  padding: 20px 50px;
   font-size: 20px;
   outline: none;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   color: #fff;
-}
-
-.novo {
-  text-align: center;
-  padding: 20px 50px;
 }
 
 @media (max-width: 800px) {
@@ -285,9 +292,8 @@ footer {
 
 .titulo {
   display: flex;
-  max-width: max-content;
   font-size: 50px;
-  transform: translateX(655px) translateY(-70px);
+  transform: translateX(650px) translateY(10px);
 }
 
 .subtitulo {
@@ -297,5 +303,10 @@ footer {
   font-size: 30px;
   font-weight: bold;
   transform: translateY(-55px) translateX(-80px);
+}
+
+.cancelado{
+  color: rgb(195, 195, 195);
+  font-size: 30px;
 }
 </style>
