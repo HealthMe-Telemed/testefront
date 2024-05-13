@@ -76,6 +76,7 @@ header {
 }
 
 </style>
+
 <script>
 export default{
     props:['cabecalho'],
