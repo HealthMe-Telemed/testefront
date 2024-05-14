@@ -157,7 +157,7 @@ import { vMaska } from "maska";
                 <button class="btnVoltar" formnovalidate v-on:click="voltar">
                   Voltar
                 </button>
-                <button class="btnConfirmar" formnovalidate v-on:click="confirmar" :disabled="!validatePhoneNumber(telefone)">
+                <button class="btnConfirmar" v-on:click="confirmar" :disabled="!validatePhoneNumber(telefone)">
                   Confirmar
                 </button>
               </div>
@@ -216,7 +216,7 @@ export default {
       ],
       idEspecialidade: 0,
       crm: "",
-      selectedEspecialidade: "",
+      selectedEspecialidade: 0,
       selecaoEspecialidade: "Selecione a Especialidade",
       especialidades:[]
     };

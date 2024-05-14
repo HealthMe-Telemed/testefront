@@ -127,6 +127,9 @@ export default {
     }
   },
   methods: {
+    Logout() {
+            this.$router.push("/");
+        },
     async cancelarAgendamento(agendamento){
       const axiosConfig = {
         headers: {
