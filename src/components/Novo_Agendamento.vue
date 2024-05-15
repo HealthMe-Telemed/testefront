@@ -4,10 +4,8 @@ import Layout from './Layout.vue';
 </script>
 <template>
   <section>
-    <Layout>
-    </Layout>
+    <Layout :cabecalho="titulo"></Layout>
     <main>
-      <div class="titulo">Novo Agendamento</div>
       <div class="container">
         <div class="box">
           <div class="square" style="--i: 0"></div>
@@ -95,7 +93,7 @@ export default {
       datasDisponiveis: [],
       dataConsulta: "",
       horarioConsulta: "",
-      titulo: 'NOVO AGENDAMENTO',
+      titulo: 'Novo Agendamento',
       token: '', 
       usuario: '',
       paciente: '',
@@ -568,12 +566,6 @@ export default {
   font-size: 16px;
   cursor: pointer;
   transform: translateY(-70px);
-}
-
-.titulo {
-  display: flex;
-  font-size: 50px;
-  transform: translateX(540px) translateY(-65px);
 }
 
 </style>
