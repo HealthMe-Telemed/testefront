@@ -158,7 +158,7 @@ import { vMaska } from "maska";
                   Voltar
                 </button>
                 <button class="btnConfirmar" v-on:click="confirmar" :disabled="!validatePhoneNumber(telefone)">
-                  Confirmar
+                  Cadastrar
                 </button>
               </div>
             </form>
@@ -579,8 +579,8 @@ export default {
 
 .titulo {
   display: flex;
-  font-size: 50px;
-  transform: translateX(655px) translateY(5px);
+  font-size: 40px;
+  transform: translateX(675px) translateY(5px);
 }
 
 </style>
