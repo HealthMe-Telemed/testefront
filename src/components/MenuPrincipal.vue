@@ -236,6 +236,7 @@ section {
     transform: translateY(20px);
   }
 }
+
 /* 1º lado direito   */
 .box .square:nth-child(1) {
   width: 150px;
