@@ -1,7 +1,7 @@
 <template>
     <header>
       <button class="home" v-on:click="home"><i class="fa fa-home"></i> Home</button>
-      <h1>{{cabecalho}}</h1>
+      <div class="titulo">{{cabecalho}}</div>
       <button class="sair" v-on:click="Logout">
         <i class="fa fa-sign-out"></i> Sair
       </button>
@@ -39,6 +39,7 @@ header {
   display: flex;
   border-bottom: white 2px solid;
   text-align: center;
+  font-size: 40px;
 }
 
 .home,
@@ -60,21 +61,28 @@ button {
 }
 
 .novo,
-.home,
-.sair {
+.home {
   font-size: 20px;
   outline: none;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   color: #fff;
 }
+.sair {
+  font-size: 20px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  color: #fff;
+  align-items: end;
 
-header {
-    display: flex;
-    border-bottom: white 2px solid;
-    text-align: center;
 }
 
+.titulo {
+  display: flex;
+  font-size: 40px;
+  align-items: center;
+}
 </style>
 
 <script>
