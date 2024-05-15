@@ -295,7 +295,7 @@ footer {
 
 .titulo {
   display: flex;
-  font-size: 50px;
+  font-size: 40px;
   transform: translateX(650px) translateY(10px);
 }
 
