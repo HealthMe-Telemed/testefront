@@ -301,8 +301,6 @@
     cursor: pointer;
   }
 
-
-
 /* Cor fonte - Inserir os dadas  */
   .form span {
     color: rgb(253, 253, 253);
@@ -310,7 +308,8 @@
   }
 
   .titulo {
-  font-size: 50px;
+  display: flex;
+  font-size: 40px;
   transform: translateX(580px) translateY(5px);
 }
 
