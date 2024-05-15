@@ -313,8 +313,8 @@
   }
 
   .titulo {
-  font-size: 50px;
-  transform: translateX(580px) translateY(5px);
+  font-size: 40px;
+  transform: translateX(620px) translateY(5px);
 }
 
   </style>
