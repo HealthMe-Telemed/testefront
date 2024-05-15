@@ -4,9 +4,8 @@ import Layout from './Layout.vue';
 
 <template>
   <section>
-    <Layout></Layout>
+    <Layout :cabecalho="'Consulta'"></Layout>
     <main>
-      <div class="titulo">Consulta</div>
       <div class="container">
         <div class="form">
           <div class="box">
@@ -37,6 +36,14 @@ import Layout from './Layout.vue';
     </footer>
   </section>
 </template>
+
+<script>
+export default {
+  methods: {
+
+  }
+}
+</script>
   
  <style scoped>
   @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
@@ -186,10 +193,4 @@ import Layout from './Layout.vue';
   position: relative;
   width: 100%;
 }
-
-  .titulo {
-  font-size: 50px;
-  transform: translateX(655px) translateY(-65px);
-}
-
   </style>
