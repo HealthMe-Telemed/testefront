@@ -68,6 +68,7 @@ button {
   border-radius: 15px;
   color: #fff;
 }
+
 .sair {
   font-size: 20px;
   outline: none;
