@@ -10,6 +10,7 @@ import Esqueci_Senha from './components/Esqueci_Senha.vue'
 import Confirmar_Senha from './components/Confirmar_Senha.vue'
 import Editar_Consulta from './components/Editar_Consulta.vue'
 import Titulos from './components/Titulos.vue'
+import Botoes_Agendamento from './components/Botoes_Agendamento.vue'
 
 
 const routes = [
@@ -23,8 +24,8 @@ const routes = [
   { path: '/Esqueci_Senha', component: Esqueci_Senha},
   { path: '/Confirmar_Senha', component: Confirmar_Senha},
   { path: '/Editar_Consulta', component:Editar_Consulta},
-  { path: '/Titulos',component:Titulos}
-  
+  { path: '/Titulos',component:Titulos},
+  { path: '/Botoes_Agendamento',component:Botoes_Agendamento}
 ]
 
 const router = createRouter({
