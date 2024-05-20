@@ -1,9 +1,14 @@
+<script setup>
+import Layout from "./Layout.vue";
+import Titulos from './Titulos.vue';
+import { vMaska } from "maska";
+</script>
 
 <template>
     <section>
-      <header>
-               <h1>EDITAR AGENDAMENTO</h1>        
-      </header>
+
+      <Titulos :cabecalho="'Editar Agendamento'"></Titulos>
+      
       <main>
         <div class="container">
         <div class="box">
@@ -22,11 +27,11 @@
 
      <!-- ALTERAR NOME DO MÉDICO -->
             <div class="inputBx">
-                    <select id="NomeMedico" v-model="NomeMedico" required placeholder=" Nome do Médico ">
-                      <option value="" disabled> Alterar o Médico </option>
-                      <option value="Joao">João</option>
-                      <option value="Aline">Aline</option>
-                      <option value="Rebeca">Rebeca</option>
+                <select id="NomeMedico" v-model="NomeMedico" required placeholder=" Nome do Médico ">
+                    <option value="" disabled> Alterar o Médico </option>
+                    <option value="Joao">João</option>
+                    <option value="Aline">Aline</option>
+                    <option value="Rebeca">Rebeca</option>
                     </select>
                   </div>
 
