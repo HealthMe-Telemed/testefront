@@ -1,18 +1,17 @@
 <script setup>
 import Layout from './Layout.vue';
-import { vMaska } from "maska";
+import Titulos from './Titulos.vue';
 </script>
 
 <template>
   <section>
+    
+    <Titulos :cabecalho="'Agendamento'"></Titulos>
 
-    <header>
-      <div class="titulo">Agendamento</div>
       <button class="sair" v-on:click="Logout">
-        <i class="fa fa-sign-out"></i> Sair
+      <i class="fa fa-sign-out"></i> Sair
       </button>
-    </header>
-
+      
       <main>
       <div class="container"
         v-if="agendamentos.length != 0"
@@ -202,11 +201,7 @@ header {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   color: #fff;
-  transform: translateX(1100px);
-}
-
-h1 {
-  margin: auto;
+  transform: translateX(1750px) translateY(-85px);
 }
 
 .container {
@@ -291,12 +286,6 @@ footer {
   .direita {
     flex-direction: column;
   }
-}
-
-.titulo {
-  display: flex;
-  font-size: 40px;
-  transform: translateX(650px) translateY(10px);
 }
 
 .subtitulo {
