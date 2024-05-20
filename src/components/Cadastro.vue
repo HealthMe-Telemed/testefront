@@ -1,18 +1,18 @@
 <!-- Cadastro.vue -->
 <script setup>
 import Layout from "./Layout.vue";
+import Titulos from './Titulos.vue';
 import { vMaska } from "maska";
 </script>
 
 <template>
   <section>
 
-    <header>
-      <div class="titulo">Cadastro</div>
-    </header>
-
+    <Titulos :cabecalho="'Cadastro'"></Titulos>
+   
     <main>
-    <div class="container">
+      <div class="container">
+
         <div class="box">
           <div class="square" style="--i: 0"></div>
           <div class="square" style="--i: 1">
@@ -21,8 +21,7 @@ import { vMaska } from "maska";
                     width: 150px;
                     height: 150px;
                     margin-left: 0px;
-                    margin-top: 10px;"/>
-            </div>
+                    margin-top: 10px;"/></div>
           <div class="square" style="--i: 2"></div>
           <div class="square" style="--i: 3"></div>
           <div class="square" style="--i: 4"></div>
@@ -32,38 +31,32 @@ import { vMaska } from "maska";
                     width: 150px;
                     height: 150px;
                     margin-left: 0px;
-                    margin-top: 10px;"/>
-          </div>
-         
-      
-            <div class="form">
+                    margin-top: 10px;"/></div>
+  
+          <div class="form">
             <form @submit.prevent="confirmar">
              <br><br><br><br>
+
               <div class="inputBx">
                 <input
                   type="text"
                   required="true"
                   placeholder="Nome Completo"
-                  v-model="nome"/>
-              </div>
+                  v-model="nome"/></div>
 
               <div class="inputBx password">
                 <input
                   type="password"
                   required="true"
                   placeholder="Senha"
-                  v-model="senha"
-                />
-              </div>
+                  v-model="senha"/></div>
 
               <div class="inputBx">
                 <input
                   type="email"
                   required="true"
                   placeholder="Email"
-                  v-model="email"
-                />
-              </div>
+                  v-model="email"/></div>
 
               <div class="inputBx">
                 <input
@@ -71,21 +64,17 @@ import { vMaska } from "maska";
                   data-maska="['(##) #####-####','(##) ####-####']"
                   required="true"
                   v-model="telefone"
-                  placeholder="Insira o telefone: (99) 99999-9999"
-                />
+                  placeholder="Insira o telefone: (99) 99999-9999"/>
                 <p v-if="!validatePhoneNumber(telefone) && telefone != ''">
                   Por favor, insira 10 ou 11 dígitos de telefone.
-                </p>
-              </div>
+                </p></div>
 
               <div class="inputBx">
                 <input
                   type="date"
                   required="true"
                   placeholder="Data de Nascimento"
-                  v-model="dataNascimento"
-                />
-              </div>
+                  v-model="dataNascimento"/></div>
 
               <div class="inputBx">
                 <input
@@ -95,48 +84,46 @@ import { vMaska } from "maska";
                   placeholder="CPF, apenas números"
                   maxlength="11"
                   minlength="11"
-                  v-model="cpf"
-                />
-              </div>
+                  v-model="cpf"/></div>
 
               <label class="checkmedico">
-                <input type="checkbox" v-model="checked" />  Sou Médico</label>
+                <input type="checkbox" v-model="checked"/>  Sou Médico</label>
 
-              <div class="inputBx" v-if="checked">
-                <select
-                  id="especialidade"
-                  v-model="selectedEspecialidade"
-                  @change="buscarMedicosPorEspecialidade"
-                  required
-                  placeholder="Selecione a especialidade"
-                >
-                  <option id="selecaoEspecialidade" value="">
-                    {{ selecaoEspecialidade }}
-                  </option>
-                  <option
-                    v-if="especialidades.count != 0"
-                    v-for="especialidade in especialidades"
-                    :value="especialidade.id"
-                    :key="especialidade.id"
-                  >
-                    {{ especialidade.nomeEspecialidade }}
-                  </option>
-                </select>
-              </div>
+                <div class="inputBx" v-if="checked">
+                  <select
+                    id="especialidade"
+                    v-model="selectedEspecialidade"
+                    @change="buscarMedicosPorEspecialidade"
+                    required
+                    placeholder="Selecione a especialidade">
+
+                    <option id="selecaoEspecialidade" value="">
+                      {{ selecaoEspecialidade }}
+                    </option>
+
+                    <option
+                      v-if="especialidades.count != 0"
+                      v-for="especialidade in especialidades"
+                      :value="especialidade.id"
+                      :key="especialidade.id">
+                      {{ especialidade.nomeEspecialidade }}
+                    </option>
+                  </select>
+                </div>
 
               <div class="inputBx" v-if="checked">
                 <select
                   id="nomeMedico"
                   v-model="uf"
                   required
-                  placeholder="Selecione a UF do CRM"
-                >
+                  placeholder="Selecione a UF do CRM">
+
                   <option value="">Selecione a UF do CRM</option>
+
                   <option
                     v-for="estado in estados"
                     :value="estado"
-                    :key="estado"
-                  >
+                    :key="estado">
                     {{ estado }}
                   </option>
                 </select>
@@ -150,9 +137,8 @@ import { vMaska } from "maska";
                   placeholder="Digite o seu CRM, apenas números"
                   minlength="4"
                   maxlength="10"
-                  v-model="crm"
-                />
-              </div>
+                  v-model="crm"/></div>
+                  
               <div class="inputBx confirmar">
                 <button class="btnVoltar" formnovalidate v-on:click="voltar">
                   Voltar
@@ -163,9 +149,9 @@ import { vMaska } from "maska";
               </div>
             </form>
           </div>
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
   </section>
 </template>
 
