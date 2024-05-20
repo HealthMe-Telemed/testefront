@@ -1,16 +1,11 @@
 <script setup>
-import Layout from './Layout.vue';
-import Titulos from './Titulos.vue';
+import Botoes_Agendamento from './Botoes_Agendamento.vue';
 </script>
 
 <template>
   <section>
 
-    <Titulos :cabecalho="'Agendamento'"></Titulos>
-
-    <button class="sair" v-on:click="Logout">
-      <i class="fa fa-sign-out"></i> Sair
-    </button>
+    <Botoes_Agendamento :cabecalho="'Agendamento'"></Botoes_Agendamento>
 
     <main>
       <div class="container" v-if="agendamentos.length != 0" v-for="(agendamento, indice) in agendamentos"
@@ -44,16 +39,13 @@ import Titulos from './Titulos.vue';
       </div>
       <div class="container" v-else>Não há agendamentos a serem listados</div>
     </main>
-    <footer>
-      <button class="novo" v-on:click="novoAgendamento">Novo Agendamento</button>
-    </footer>
   </section>
 </template>
 
 <script>
 export default {
   components: {
-    Layout,
+    Botoes_Agendamento,
   },
   data() {
     return {
@@ -128,6 +120,7 @@ export default {
       this.$router.push("/");
     },
     async cancelarAgendamento(agendamento) {
+      
       const axiosConfig = {
         headers: {
           Authorization: `Bearer ${this.token}`,
@@ -196,17 +189,6 @@ header {
   text-align: center;
 }
 
-.sair {
-  margin: 20px;
-  padding: 10px;
-  font-size: 20px;
-  outline: none;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  color: #fff;
-  transform: translateX(1750px) translateY(-85px);
-}
-
 .container {
   width: 80%;
   margin: 70px auto;
@@ -232,15 +214,6 @@ header {
   justify-content: center;
 }
 
-button {
-  font-weight: bold;
-  cursor: pointer;
-  padding: 10px;
-  background-color: black;
-  border-radius: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
 .botao-consulta {
   padding: 20px;
   font-size: 20px;
@@ -264,20 +237,6 @@ button {
 
 .direita button {
   margin: 10px;
-}
-
-footer {
-  text-align: center;
-}
-
-.novo {
-  text-align: center;
-  padding: 20px 50px;
-  font-size: 20px;
-  outline: none;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  color: #fff;
 }
 
 @media (max-width: 800px) {
