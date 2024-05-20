@@ -5,17 +5,15 @@ import Titulos from './Titulos.vue';
 
 <template>
   <section>
-    
+
     <Titulos :cabecalho="'Agendamento'"></Titulos>
 
-      <button class="sair" v-on:click="Logout">
+    <button class="sair" v-on:click="Logout">
       <i class="fa fa-sign-out"></i> Sair
-      </button>
-      
-      <main>
-      <div class="container"
-        v-if="agendamentos.length != 0"
-        v-for="(agendamento, indice) in agendamentos"
+    </button>
+
+    <main>
+      <div class="container" v-if="agendamentos.length != 0" v-for="(agendamento, indice) in agendamentos"
         :key="indice">
 
         <div class="esquerda">
@@ -23,23 +21,23 @@ import Titulos from './Titulos.vue';
             <img src="../assets/img/agendamento.png" style="
               width: 100px;
               height: 80px;
-              margin-top: 15px;"/>
-          
-          <div class="subtitulo">Agendamento {{ indice + 1 }}</div>
-          <p v-if="agendamento.medicoId !== medicoId">Médico: {{ agendamento.nomeMedico }}</p>
-          <p v-else>Paciente: {{agendamento.nomePaciente}}</p>
-          <p>Especialidade: {{ agendamento.especialidade }}</p>
-          <p>Tipo da consulta: {{ agendamento.tipoConsulta }}</p>
-          <p>
-            Data agendamento: {{ formattedDate(agendamento.dataAgendamento) }}
-          </p>
+              margin-top: 15px;" />
+
+            <div class="subtitulo">Agendamento {{ indice + 1 }}</div>
+            <p v-if="agendamento.medicoId !== medicoId">Médico: {{ agendamento.nomeMedico }}</p>
+            <p v-else>Paciente: {{ agendamento.nomePaciente }}</p>
+            <p>Especialidade: {{ agendamento.especialidade }}</p>
+            <p>Tipo da consulta: {{ agendamento.tipoConsulta }}</p>
+            <p>Data agendamento: {{ formattedDate(agendamento.dataAgendamento) }}</p>
           </div>
         </div>
+
         <div v-if="agendamento.statusConsultaId === 1" class="direita">
           <button class="botao-consulta" v-on:click="acessarConsulta">Entrar na Consulta</button>
-          <button class="botao-secundario editar" v-if="agendamento.pacienteId == pacienteId">Editar</button>
+          <button class="botao-secundario editar" v-on:click="editarAgendamento">Editar</button>
           <button class="botao-secundario cancelar" v-on:click="cancelarAgendamento(agendamento)">Cancelar</button>
         </div>
+
         <div v-else class="direita" style="margin: auto">
           <div class="cancelado">{{ agendamento.statusConsulta }}</div>
         </div>
@@ -54,11 +52,11 @@ import Titulos from './Titulos.vue';
 
 <script>
 export default {
-    components: {
-      Layout,
-    },
+  components: {
+    Layout,
+  },
   data() {
-    return { 
+    return {
       agendamentos: [],
       token: "",
       usuario: "",
@@ -74,7 +72,7 @@ export default {
     this.token = sessionStorage.getItem("token");
     this.usuario = JSON.parse(sessionStorage.getItem("usuario"));
     this.perfis = this.usuario.perfis
-    if(this.perfis.length > 1 || this.perfis[0].idPerfil == 2)
+    if (this.perfis.length > 1 || this.perfis[0].idPerfil == 2)
       this.medicoId = this.perfis.find(x => x.idPerfil == 2).idMedico
     this.pacienteId = this.perfis.find(x => x.idPerfil == 1).idPaciente
   },
@@ -85,7 +83,7 @@ export default {
       },
     };
     if (this.usuario !== null && this.pacienteId !== 0) {
-        axios
+      axios
         .get(
           `https://localhost:7231/Agendamentos/Paciente/${this.pacienteId}`,
           axiosConfig
@@ -104,7 +102,7 @@ export default {
           console.log(error.response.data);
         });
     }
-    if(this.usuario !== null && this.medicoId !== 0){
+    if (this.usuario !== null && this.medicoId !== 0) {
       axios
         .get(
           `https://localhost:7231/Agendamentos/Medico/${this.medicoId}`,
@@ -127,34 +125,37 @@ export default {
   },
   methods: {
     Logout() {
-            this.$router.push("/");
-        },
-    async cancelarAgendamento(agendamento){
+      this.$router.push("/");
+    },
+    async cancelarAgendamento(agendamento) {
       const axiosConfig = {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },
       }
       await axios.delete(`https://localhost:7231/agendamentos/${agendamento.id}`,
-          axiosConfig) 
+        axiosConfig)
       window.location.reload()
     },
-    acessarConsulta(){
+    acessarConsulta() {
       this.$router.push("/Consulta");
     },
-    novoAgendamento(){
+    novoAgendamento() {
       this.$router.push("/Novo_Agendamento");
+    },
+    editarAgendamento() {
+      this.$router.push("/Editar_Consulta");
     },
     formattedDate(dataAgendamento) {
       const date = new Date(
         dataAgendamento
       );
       return date.toLocaleString("pt-BR", {
-          dateStyle: "short",
-          timeStyle: "short",
-        });
-      }
+        dateStyle: "short",
+        timeStyle: "short",
+      });
     }
+  }
 };
 </script>
 
@@ -179,9 +180,11 @@ section {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -297,7 +300,7 @@ footer {
   transform: translateY(-55px) translateX(-80px);
 }
 
-.cancelado{
+.cancelado {
   color: rgb(195, 195, 195);
   font-size: 30px;
 }
