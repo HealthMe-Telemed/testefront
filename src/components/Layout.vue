@@ -51,6 +51,7 @@ header {
 h1 {
   margin: auto;
 }
+
 button {
   font-weight: bold;
   cursor: pointer;
