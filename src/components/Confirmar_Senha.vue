@@ -1,8 +1,13 @@
+<script setup>
+import Layout from './Layout.vue';
+import Titulos from './Titulos.vue';
+</script>
+
 <template>
     <section>
-      <header>
-        <div class="titulo">Redefinir Senha</div>
-      </header>
+      
+      <Titulos :cabecalho="'Confirmar Nova Senha'"></Titulos>
+
       <main>
         <div class="container">
           <div class="box">
