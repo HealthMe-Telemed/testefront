@@ -8,6 +8,7 @@ import Layout from './components/Layout.vue';
 import Confirmar_Senha from './components/Confirmar_Senha.vue';
 import Editar_Consulta from'./components/Editar_Consulta.vue';
 import Titulos from './components/Titulos.vue';
+import Botoes_Agendamento from './components/Botoes_Agendamento.vue';
 
 </script>
 
@@ -28,7 +29,8 @@ import Titulos from './components/Titulos.vue';
       Confirmar_Senha,
       Editar_Consulta,      
       Layout,
-      Titulos
+      Titulos,
+      Botoes_Agendamento
     },
   };
   </script>
