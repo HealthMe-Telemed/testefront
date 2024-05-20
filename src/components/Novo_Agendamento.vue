@@ -2,10 +2,12 @@
 import { NavigationFailureType } from 'vue-router';
 import Layout from './Layout.vue';
 </script>
+
 <template>
   <section>
     <Layout :cabecalho="titulo"></Layout>
     <main>
+
       <div class="container">
         <div class="box">
           <div class="square" style="--i: 0"></div>
@@ -29,49 +31,56 @@ import Layout from './Layout.vue';
               margin-top: 15px;
             " />
           </div>
-            <div class="form">
-              <img src="../assets/img/HealthMe.png" style="margin-top:-35px;"/>
+          
+          <div class="form">
+            <img src="../assets/img/HealthMe.png" style="margin-top:-35px;" />
 
-              <form @submit.prevent="confirmarConsulta">
+            <form @submit.prevent="confirmarConsulta">
 
-                <div class="inputBx">
-                  <select id="nomeMedico" v-model="selectedMedicos" @change="atualizaEspecialidadesEDatas" required placeholder="Selecione o Nome do Médico">
-                    <option value="">{{ selecaoMedico }}</option>
-                    <option v-if="medicos.count != 0" v-for="medico in medicos" :value="medico.id" :key="medico.id">
+              <div class="inputBx">
+                <select id="nomeMedico" v-model="selectedMedicos" @change="atualizaEspecialidadesEDatas" required
+                  placeholder="Selecione o Nome do Médico">
+                  <option value="">{{ selecaoMedico }}</option>
+                  <option v-if="medicos.count != 0" v-for="medico in medicos" :value="medico.id" :key="medico.id">
                     {{ medico.nome }} - CRM {{ medico.crm }}
-                    </option>
-                  </select>
-                </div>
+                  </option>
+                </select>
+              </div>
 
-                <div class="inputBx">
-                  <select id="especialidade" v-model="selectedEspecialidade" @change="buscarMedicosPorEspecialidade" required placeholder="Selecione a especialidade">
-                    <option id="selecaoEspecialidade" value="">{{ selecaoEspecialidade }} </option>
-                    <option v-if="especialidades.count != 0" v-for="especialidade in especialidades" :value="especialidade.id" :key="especialidade.id">
+              <div class="inputBx">
+                <select id="especialidade" v-model="selectedEspecialidade" @change="buscarMedicosPorEspecialidade"
+                  required placeholder="Selecione a especialidade">
+                  <option id="selecaoEspecialidade" value="">{{ selecaoEspecialidade }} </option>
+                  <option v-if="especialidades.count != 0" v-for="especialidade in especialidades"
+                    :value="especialidade.id" :key="especialidade.id">
                     {{ especialidade.nomeEspecialidade }}</option>
-                  </select>
-                </div>
+                </select>
+              </div>
 
-                <div class="inputBx">
-                  <input type="text" v-model="dataConsulta" :disabled="selectedMedicos === null || selectedMedicos === ''" required :list="dateListId" @input="checkIfDateIsValid" @change="filtrarHorario" placeholder="Selecione uma data:"/>
-                  <datalist :id="dateListId">
-                    <option value="">Selecione uma data</option>
-                    <option v-for="date in datasDisponiveis" :key="date" :value="date"></option>
-                  </datalist>
-                </div>
+              <div class="inputBx">
+                <input type="text" v-model="dataConsulta" :disabled="selectedMedicos === null || selectedMedicos === ''"
+                  required :list="dateListId" @input="checkIfDateIsValid" @change="filtrarHorario"
+                  placeholder="Selecione uma data:" />
+                <datalist :id="dateListId">
+                  <option value="">Selecione uma data</option>
+                  <option v-for="date in datasDisponiveis" :key="date" :value="date"></option>
+                </datalist>
+              </div>
 
-                <div class="inputBx">
-                  <input type="text" v-model="horarioConsulta" :disabled="dataConsulta === ''" required @input="checkIfTimeIsValid" :list="timesListId" placeholder="Selecione um horário"/>
-                  <datalist :id="timesListId">
-                    <option v-for="hora in horasDisponiveis" :key="hora" :value="hora"></option>
-                  </datalist>
-                </div>
+              <div class="inputBx">
+                <input type="text" v-model="horarioConsulta" :disabled="dataConsulta === ''" required
+                  @input="checkIfTimeIsValid" :list="timesListId" placeholder="Selecione um horário" />
+                <datalist :id="timesListId">
+                  <option v-for="hora in horasDisponiveis" :key="hora" :value="hora"></option>
+                </datalist>
+              </div>
 
-                <div class="inputBx confirmar">
-                  <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
-                  <button type="submit" class="btnConfirmar" >Confirmar</button>
-                </div>
-              </form>
-            </div>
+              <div class="inputBx confirmar">
+                <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
+                <button type="submit" class="btnConfirmar">Confirmar</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </main>
@@ -82,10 +91,10 @@ import Layout from './Layout.vue';
 export default {
   data() {
     return {
-      medicos:[],
+      medicos: [],
       selectedMedicos: "",
       selecaoMedico: "Selecione o médico",
-      especialidades:[],
+      especialidades: [],
       selectedEspecialidade: '',
       selecaoEspecialidade: 'Selecione a Especialidade',
       dataHorasDisponiveis: [],
@@ -94,7 +103,7 @@ export default {
       dataConsulta: "",
       horarioConsulta: "",
       titulo: 'Novo Agendamento',
-      token: '', 
+      token: '',
       usuario: '',
       paciente: '',
       dateListId: 'datesList',
@@ -109,66 +118,64 @@ export default {
     this.buscarIdPaciente();
     this.buscarIdMedico();
   },
-  mounted(){
-    if(this.token !== null)
-    { 
+  mounted() {
+    if (this.token !== null) {
       this.carregarMedicos();
       this.carregarEspecialidades();
     }
   },
-  methods:{
-    atualizaEspecialidadesEDatas(){
+  methods: {
+    atualizaEspecialidadesEDatas() {
       this.buscarEspecialidadesPorMedico();
       this.dataConsulta = '';
       this.horarioConsulta = '';
-      if(this.selectedMedicos !== ''){ 
+      if (this.selectedMedicos !== '') {
         this.carregarDataEHora(this.selectedMedicos);
       }
     },
-    buscarIdPaciente()
-    {
-        const perfis = this.usuario.perfis.filter(x => x.idPerfil === 1);
-        this.paciente = perfis[0].idPaciente
+    buscarIdPaciente() {
+      const perfis = this.usuario.perfis.filter(x => x.idPerfil === 1);
+      this.paciente = perfis[0].idPaciente
 
     },
-    buscarIdMedico(){
+    buscarIdMedico() {
       const perfis = this.usuario.perfis.filter(x => x.idPerfil === 2);
       if (perfis.length > 0)
         this.medico = perfis[0].idMedico
-        console.log(this.medico)
+      console.log(this.medico)
     },
-    filtrarHorario(){
-      if(this.dataConsulta){
-      this.horarioConsulta = '';
-      this.horasDisponiveis = [];
-      const dataFormatada = this.formatarDataParaBR();
-      const horariosNoDia = this.dataHorasDisponiveis.filter(hora => {
-        const horaLimite = new Date(`${dataFormatada}T18:00:00`);
-        const horaInicio = new Date(`${dataFormatada}T08:59:00`);
-        return horaLimite > new Date(hora.dataHora) && horaInicio < new Date(hora.dataHora); // Retorna apenas as horas após a hora selecionada
-      });
-      horariosNoDia.forEach(horario => {
-        const dataHora = new Date(horario.dataHora)
-        const time = dataHora.toTimeString().split(' ')[0]; // Obtém a hora no formato hh:mm:ss
-        if (!this.horasDisponiveis.includes(time)) {
-          this.horasDisponiveis.push(time); // Adiciona a hora ao array de horas, se ainda não estiver lá
-        }
-      });
-    }
+    filtrarHorario() {
+      if (this.dataConsulta) {
+        this.horarioConsulta = '';
+        this.horasDisponiveis = [];
+        const dataFormatada = this.formatarDataParaBR();
+        const horariosNoDia = this.dataHorasDisponiveis.filter(hora => {
+          const horaLimite = new Date(`${dataFormatada}T18:00:00`);
+          const horaInicio = new Date(`${dataFormatada}T08:59:00`);
+          return horaLimite > new Date(hora.dataHora) && horaInicio < new Date(hora.dataHora); // Retorna apenas as horas após a hora selecionada
+        });
+        horariosNoDia.forEach(horario => {
+          const dataHora = new Date(horario.dataHora)
+          const time = dataHora.toTimeString().split(' ')[0]; // Obtém a hora no formato hh:mm:ss
+          if (!this.horasDisponiveis.includes(time)) {
+            this.horasDisponiveis.push(time); // Adiciona a hora ao array de horas, se ainda não estiver lá
+          }
+        });
+      }
 
     },
-    formatarDataParaBR(){
+    formatarDataParaBR() {
       const [day, month, year] = this.dataConsulta.split('/');
       const dataEscolhida = new Date(`${year}-${month}-${day}`);
       return dataEscolhida.toISOString().split('T')[0];
     },
-    async carregarDataEHora(){
+    async carregarDataEHora() {
       const axiosConfig = {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      },
-    };  
-    await axios.get(`https://localhost:7231/agendamentos/DataHora/paciente/${this.paciente}/medico/${this.selectedMedicos}`, axiosConfig)
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      };
+      await axios.get(`https://localhost:7231/agendamentos/DataHora/paciente/${this.paciente}/medico/${this.selectedMedicos}`, axiosConfig)
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
@@ -182,7 +189,7 @@ export default {
         .catch(error => {
           console.log(error.response.data);
         });
-        this.separateDateTime();
+      this.separateDateTime();
     },
     separateDateTime() {
       // Itera sobre os registros para extrair as datas e horas
@@ -210,39 +217,39 @@ export default {
         this.horarioConsulta = '';
       }
     },
-    buscarMedicosPorEspecialidade(){
+    buscarMedicosPorEspecialidade() {
       if (this.selectedEspecialidade === '') {
         this.carregarMedicos(); // Se nenhum valor estiver selecionado, busca todos os dados
       } else {
         this.carregarMedicos(this.selectedEspecialidade);
-         // Se um valor estiver selecionado, passa o ID como parâmetro
+        // Se um valor estiver selecionado, passa o ID como parâmetro
       }
     },
-    buscarEspecialidadesPorMedico(){
+    buscarEspecialidadesPorMedico() {
       if (this.selectedMedicos === '') {
         this.carregarEspecialidades(); // Se nenhum valor estiver selecionado, busca todos os dados
       } else {
         this.carregarEspecialidades(this.selectedMedicos);
-         // Se um valor estiver selecionado, passa o ID como parâmetro
+        // Se um valor estiver selecionado, passa o ID como parâmetro
       }
     },
     async confirmarConsulta() {
       const axiosConfig = {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      },
-    };  
-    const data = this.formatarDataParaBR();
-    const body = {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      };
+      const data = this.formatarDataParaBR();
+      const body = {
         idMedico: this.selectedMedicos,
         idPaciente: this.paciente,
         idEspecialidade: this.selectedEspecialidade,
         idTipoConsulta: 1,
         idStatusConsulta: 0,
-        dataAgendada: new Date(`${data}T${this.horarioConsulta}Z`)          
+        dataAgendada: new Date(`${data}T${this.horarioConsulta}Z`)
       };
-    await axios.post(`https://localhost:7231/agendamentos`, body,
-      axiosConfig)
+      await axios.post(`https://localhost:7231/agendamentos`, body,
+        axiosConfig)
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
@@ -256,29 +263,29 @@ export default {
           console.log(error.response.data);
         });
     },
-    limparFormulario(){
+    limparFormulario() {
       this.selectedMedicos = '',
-      this.selectedEspecialidade = '',
-      this.dataConsulta = '',
-      this.horarioConsulta = ''
+        this.selectedEspecialidade = '',
+        this.dataConsulta = '',
+        this.horarioConsulta = ''
     },
-    async carregarMedicos(id = 0){
+    async carregarMedicos(id = 0) {
       const axiosConfig = {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      },
-    };  
-    await axios.get(`https://localhost:7231/agendamentos/Medicos?idEspecialidade=${id}&idMedico=${this.medico}`, axiosConfig)
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      };
+      await axios.get(`https://localhost:7231/agendamentos/Medicos?idEspecialidade=${id}&idMedico=${this.medico}`, axiosConfig)
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
             this.medicos = response.data;
             this.selecaoMedico = "Selecione um médico";
           }
-          else if(response.status == 204){
+          else if (response.status == 204) {
             this.medicos = [];
             this.selecaoMedico = "Não há médicos para esta especialidade";
-          } 
+          }
           else {
             console.log("Erro: " + response.message);
           }
@@ -287,23 +294,23 @@ export default {
           console.log(error.response.data);
         });
     },
-    async carregarEspecialidades(id = 0){
+    async carregarEspecialidades(id = 0) {
       const axiosConfig = {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      },
-    };  
-    await axios.get(`https://localhost:7231/agendamentos/Especialidades?idMedico=${id}`, axiosConfig)
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      };
+      await axios.get(`https://localhost:7231/agendamentos/Especialidades?idMedico=${id}`, axiosConfig)
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
             this.especialidades = response.data
             this.selecaoEspecialidade = "Selecione uma especialidade"
           }
-          else if (response.status === 204){
+          else if (response.status === 204) {
             this.especialidades = [];
             this.selecaoEspecialidade = "Não há especialidades para este médico"
-          } 
+          }
           else {
             console.log("Erro: " + response.message);
           }
@@ -312,7 +319,7 @@ export default {
           console.log(error.response.data);
         });
     },
-    voltar(){
+    voltar() {
       this.$router.push('/Agendamentos');
     },
   }
@@ -323,39 +330,39 @@ export default {
 @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "El Messiri", sans-serif;
-    color: white;
-  }
-  
-  section {
-    min-height: 100vh;
-    background: linear-gradient(-45deg,  #80caea);
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
-  }
-    
-  @keyframes gradient {
+  margin: 0;
+  padding: 0;
+  font-family: "El Messiri", sans-serif;
+  color: white;
+}
 
-    0% {
-      background-position: 0% 50%;
-    }
-  
-    50% {
-      background-position: 100% 50%;
-    }
-  
-    100% {
-      background-position: 0% 50%;
-    }
+section {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #80caea);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+
+  0% {
+    background-position: 0% 50%;
   }
-  
-  header {
-    display: flex;
-    border-bottom: white 2px solid;
-    text-align: center;
+
+  50% {
+    background-position: 100% 50%;
   }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+header {
+  display: flex;
+  border-bottom: white 2px solid;
+  text-align: center;
+}
 
 .box {
   position: relative;
@@ -374,7 +381,7 @@ export default {
 
 
 @keyframes square {
-  
+
   0%,
 
   100% {
@@ -449,7 +456,7 @@ export default {
   /* backdrop-filter: blur(5px);  */
   border-radius: 10px;
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-  margin: 15px auto;
+  margin: 50px auto;
   text-align: center;
 }
 
@@ -567,5 +574,4 @@ export default {
   cursor: pointer;
   transform: translateY(-70px);
 }
-
 </style>
