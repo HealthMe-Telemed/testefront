@@ -1,9 +1,12 @@
 <!-- Esqueci_Senha.vue -->
+<script setup>
+import Titulos from './Titulos.vue';
+</script>
+
+
 <template>
     <section>
-      <header>
-        <div class="titulo">Redefinir Senha</div>
-      </header>
+        <Titulos :cabecalho="'Redefinir Senha'"></Titulos>
       <main>
         <div class="container">
           <div class="box">
@@ -72,7 +75,8 @@
   
   <script>
 
-  import MenuPrincipal from './MenuPrincipal.vue';
+import MenuPrincipal from './MenuPrincipal.vue';
+import Titulos from './Titulos.vue';
 
   export default {
     data() {
