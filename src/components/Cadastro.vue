@@ -1,144 +1,104 @@
 <!-- Cadastro.vue -->
 <script setup>
 import Layout from "./Layout.vue";
-import Titulos from './Titulos.vue';
-import { vMaska } from "maska";
+import Titulos from './Titulos.vue'
 </script>
 
 <template>
   <section>
 
     <Titulos :cabecalho="'Cadastro'"></Titulos>
-   
+
     <main>
       <div class="container">
 
         <div class="box">
           <div class="square" style="--i: 0"></div>
           <div class="square" style="--i: 1">
-            <img src="../assets/img/HealthMe.png"
-                  style="
+            <img src="../assets/img/HealthMe.png" style="
                     width: 150px;
                     height: 150px;
                     margin-left: 0px;
-                    margin-top: 10px;"/></div>
+                    margin-top: 10px;" />
+          </div>
           <div class="square" style="--i: 2"></div>
           <div class="square" style="--i: 3"></div>
           <div class="square" style="--i: 4"></div>
           <div class="square" style="--i: 5">
-            <img src="../assets/img/HealthMe.png"
-                  style="
+            <img src="../assets/img/HealthMe.png" style="
                     width: 150px;
                     height: 150px;
                     margin-left: 0px;
-                    margin-top: 10px;"/></div>
-  
+                    margin-top: 10px;" />
+          </div>
+
           <div class="form">
             <form @submit.prevent="confirmar">
-             <br><br><br><br>
+              <br><br><br><br>
 
               <div class="inputBx">
-                <input
-                  type="text"
-                  required="true"
-                  placeholder="Nome Completo"
-                  v-model="nome"/></div>
+                <input type="text" required="true" placeholder="Nome Completo" v-model="nome" />
+              </div>
 
               <div class="inputBx password">
-                <input
-                  type="password"
-                  required="true"
-                  placeholder="Senha"
-                  v-model="senha"/></div>
+                <input type="password" required="true" placeholder="Senha" v-model="senha" />
+              </div>
 
               <div class="inputBx">
-                <input
-                  type="email"
-                  required="true"
-                  placeholder="Email"
-                  v-model="email"/></div>
+                <input type="email" required="true" placeholder="Email" v-model="email" />
+              </div>
 
               <div class="inputBx">
-                <input
-                  v-maska
-                  data-maska="['(##) #####-####','(##) ####-####']"
-                  required="true"
-                  v-model="telefone"
-                  placeholder="Insira o telefone: (99) 99999-9999"/>
+                <input v-maska data-maska="['(##) #####-####','(##) ####-####']" required="true" v-model="telefone"
+                  placeholder="Insira o telefone: (99) 99999-9999" />
                 <p v-if="!validatePhoneNumber(telefone) && telefone != ''">
                   Por favor, insira 10 ou 11 dígitos de telefone.
-                </p></div>
+                </p>
+              </div>
 
               <div class="inputBx">
-                <input
-                  type="date"
-                  required="true"
-                  placeholder="Data de Nascimento"
-                  v-model="dataNascimento"/></div>
+                <input type="date" required="true" placeholder="Data de Nascimento" v-model="dataNascimento" />
+              </div>
 
               <div class="inputBx">
-                <input
-                  type="text"
-                  required="true"
-                  @input="formatarCPF()"
-                  placeholder="CPF, apenas números"
-                  maxlength="11"
-                  minlength="11"
-                  v-model="cpf"/></div>
+                <input type="text" required="true" @input="formatarCPF()" placeholder="CPF, apenas números"
+                  maxlength="11" minlength="11" v-model="cpf" />
+              </div>
 
               <label class="checkmedico">
-                <input type="checkbox" v-model="checked"/>  Sou Médico</label>
-
-                <div class="inputBx" v-if="checked">
-                  <select
-                    id="especialidade"
-                    v-model="selectedEspecialidade"
-                    @change="buscarMedicosPorEspecialidade"
-                    required
-                    placeholder="Selecione a especialidade">
-
-                    <option id="selecaoEspecialidade" value="">
-                      {{ selecaoEspecialidade }}
-                    </option>
-
-                    <option
-                      v-if="especialidades.count != 0"
-                      v-for="especialidade in especialidades"
-                      :value="especialidade.id"
-                      :key="especialidade.id">
-                      {{ especialidade.nomeEspecialidade }}
-                    </option>
-                  </select>
-                </div>
+                <input type="checkbox" v-model="checked" /> Sou Médico</label>
 
               <div class="inputBx" v-if="checked">
-                <select
-                  id="nomeMedico"
-                  v-model="uf"
-                  required
-                  placeholder="Selecione a UF do CRM">
+                <select id="especialidade" v-model="selectedEspecialidade" @change="buscarMedicosPorEspecialidade"
+                  required placeholder="Selecione a especialidade">
+
+                  <option id="selecaoEspecialidade" value="">
+                    {{ selecaoEspecialidade }}
+                  </option>
+
+                  <option v-if="especialidades.count != 0" v-for="especialidade in especialidades"
+                    :value="especialidade.id" :key="especialidade.id">
+                    {{ especialidade.nomeEspecialidade }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="inputBx" v-if="checked">
+                <select id="nomeMedico" v-model="uf" required placeholder="Selecione a UF do CRM">
 
                   <option value="">Selecione a UF do CRM</option>
 
-                  <option
-                    v-for="estado in estados"
-                    :value="estado"
-                    :key="estado">
+                  <option v-for="estado in estados" :value="estado" :key="estado">
                     {{ estado }}
                   </option>
                 </select>
               </div>
 
               <div class="inputBx" v-if="checked">
-                <input
-                  type="text"
-                  required="true"
-                  @input="formatarCRM()"
-                  placeholder="Digite o seu CRM, apenas números"
-                  minlength="4"
-                  maxlength="10"
-                  v-model="crm"/></div>
-                  
+                <input type="text" required="true" @input="formatarCRM()" placeholder="Digite o seu CRM, apenas números"
+                  minlength="4" maxlength="10" v-model="crm" />
+              </div>
+
               <div class="inputBx confirmar">
                 <button class="btnVoltar" formnovalidate v-on:click="voltar">
                   Voltar
@@ -204,7 +164,7 @@ export default {
       crm: "",
       selectedEspecialidade: 0,
       selecaoEspecialidade: "Selecione a Especialidade",
-      especialidades:[]
+      especialidades: []
     };
   },
   watch: {
@@ -234,18 +194,18 @@ export default {
     validarCPF(cpf) {
       return cpf.length == 11 ? true : false;
     },
-    async carregarEspecialidades(id = 0){ 
-    await axios.get(`https://localhost:7231/agendamentos/Especialidades?idMedico=${id}`)
+    async carregarEspecialidades(id = 0) {
+      await axios.get(`https://localhost:7231/agendamentos/Especialidades?idMedico=${id}`)
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
             this.especialidades = response.data
             this.selecaoEspecialidade = "Selecione uma especialidade"
           }
-          else if (response.status === 204){
+          else if (response.status === 204) {
             this.especialidades = [];
             this.selecaoEspecialidade = "Não há especialidades para este médico"
-          } 
+          }
           else {
             console.log("Erro: " + response.message);
           }
@@ -310,38 +270,38 @@ export default {
 @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "El Messiri", sans-serif;
-    color: white;
+  margin: 0;
+  padding: 0;
+  font-family: "El Messiri", sans-serif;
+  color: white;
+}
+
+section {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #80caea);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
   }
-  
-  section {
-    min-height: 100vh;
-    background: linear-gradient(-45deg,  #80caea);
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
+
+  50% {
+    background-position: 100% 50%;
   }
-    
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-  
-    50% {
-      background-position: 100% 50%;
-    }
-  
-    100% {
-      background-position: 0% 50%;
-    }
+
+  100% {
+    background-position: 0% 50%;
   }
-  
-  header {
-    display: flex;
-    border-bottom: white 2px solid;
-    text-align: center;
-  }
+}
+
+header {
+  display: flex;
+  border-bottom: white 2px solid;
+  text-align: center;
+}
 
 .box {
   position: relative;
@@ -360,7 +320,7 @@ export default {
 
 
 @keyframes square {
-  
+
   0%,
 
   100% {
@@ -435,7 +395,7 @@ export default {
   /* backdrop-filter: blur(5px);  */
   border-radius: 10px;
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-  margin: 15px auto;
+  margin: 50px auto;
   text-align: center;
 }
 
@@ -512,10 +472,10 @@ export default {
 
 
 .form img {
-    display: flex;
-    width: 200px;
-    margin: auto;
-  }
+  display: flex;
+  width: 200px;
+  margin: auto;
+}
 
 .form .inputBx .fas {
   position: absolute;
@@ -568,5 +528,4 @@ export default {
   font-size: 40px;
   transform: translateX(675px) translateY(5px);
 }
-
 </style>
