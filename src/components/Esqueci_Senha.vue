@@ -225,7 +225,7 @@ import Titulos from './Titulos.vue';
     /* backdrop-filter: blur(5px);  */
     border-radius: 10px;
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-    margin: 15px auto;
+    margin: 50px auto;
     text-align: center;
   }
   
