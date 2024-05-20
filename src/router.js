@@ -9,6 +9,7 @@ import Consulta from './components/Consulta.vue'
 import Esqueci_Senha from './components/Esqueci_Senha.vue'
 import Confirmar_Senha from './components/Confirmar_Senha.vue'
 import Editar_Consulta from './components/Editar_Consulta.vue'
+import Titulos from './components/Titulos.vue'
 
 
 const routes = [
@@ -21,7 +22,8 @@ const routes = [
   { path: '/Consulta', component: Consulta},
   { path: '/Esqueci_Senha', component: Esqueci_Senha},
   { path: '/Confirmar_Senha', component: Confirmar_Senha},
-  { path: '/Editar_Consulta', component:Editar_Consulta}
+  { path: '/Editar_Consulta', component:Editar_Consulta},
+  { path: '/Titulos',component:Titulos}
   
 ]
 
