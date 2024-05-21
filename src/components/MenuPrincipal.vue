@@ -58,6 +58,10 @@
               </div>
 
               <div class="inputBx password">
+
+                <img src="../assets/Icons/Icon Senha.png"/>
+                <span>Senha:</span>
+
                 <input
                   id="password-input"
                   v-model="password"
@@ -65,11 +69,11 @@
                   name="password"
                   required="true"
                 />
-                <span>Senha:</span>
                 <!--<button type="button" @click="togglePasswordVisibility">-
                 {{ passwordVisible ? "Ocultar Senha" : "Mostrar Senha" }}
                 </button> -->
                 <i class="fas fa-key"></i>
+                
               </div>
 
               <label class="remember"><input type="checkbox" />  Lembrar</label>
@@ -184,8 +188,7 @@ body {
 }
 
 .fas {
-  width: 32px;
-  
+  width: 32px;  
 }
 
 section {
@@ -323,6 +326,17 @@ section {
   position: relative;
   width: 100%;
   margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.form .inputBx img {
+  width: 30px; /* Ajuste este valor conforme necessário */
+  height: 30px; /* Ajuste este valor conforme necessário */
+}
+
+.form .inputBx span {
+  margin-left: 10px;
 }
 
   /* config para Login e Passoword  */

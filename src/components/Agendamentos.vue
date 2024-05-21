@@ -6,8 +6,6 @@ import Botoes_Agendamento from './Botoes_Agendamento.vue';
   <section>
 
     <Botoes_Agendamento :cabecalho="'Agendamento'"></Botoes_Agendamento>
-
-    <main>
       <div class="container" v-if="agendamentos.length != 0" v-for="(agendamento, indice) in agendamentos"
         :key="indice">
 
@@ -38,7 +36,6 @@ import Botoes_Agendamento from './Botoes_Agendamento.vue';
         </div>
       </div>
       <div class="container" v-else>Não há agendamentos a serem listados</div>
-    </main>
   </section>
 </template>
 
@@ -191,7 +188,8 @@ header {
 
 .container {
   width: 80%;
-  margin: 70px auto;
+  margin: auto;
+  margin-top: 70px;
   display: flex;
   box-shadow: 0 5px 25px #70b8d6;
   justify-content: space-between;
