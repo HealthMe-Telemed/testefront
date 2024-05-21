@@ -37,22 +37,19 @@ import { vMaska } from "maska";
             <form @submit.prevent="editarConsulta">
 
               <div class="inputBx">
-                <select id="nomeMedico" v-model="selectedMedicos" @change="atualizaEspecialidadesEDatas" required
+                <select id="nomeMedico" v-model="selectedMedicos" required @change="atualizaDatas"
                   placeholder="Selecione o Nome do Médico">
-                  <option value="">{{ selecaoMedico }}</option>
-                  <option v-if="medicos.count != 0" v-for="medico in medicos" :value="medico.id" :key="medico.id">
-                    {{ medico.nome }} - CRM {{ medico.crm }}
+                  <option :value="agendamento.medicoId" :key="agendamento.medicoId">
+                    {{ agendamento.nomeMedico }} - CRM {{ medico.crm }}
                   </option>
                 </select>
               </div>
 
               <div class="inputBx">
-                <select id="especialidade" v-model="selectedEspecialidade" @change="buscarMedicosPorEspecialidade"
+                <select id="especialidade" v-model="selectedEspecialidade"
                   required placeholder="Selecione a especialidade">
-                  <option id="selecaoEspecialidade" value="">{{ selecaoEspecialidade }} </option>
-                  <option v-if="especialidades.count != 0" v-for="especialidade in especialidades"
-                    :value="especialidade.id" :key="especialidade.id">
-                    {{ especialidade.nomeEspecialidade }}</option>
+                  <option :selected="true" :value="agendamento.especialidadeId" :key="agendamento.especialidadeId">
+                    {{ agendamento.especialidade }}</option>
                 </select>
               </div>
 
@@ -90,12 +87,10 @@ import { vMaska } from "maska";
 export default {
   data() {
     return {
-      medicos: [],
+      agendamento: "",
       selectedMedicos: "",
-      selecaoMedico: "Selecione o médico",
-      especialidades: [],
       selectedEspecialidade: '',
-      selecaoEspecialidade: 'Selecione a Especialidade',
+      especialidade: "",
       dataHorasDisponiveis: [],
       horasDisponiveis: [],
       datasDisponiveis: [],
@@ -111,6 +106,7 @@ export default {
     };
   },
   created() {
+    this.buscarAgendamento();
     this.token = sessionStorage.getItem("token");
     this.usuario = JSON.parse(sessionStorage.getItem("usuario"));
     this.buscarIdPaciente();
@@ -118,15 +114,32 @@ export default {
   },
 
   mounted() {
-    if (this.token !== null) {
-      this.carregarMedicos();
-      this.carregarEspecialidades();
-    }
+    this.selectedEspecialidade = this.agendamento.especialidadeId;
+    this.especialidade = this.agendamento.especialidade;
   },
 
   methods: {
-    atualizaEspecialidadesEDatas() {
-      this.buscarEspecialidadesPorMedico();
+    buscarAgendamento(){
+      axios
+        .get(
+          `https://localhost:7231/Agendamentos/${this.$route.params.id}`
+        )
+        .then((response) => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            // Redirecionar para a página de sucesso
+            console.log(response.data);
+            this.agendamento = response.data;
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    },
+    
+    atualizaDatas() {
       this.dataConsulta = '';
       this.horarioConsulta = '';
       if (this.selectedMedicos !== '') {
@@ -217,22 +230,6 @@ export default {
         this.horarioConsulta = '';
       }
     },
-    buscarMedicosPorEspecialidade() {
-      if (this.selectedEspecialidade === '') {
-        this.carregarMedicos(); // Se nenhum valor estiver selecionado, busca todos os dados
-      } else {
-        this.carregarMedicos(this.selectedEspecialidade);
-        // Se um valor estiver selecionado, passa o ID como parâmetro
-      }
-    },
-    buscarEspecialidadesPorMedico() {
-      if (this.selectedMedicos === '') {
-        this.carregarEspecialidades(); // Se nenhum valor estiver selecionado, busca todos os dados
-      } else {
-        this.carregarEspecialidades(this.selectedMedicos);
-        // Se um valor estiver selecionado, passa o ID como parâmetro
-      }
-    },
     async editarConsulta() {
       const axiosConfig = {
         headers: {
@@ -248,8 +245,7 @@ export default {
         idStatusConsulta: 0,
         dataAgendada: new Date(`${data}T${this.horarioConsulta}Z`)
       };
-      await axios.post(`https://localhost:7231/agendamentos`, body,
-        axiosConfig)
+      await axios.patch(`https://localhost:7231/agendamentos/${this.$route.params.id}`, body)
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {

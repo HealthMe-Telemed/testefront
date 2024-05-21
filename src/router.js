@@ -15,15 +15,15 @@ import Botoes_Agendamento from './components/Botoes_Agendamento.vue'
 
 const routes = [
   { path: '/', component: MenuPrincipal },
-  { path: '/App', component: App },
-  { path: '/Agendamentos', component: Agendamentos },
-  { path: '/Novo_Agendamento', component: Novo_Agendamento},
+  { path: '/App', name: "App", component: App },
+  { path: '/Agendamentos', name: "Agendamentos",component: Agendamentos },
+  { path: '/Novo_Agendamento', name: "Novo_Agendamento",component: Novo_Agendamento},
   { path: '/Tela_Medico', component: Tela_Medico},
   { path: '/Cadastro', component: Cadastro},
   { path: '/Consulta', component: Consulta},
   { path: '/Esqueci_Senha', component: Esqueci_Senha},
   { path: '/Confirmar_Senha', component: Confirmar_Senha},
-  { path: '/Editar_Consulta', component:Editar_Consulta},
+  { path: '/Editar_Consulta/:id', name:"Editar_Consulta", component:Editar_Consulta},
   { path: '/Titulos',component:Titulos},
   { path: '/Botoes_Agendamento',component:Botoes_Agendamento}
 ]

@@ -27,7 +27,7 @@ import Botoes_Agendamento from './Botoes_Agendamento.vue';
 
         <div v-if="agendamento.statusConsultaId === 1" class="direita">
           <button class="botao-consulta" v-on:click="acessarConsulta">Entrar na Consulta</button>
-          <button class="botao-secundario editar" v-on:click="editarAgendamento">Editar</button>
+          <button class="botao-secundario editar" v-on:click="editarAgendamento(agendamento)">Editar</button>
           <button class="botao-secundario cancelar" v-on:click="cancelarAgendamento(agendamento)">Cancelar</button>
         </div>
 
@@ -133,8 +133,8 @@ export default {
     novoAgendamento() {
       this.$router.push("/Novo_Agendamento");
     },
-    editarAgendamento() {
-      this.$router.push("/Editar_Consulta");
+    editarAgendamento(agendamento) {
+      this.$router.push({name: "Editar_Consulta", params: { id: agendamento.id}});
     },
     formattedDate(dataAgendamento) {
       const date = new Date(
