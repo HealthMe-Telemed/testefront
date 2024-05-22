@@ -6,7 +6,7 @@
         <div class="square" style="--i: 1">
            <!-- logo lado esquedor -->
           <img
-            src="../assets/img/HealthMe-1.png"
+            src="../assets/img/HealthMe.png"
             style="
               width: 150px;
               height: 150px;
@@ -43,6 +43,12 @@
             style="margin-top: -50px;"/>
 
             <form @submit.prevent="submitForm">
+
+              <div class="iconlogin">
+                <img src="../assets/Icons/Icon Usuario.png" style="
+                width: 30px;"/>
+              </div>
+
               <div class="inputBx">
                 <input
                   type="text"
@@ -56,19 +62,23 @@
                 <span>Login: CPF</span>
                 <i class="fas fa-user-circle"></i>
               </div>
+              
+              <div class="iconsenha">
+                <img src="../assets/Icons/Icon Senha.png" style="
+                width: 30px;"/>
+              </div>
 
               <div class="inputBx password">
-
-                <img src="../assets/Icons/Icon Senha.png"/>
-                <span>Senha:</span>
 
                 <input
                   id="password-input"
                   v-model="password"
                   :type="passwordVisible ? 'text' : 'password'"
                   name="password"
-                  required="true"
-                />
+                  required="true"/>
+
+                  <span>Senha:</span>
+
                 <!--<button type="button" @click="togglePasswordVisibility">-
                 {{ passwordVisible ? "Ocultar Senha" : "Mostrar Senha" }}
                 </button> -->
@@ -330,13 +340,22 @@ section {
   align-items: center;
 }
 
-.form .inputBx img {
-  width: 30px; /* Ajuste este valor conforme necessário */
-  height: 30px; /* Ajuste este valor conforme necessário */
+.iconsenha {
+  display: flex;
+  position: relative;
+  width: 10px;
+  margin-bottom: -8px;
+}
+
+.iconlogin {
+  display: flex;
+  position: relative;
+  width: 10px;
+  margin-bottom: -8px;
 }
 
 .form .inputBx span {
-  margin-left: 10px;
+  margin-left: 30px;
 }
 
   /* config para Login e Passoword  */

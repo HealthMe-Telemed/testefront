@@ -11,8 +11,15 @@ import { vMaska } from "maska";
     <Titulos :cabecalho="'Cadastro'"></Titulos>
 
     <main>
-      <div class="container">
 
+          <div class="iconuser">
+          <img src="../assets/Icons/Adicionar User.png"/>
+          </div>
+          <div class="iconsenha">
+          <img src="../assets/Icons/Icon Senha.png"/>
+          </div>
+
+      <div class="container">
         <div class="box">
           <div class="square" style="--i: 0"></div>
           <div class="square" style="--i: 1">
@@ -34,8 +41,9 @@ import { vMaska } from "maska";
           </div>
 
           <div class="form">
+
             <form @submit.prevent="confirmar">
-              <br><br><br><br>
+              <br><br>
 
               <div class="inputBx">
                 <input type="text" required="true" placeholder="Nome Completo" v-model="nome" />
@@ -337,7 +345,7 @@ header {
 .box .square:nth-child(1) {
   width: 150px;
   height: 150px;
-  top: -15px;
+  top: -40px;
   right: -500px;
 }
 
@@ -345,7 +353,7 @@ header {
 .box .square:nth-child(6) {
   width: 150px;
   height: 150px;
-  top: 175px;
+  top: 150px;
   right: -350px;
   z-index: 2;
 }
@@ -356,14 +364,14 @@ header {
   height: 150px;
   bottom: 100px;
   right: -450px;
-  top: 450px
+  top: 350px
 }
 
 /* 1º lado esquerdo   */
 .box .square:nth-child(5) {
   width: 150px;
   height: 150px;
-  top: -35px;
+  top: -40px;
   left: -500px;
 }
 
@@ -371,7 +379,7 @@ header {
 .box .square:nth-child(2) {
   width: 150px;
   height: 150px;
-  top: 175px;
+  top: 150px;
   left: -350px;
 }
 
@@ -387,7 +395,7 @@ header {
 .container {
   position: relative;
   padding: 40px;
-  width: 400px;
+  width: 500px;
   min-height: 380px;
   display: flex;
   justify-content: center;
@@ -396,7 +404,7 @@ header {
   /* backdrop-filter: blur(5px);  */
   border-radius: 10px;
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-  margin: 50px auto;
+  margin: 20px auto;
   text-align: center;
 }
 
@@ -431,7 +439,7 @@ header {
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 50px;
+  padding: 8px 40px;
   padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
@@ -469,13 +477,6 @@ header {
   font-size: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transform: translateY(-90px) translateX(-20px);
-}
-
-
-.form img {
-  display: flex;
-  width: 200px;
-  margin: auto;
 }
 
 .form .inputBx .fas {
@@ -524,9 +525,22 @@ header {
   transform: translateY(-40px);
 }
 
-.titulo {
+.iconuser {
   display: flex;
-  font-size: 40px;
-  transform: translateX(675px) translateY(5px);
+  position: absolute;
+  width: 40px;
+  height: 42px;
+  margin-left: 540px;
+  margin-top: 36px;  
+}
+
+
+.iconsenha {
+  display: flex;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin-left: 540px;
+  margin-top: 93px;  
 }
 </style>
