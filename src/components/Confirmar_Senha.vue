@@ -45,7 +45,11 @@ import Titulos from './Titulos.vue';
                     <input 
                     id="cpf_senha" 
                     v-model="cpf_senha" 
-                    required placeholder=""/>                 
+                    required
+                    @input="formatarCPF"
+                    placeholder="Digite apenas números"
+                    maxlength="11"
+                    minlength="11"/>                 
                 </div>
    
                 <span> Digite a Nova Senha: </span>                     
@@ -53,10 +57,10 @@ import Titulos from './Titulos.vue';
                <div class="inputBx">
                 <br>
                 <input 
-                type="text"
+                type="password"
                 id="Digitar_NovaSenha" 
-                v-model="Digitar_NovaSenha" 
-                required placeholder=""
+                v-model="NovaSenha" 
+                required placeholder="Digite a sua senha"
                   />                                           
               </div>
 
@@ -65,10 +69,10 @@ import Titulos from './Titulos.vue';
                <div class="inputBx">
                 <br>
                 <input 
-                type="text"
+                type="password"
                 id="Confirmar_NovaSenha" 
-                v-model="Confirmar_NovaSenha" 
-                required placeholder=""
+                v-model="NovaSenhaConfirmar" 
+                required placeholder="Confirme a sua senha"
                   />                                           
               </div>
               
@@ -92,13 +96,74 @@ import Titulos from './Titulos.vue';
     data() {
       return {
          cpf_senha: "",
+         token: "",
+         NovaSenha: "",
+         NovaSenhaConfirmar: ""
       };
     },
 
+    created(){
+      this.token = this.$route.query.token
+      console.log(this.token)
+      this.verificarToken();
+    },
     methods:{
       voltar(){
         this.$router.push('/');
+      },
+      formatarCPF() {
+      // Remova quaisquer caracteres não numéricos do valor do campo
+      this.cpf_senha = this.cpf_senha.replace(/\D/g, '');
+      },
+      validarCPF(cpf){
+      return cpf.length == 11 ? true: false; 
+      },
+      async verificarToken(){
+          await axios.get("https://localhost:7146/Usuario/RecoveryPassword", { params: {token: `${this.token}`}}).then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            console.log("O token fornecido é valido")
+          } 
+        })
+        .catch(error => {
+          alert(error.response.data);
+          this.$router.push('/');
+        });
+      },
+      async confirmar(){
+        const mensagem = ""
+        const cpfValido = this.validarCPF(this.cpf_senha);
+        const body = {
+          cpf: this.cpf_senha,
+          token: this.token,
+          senha: CryptoJS.MD5(this.NovaSenha).toString(),
+          confirmarSenha: CryptoJS.MD5(this.NovaSenhaConfirmar).toString()
+        }
+
+        if(cpfValido){
+          await axios.post('https://localhost:7146/Usuario/RecoveryPassword', body)
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            window.alert("A senha foi alterada com sucesso!! Voce será redirecionado para a tela de login da aplicação")
+            this.$router.push('/');
+          } 
+        })
+        .catch(error => {
+          if(error.status === 401){
+            alert("CPF e token inválidos!!");
+            this.$router.push('/');
+          }
+          if(error.status === 400){
+            alert("Não foi possível alterar senha!!")
+            this.cpf_senha = ""
+            this.NovaSenha = ""
+            this.NovaSenhaConfirmar = ""
+          }
+        });
+      
       }
+    }
     },
 
   }

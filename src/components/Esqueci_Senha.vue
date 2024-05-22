@@ -45,9 +45,9 @@ import Titulos from './Titulos.vue';
               <div class="inputBx">
                 <br>
                 <input 
-                type="text" 
+                type="email" 
                 id="InserirEmail" 
-                v-model="InserirEmail" 
+                v-model="email" 
                 required="true" 
                 placeholder="" />
               </div>
@@ -70,7 +70,10 @@ import Titulos from './Titulos.vue';
                 v-model="cpf_senha" 
                 required="true"
                 @input="formatarCPF"                 
-                placeholder="Digite apenas números" />
+                placeholder="Digite apenas números" 
+                maxlength="11"
+                minlength="11"
+                />
               </div>
 
               <div class="inputBx Reenviar">
@@ -94,7 +97,7 @@ import Titulos from './Titulos.vue';
 export default {
   data() {
     return {
-      InserirEmail: "",
+      email: "",
       cpf_senha: "",
     };
   },
@@ -102,6 +105,38 @@ export default {
   methods: {
     voltar() {
       this.$router.push('/');
+    },
+    formatarCPF() {
+      // Remova quaisquer caracteres não numéricos do valor do campo
+      this.cpf_senha = this.cpf_senha.replace(/\D/g, '');
+      },
+      validarCPF(cpf){
+      return cpf.length == 11 ? true: false; 
+      },
+      async confirmar(){
+        const mensagem = ""
+        const cpfValido = this.validarCPF(this.cpf_senha);
+        const body = {
+          cpf: this.cpf_senha,
+          email: this.email
+        }
+
+        if(cpfValido){
+          await axios.post('https://localhost:7146/Usuario/PasswordReset', body)
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            window.alert("Um link de redefinição de senha será enviado ao email fornecido")
+            this.$router.push('/');
+          } 
+        })
+        .catch(error => {
+          alert(error.response.data);
+          this.cpf_senha = "",
+          this.email = ""
+        });
+      
+      }
     }
   },
 
