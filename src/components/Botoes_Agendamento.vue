@@ -1,10 +1,15 @@
 <template>
     <header>
-      <button class="novo" v-on:click="novoAgendamento">Novo Agendamento</button>
+
+      <button class="novo" v-on:click="novoAgendamento">
+        <img src="../assets/Icons/Adicionar.png" style="width: 50px; height: 50px;"/>
+        <p> Novo Agendamento </p></button>
+
       <div class="titulo">{{cabecalho}}</div>
+
       <button class="sair" v-on:click="Logout">
-        <i class="fa fa-sign-out"></i> Sair
-      </button>
+        <i class="fa fa-sign-out"></i> <img src="../assets/Icons/Sair.png" style="width: 50px; height: 50px;"/>
+        <p>Sair</p></button>
     </header>
 </template>
 <style>
@@ -49,6 +54,8 @@ button {
   background-color: black;
   border-radius: 20px;
   border: 2px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  justify-content: center;
 }
 
 .novo {
@@ -71,7 +78,6 @@ button {
   border-radius: 15px;
   color: #fff;
   align-items: end;
-
 }
 
 .titulo {
@@ -93,4 +99,5 @@ export default{
         }
     }
 }
+
 </script>

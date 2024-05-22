@@ -455,7 +455,7 @@ header {
 .container {
   position: relative;
   padding: 20px;
-  width: 400px;
+  width: 600px;
   min-height: 380px;
   display: flex;
   justify-content: center;

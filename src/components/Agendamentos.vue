@@ -6,13 +6,14 @@ import Botoes_Agendamento from './Botoes_Agendamento.vue';
   <section>
 
     <Botoes_Agendamento :cabecalho="'Agendamento'"></Botoes_Agendamento>
+
       <div class="container" v-if="agendamentos.length != 0" v-for="(agendamento, indice) in agendamentos"
         :key="indice">
 
         <div class="esquerda">
           <div class="item">
-            <img src="../assets/img/agendamento.png" style="
-              width: 100px;
+            <img src="../assets/Icons/AguardandoCalendário.png" style="
+              width: 80px;
               height: 80px;
               margin-top: 15px;" />
 
@@ -26,9 +27,18 @@ import Botoes_Agendamento from './Botoes_Agendamento.vue';
         </div>
 
         <div v-if="agendamento.statusConsultaId === 1" class="direita">
-          <a :href="agendamento.linkConsulta" target="_blank"><button class="botao-consulta">Entrar na Consulta</button></a>
-          <button class="botao-secundario editar" v-on:click="editarAgendamento(agendamento)">Editar</button>
-          <button class="botao-secundario cancelar" v-on:click="cancelarAgendamento(agendamento)">Cancelar</button>
+
+          <a :href="agendamento.linkConsulta" target="_blank"><button class="botao-consulta">
+            <img src="../assets/Icons/AceitarCalendário.png" style="width: 70px; height: 70px;"/>
+            <p>Entrar na Consulta</p></button></a>
+
+          <button class="botao-secundario editar" v-on:click="editarAgendamento(agendamento)">
+            <img src="../assets/Icons/EditarCalendário.png" style="width: 50px; height: 50px;"/>
+            <p>Editar</p></button>
+
+          <button class="botao-secundario cancelar" v-on:click="cancelarAgendamento(agendamento)">
+            <img src="../assets/Icons/CancelarCalendário.png" style="width: 50px; height: 50px;"/>
+            <p>Cancelar</p></button>
         </div>
 
         <div v-else class="direita" style="margin: auto">
@@ -191,16 +201,16 @@ header {
 .container {
   width: 80%;
   margin: auto;
-  margin-top: 70px;
+  margin-top: 40px;
   display: flex;
   box-shadow: 0 5px 25px #70b8d6;
   justify-content: space-between;
   padding-right: 20px;
-  transform: translateY(-50px);
 }
 
 .esquerda {
   width: 50%;
+  margin-left: 30px;
   padding: 30px;
 }
 
@@ -211,7 +221,7 @@ header {
 .direita {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
 }
 
 .botao-consulta {
@@ -252,7 +262,6 @@ header {
 
 .subtitulo {
   display: flex;
-  align-items: center;
   justify-content: center;
   font-size: 30px;
   font-weight: bold;

@@ -18,6 +18,18 @@ import { vMaska } from "maska";
           <div class="iconsenha">
           <img src="../assets/Icons/Icon Senha.png"/>
           </div>
+          <div class="iconemail">
+          <img src="../assets/Icons/Email2.png"/>
+          </div>
+          <div class="icontel">
+          <img src="../assets/Icons/Telefone.png"/>
+          </div>
+          <div class="icondata">
+          <img src="../assets/Icons/Calendário2.png"/>
+          </div>
+          <div class="iconcpf">
+          <img src="../assets/Icons/CPF.png"/>
+          </div>
 
       <div class="container">
         <div class="box">
@@ -93,6 +105,19 @@ import { vMaska } from "maska";
               </div>
 
               <div class="inputBx" v-if="checked">
+
+                <div class="iconesp">
+                <img src="../assets/Icons/Icon Médico.png"/>
+                </div>
+
+                <div class="iconcrm">
+                <img src="../assets/Icons/Icon CRM.png"/>
+                </div>
+
+                <div class="iconnumcrm">
+                <img src="../assets/Icons/Icon NumCRM.png"/>
+                </div>
+
                 <select id="nomeMedico" v-model="uf" required placeholder="Selecione a UF do CRM">
 
                   <option value="">Selecione a UF do CRM</option>
@@ -542,5 +567,68 @@ header {
   height: 40px;
   margin-left: 540px;
   margin-top: 93px;  
+}
+
+.iconemail {
+  display: flex;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin-left: 540px;
+  margin-top: 146px; 
+}
+
+.icontel {
+  display: flex;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin-left: 540px;
+  margin-top: 203px; 
+}
+
+.icondata {
+  display: flex;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin-left: 540px;
+  margin-top: 260px; 
+}
+
+.iconcpf {
+  display: flex;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin-left: 540px;
+  margin-top: 317px; 
+}
+
+.iconesp {
+  display: flex;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin-left: -70px;
+  margin-top: -150px; 
+}
+
+.iconcrm {
+  display: flex;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin-left: -70px;
+  margin-top: -90px;  
+}
+
+.iconnumcrm {
+  display: flex;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin-left: -70px;
+  margin-top: -32px;  
 }
 </style>
