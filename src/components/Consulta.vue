@@ -33,7 +33,7 @@ import Layout from './Layout.vue';
 
         </div>
           <div>
-            <iframe src="https://meet.google.com/phh-ztgp-kmo" frameborder="0"></iframe>
+            <iframe :src="consultaUrl" sandbox="allow-scripts " frameborder="0" width="500"></iframe>
           </div>
       </div>
       </div>
@@ -45,6 +45,19 @@ import Layout from './Layout.vue';
 
 <script>
 export default {
+  data(){
+    return {
+      consultaUrl: ""
+    }
+  },
+  created(){
+    let urlformatada = localStorage.getItem('linkConsulta').split(',')
+    console.log(urlformatada)
+    this.consultaUrl = "https://app.zoom.us/wc".concat(urlformatada[0]);
+    this.consultaUrl = this.consultaUrl.concat("/join?fromPWA=1&");
+    this.consultaUrl = this.consultaUrl.concat(urlformatada[1])
+    console.log(this.consultaUrl)
+  },
   methods: {
 
   }

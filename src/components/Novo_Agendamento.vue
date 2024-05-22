@@ -108,7 +108,8 @@ export default {
       paciente: '',
       dateListId: 'datesList',
       timesListId: 'timesList',
-      medico: 0
+      medico: 0,
+      agendamentoCriado: '',
 
     };
   },
@@ -253,7 +254,29 @@ export default {
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
+            this.agendamentoCriado  = response.data
+            this.criarConsulta()
             this.limparFormulario();
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
+    },
+    async criarConsulta(){
+      const bodyConsulta = {
+          idAgendamento: this.agendamentoCriado.id,
+          dataAgendamento: this.agendamentoCriado.dataAgendamento,
+          emailMedico: this.agendamentoCriado.emailMedico,
+          emailPaciente: this.agendamentoCriado.emailPaciente
+        }
+
+        await axios.post(`https://localhost:7059/Consulta`, bodyConsulta)
+        .then(response => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
             this.$router.push('/Agendamentos')
           } else {
             console.log("Erro: " + response.message);

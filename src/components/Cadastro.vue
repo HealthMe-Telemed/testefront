@@ -1,7 +1,8 @@
 <!-- Cadastro.vue -->
 <script setup>
 import Layout from "./Layout.vue";
-import Titulos from './Titulos.vue'
+import Titulos from './Titulos.vue';
+import { vMaska } from "maska";
 </script>
 
 <template>

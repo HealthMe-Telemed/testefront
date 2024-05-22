@@ -26,7 +26,7 @@ import Botoes_Agendamento from './Botoes_Agendamento.vue';
         </div>
 
         <div v-if="agendamento.statusConsultaId === 1" class="direita">
-          <button class="botao-consulta" v-on:click="acessarConsulta">Entrar na Consulta</button>
+          <a :href="agendamento.linkConsulta" target="_blank"><button class="botao-consulta">Entrar na Consulta</button></a>
           <button class="botao-secundario editar" v-on:click="editarAgendamento(agendamento)">Editar</button>
           <button class="botao-secundario cancelar" v-on:click="cancelarAgendamento(agendamento)">Cancelar</button>
         </div>
@@ -127,7 +127,9 @@ export default {
         axiosConfig)
       window.location.reload()
     },
-    acessarConsulta() {
+    acessarConsulta(agendamento) {
+      let reuniaoId = (agendamento.linkConsulta.substr(25)).split('?');
+      localStorage.setItem("linkConsulta", reuniaoId);
       this.$router.push("/Consulta");
     },
     novoAgendamento() {

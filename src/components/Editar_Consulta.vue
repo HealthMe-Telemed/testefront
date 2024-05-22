@@ -39,8 +39,9 @@ import { vMaska } from "maska";
               <div class="inputBx">
                 <select id="nomeMedico" v-model="selectedMedicos" required @change="atualizaDatas"
                   placeholder="Selecione o Nome do Médico">
+                  <option value="">Selecione o Nome do Médico</option>
                   <option :value="agendamento.medicoId" :key="agendamento.medicoId">
-                    {{ agendamento.nomeMedico }} - CRM {{ medico.crm }}
+                    {{ agendamento.nomeMedico }} - CRM {{ agendamento.crmMedico }}
                   </option>
                 </select>
               </div>
@@ -48,6 +49,7 @@ import { vMaska } from "maska";
               <div class="inputBx">
                 <select id="especialidade" v-model="selectedEspecialidade"
                   required placeholder="Selecione a especialidade">
+                  <option id="selecaoEspecialidade" value="">Selecione a especialidade</option>
                   <option :selected="true" :value="agendamento.especialidadeId" :key="agendamento.especialidadeId">
                     {{ agendamento.especialidade }}</option>
                 </select>
@@ -109,6 +111,7 @@ export default {
     this.buscarAgendamento();
     this.token = sessionStorage.getItem("token");
     this.usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    this.selectedMedicos = this.agendamento.medicoId
     this.buscarIdPaciente();
     this.buscarIdMedico();
   },
