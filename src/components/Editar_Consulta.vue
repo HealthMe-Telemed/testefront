@@ -36,6 +36,10 @@ import { vMaska } from "maska";
 
             <form @submit.prevent="editarConsulta">
 
+              <div class="iconMedico">
+              <img src="../assets/Icons/Icon Médico.png" style="width: 40px; height: 40px;"/>
+              </div>
+
               <div class="inputBx">
                 <select id="nomeMedico" v-model="selectedMedicos" required @change="atualizaDatas"
                   placeholder="Selecione o Nome do Médico">
@@ -46,13 +50,21 @@ import { vMaska } from "maska";
                 </select>
               </div>
 
+              <div class="iconEsp">
+              <img src="../assets/Icons/Icon NumCRM.png" style="width: 40px; height: 40px;"/>
+              </div>
+
               <div class="inputBx">
                 <select id="especialidade" v-model="selectedEspecialidade"
-                  required placeholder="Selecione a especialidade">
+                  required="true" placeholder="Selecione a especialidade">
                   <option id="selecaoEspecialidade" value="">Selecione a especialidade</option>
                   <option :selected="true" :value="agendamento.especialidadeId" :key="agendamento.especialidadeId">
                     {{ agendamento.especialidade }}</option>
                 </select>
+              </div>
+
+              <div class="iconData">
+              <img src="../assets/Icons/Calendário2.png" style="width: 40px; height: 40px;"/>
               </div>
 
               <div class="inputBx">
@@ -63,6 +75,10 @@ import { vMaska } from "maska";
                   <option value="">Selecione uma data</option>
                   <option v-for="date in datasDisponiveis" :key="date" :value="date"></option>
                 </datalist>
+              </div>
+
+              <div class="iconHora">
+              <img src="../assets/Icons/IconHora.png" style="width: 40px; height: 40px;"/>
               </div>
 
               <div class="inputBx">
@@ -436,7 +452,7 @@ header {
 .container {
   position: relative;
   padding: 20px;
-  width: 400px;
+  width: 450px;
   min-height: 380px;
   display: flex;
   justify-content: center;
@@ -469,18 +485,19 @@ header {
 .form .inputBx {
   position: relative;
   width: 100%;
-  top: 80px;
+  top: 50px;
+  left: 20px;
   margin-bottom: 20px;
 }
 
-/* Barras de Especialidade e CRM  */
+/* Barras de Medico e CRM  */
 .form .inputBx select {
   width: 110%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 50px;
+  padding: 8px 30px;
   padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
@@ -496,7 +513,7 @@ header {
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 50px;
+  padding: 8px 30px;
   padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
@@ -505,13 +522,14 @@ header {
   transform: translateY(-90px) translateX(-35px);
 }
 
+/* Barras Data e Horário  */
 .form .inputBx input {
   width: 88%;
   outline: none;
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 50px;
+  padding: 8px 41px;
   padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
@@ -522,7 +540,7 @@ header {
 
 .form img {
   display: flex;
-  width: 200px;
+  width: 250px;
   margin: auto;
 }
 
@@ -559,5 +577,33 @@ header {
   font-size: 16px;
   cursor: pointer;
   transform: translateY(-80px);
+}
+
+.iconMedico {
+  display: flex;
+  position: absolute;
+  margin-top: -41px;
+  margin-left: -55px;
+}
+
+.iconEsp {
+  display: flex;
+  position: absolute;
+  margin-top: -41px;
+  margin-left: -55px;
+}
+
+.iconData {
+  display: flex;
+  position: absolute;
+  margin-top: -41px;
+  margin-left: -55px;
+}
+
+.iconHora {
+  display: flex;
+  position: absolute;
+  margin-top: -41px;
+  margin-left: -55px;
 }
 </style>

@@ -1,10 +1,16 @@
 <template>
     <header>
-      <button class="home" v-on:click="home"><i class="fa fa-home"></i> Home</button>
+
+      <button class="home" v-on:click="home"><i class="fa fa-home"></i>
+        <img src="../assets/Icons/Home.png" style="width: 50px; height: 50px;"/>
+        <p>Home</p></button>
+
       <div class="titulo">{{cabecalho}}</div>
+
       <button class="sair" v-on:click="Logout">
-        <i class="fa fa-sign-out"></i> Sair
-      </button>
+        <i class="fa fa-sign-out"></i>
+        <img src="../assets/Icons/Sair.png" style="width: 50px; height: 50px;"/>
+        <p>Sair</p></button>
     </header>
 </template>
 <style>

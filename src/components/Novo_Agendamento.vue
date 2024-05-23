@@ -37,6 +37,10 @@ import Layout from './Layout.vue';
 
             <form @submit.prevent="confirmarConsulta">
 
+              <div class="iconMedico">
+              <img src="../assets/Icons/Icon Médico.png" style="width: 40px; height: 40px;"/>
+              </div>
+
               <div class="inputBx">
                 <select id="nomeMedico" v-model="selectedMedicos" @change="atualizaEspecialidadesEDatas" required
                   placeholder="Selecione o Nome do Médico">
@@ -45,6 +49,10 @@ import Layout from './Layout.vue';
                     {{ medico.nome }} - CRM {{ medico.crm }}
                   </option>
                 </select>
+              </div>
+
+              <div class="iconEsp">
+              <img src="../assets/Icons/Icon NumCRM.png" style="width: 40px; height: 40px;"/>
               </div>
 
               <div class="inputBx">
@@ -57,6 +65,10 @@ import Layout from './Layout.vue';
                 </select>
               </div>
 
+              <div class="iconData">
+              <img src="../assets/Icons/Calendário2.png" style="width: 40px; height: 40px;"/>
+              </div>
+
               <div class="inputBx">
                 <input type="text" v-model="dataConsulta" :disabled="selectedMedicos === null || selectedMedicos === ''"
                   required :list="dateListId" @input="checkIfDateIsValid" @change="filtrarHorario"
@@ -65,6 +77,10 @@ import Layout from './Layout.vue';
                   <option value="">Selecione uma data</option>
                   <option v-for="date in datasDisponiveis" :key="date" :value="date"></option>
                 </datalist>
+              </div>
+
+              <div class="iconHora">
+              <img src="../assets/Icons/IconHora.png" style="width: 40px; height: 40px;"/>
               </div>
 
               <div class="inputBx">
@@ -423,8 +439,8 @@ header {
   width: 150px;
   height: 150px;
   bottom: 100px;
-  right: -450px;
-  top: 370px;
+  right: -550px;
+  top: 350px;
 }
 
 /* 1º lado esquerdo   */
@@ -448,14 +464,14 @@ header {
   width: 150px;
   height: 150px;
   bottom: 100px;
-  left: -450px;
+  left: -550px;
   top: 350px
 }
 
 .container {
   position: relative;
   padding: 20px;
-  width: 600px;
+  width: 500px;
   min-height: 380px;
   display: flex;
   justify-content: center;
@@ -490,6 +506,7 @@ header {
   position: relative;
   width: 100%;
   top: 50px;
+  left: 20px;
   margin-bottom: 20px;
 }
 
@@ -500,7 +517,7 @@ header {
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 50px;
+  padding: 8px 40px;
   padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
@@ -516,7 +533,7 @@ header {
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 50px;
+  padding: 8px 40px;
   padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
@@ -531,7 +548,7 @@ header {
   border: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 50px;
+  padding: 8px 52px;
   padding-left: 20px;
   border-radius: 15px;
   color: hwb(225 0% 93%);
@@ -582,4 +599,35 @@ header {
   cursor: pointer;
   transform: translateY(-70px);
 }
+
+.iconMedico {
+  display: flex;
+  position: absolute;
+  margin-top: -41px;
+  margin-left: -55px;
+}
+
+
+.iconEsp {
+  display: flex;
+  position: absolute;
+  margin-top: -41px;
+  margin-left: -55px;
+}
+
+
+.iconData {
+  display: flex;
+  position: absolute;
+  margin-top: -41px;
+  margin-left: -55px;
+}
+
+.iconHora {
+  display: flex;
+  position: absolute;
+  margin-top: -41px;
+  margin-left: -55px;
+}
+
 </style>

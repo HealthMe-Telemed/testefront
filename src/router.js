@@ -11,6 +11,7 @@ import Confirmar_Senha from './components/Confirmar_Senha.vue'
 import Editar_Consulta from './components/Editar_Consulta.vue'
 import Titulos from './components/Titulos.vue'
 import Botoes_Agendamento from './components/Botoes_Agendamento.vue'
+import ConsultaExemplo from './components/ConsultaExemplo.vue'
 
 
 const routes = [
@@ -25,7 +26,8 @@ const routes = [
   { path: '/Confirmar_Senha', component: Confirmar_Senha},
   { path: '/Editar_Consulta/:id', name:"Editar_Consulta", component:Editar_Consulta},
   { path: '/Titulos',component:Titulos},
-  { path: '/Botoes_Agendamento',component:Botoes_Agendamento}
+  { path: '/Botoes_Agendamento',component:Botoes_Agendamento},
+  { path: '/ConsultaExemplo', component:ConsultaExemplo}
 ]
 
 const router = createRouter({

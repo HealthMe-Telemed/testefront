@@ -4,103 +4,47 @@
       <div class="box">
         <div class="square" style="--i: 0"></div>
         <div class="square" style="--i: 1">
-           <!-- logo lado esquedor -->
-          <img
-            src="../assets/img/HealthMe.png"
-            style="
-              width: 150px;
-              height: 150px;
-              margin-left: 0px;
-              margin-top: 10px;
-            "/></div>
-        <!-- quadrado lado direito - terceiro-->
-        <div class="square" style="--i: 2"> 
-        
-        </div>     
-        <div class="square" style="--i: 3">
-                  
+          <img src="../assets/img/HealthMe.png"
+            style="width: 150px; height: 150px; margin-left: 0px; margin-top: 10px;" />
         </div>
-        <div class="square" style="--i: 4"> </div>
-       
+        <div class="square" style="--i: 2"></div>
+        <div class="square" style="--i: 3"></div>
+        <div class="square" style="--i: 4"></div>
         <div class="square" style="--i: 5">
-          <!-- logo lado direito -->
-          <img
-            src="../assets/img/HealthMe.png"
-            style="
-              width: 150px;
-              height: 150px;
-              margin-left: 2px;
-              margin-top: 10px;
-            "
-          />
+          <img src="../assets/img/HealthMe.png"
+            style="width: 150px; height: 150px; margin-left: 2px; margin-top: 10px;" />
         </div>
-
-        
         <div class="container">
           <div class="form">
-            <!-- logo central -->
-            <img src="../assets/img/HealthMe.png" 
-            style="margin-top: -50px;"/>
-
+            <img src="../assets/img/HealthMe.png" style="margin-top: -50px;" />
             <form @submit.prevent="submitForm">
-
               <div class="iconlogin">
-                <img src="../assets/Icons/Icon Usuario.png" style="
-                width: 30px;"/>
+                <img src="../assets/Icons/Icon Usuario.png" style="width: 30px;" />
               </div>
-
               <div class="inputBx">
-                <input
-                  type="text"
-                  v-model="username"
-                  required="true"
-                  @input="formatarCPF"
-                  placeholder="Digite apenas números"
-                  maxlength="11"
-                  minlength="11"
-                />
-                <span>Login: CPF</span>
+                <input type="text" v-model="username" required="true" @input="formatarCPF"
+                  placeholder="Digite apenas números" maxlength="11" minlength="11" /><span>Login: CPF</span>
                 <i class="fas fa-user-circle"></i>
               </div>
-              
               <div class="iconsenha">
-                <img src="../assets/Icons/Icon Senha.png" style="
-                width: 30px;"/>
+                <img src="../assets/Icons/Icon Senha.png" style="width: 30px;" />
               </div>
-
               <div class="inputBx password">
-
-                <input
-                  id="password-input"
-                  v-model="password"
-                  :type="passwordVisible ? 'text' : 'password'"
-                  name="password"
-                  required="true"/>
-
-                  <span>Senha:</span>
-
-                <!--<button type="button" @click="togglePasswordVisibility">-
-                {{ passwordVisible ? "Ocultar Senha" : "Mostrar Senha" }}
-                </button> -->
+                <input id="password-input" v-model="password" :type="passwordVisible ? 'text' : 'password'"
+                  name="password" required="true" /><span>Senha:</span>
                 <i class="fas fa-key"></i>
-                
               </div>
-
-              <label class="remember"><input type="checkbox" />  Lembrar</label>
-
+              <label class="remember"><input type="checkbox" /> Lembrar</label>
               <p class="configsenha"><a href="Esqueci_Senha">Esqueceu sua Senha? </a></p>
-
               <div class="inputBx acessar">
                 <button type="submit" value="Entrar" v-on:click="submitForm">Entrar</button>
               </div>
             </form>
-
             <p class="novocadastro"><a href="Cadastro">Cadastrar Nova Conta</a></p>
           </div>
         </div>
       </div>
     </div>
-
     <div v-show="showError" class="modal">
       <div class="modal-content">
         <span class="modal-close" @click="closeErrorModal">&times;</span>
@@ -118,66 +62,47 @@
 <script>
 export default {
   data() {
-    return {
-      username: "",
-      senha: "",
-      passwordVisible: false,
-      showError: false,
-      errorMessage: '',
-    };
+    return { username: "", senha: "", passwordVisible: false, showError: false, errorMessage: '', };
   },
-  created(){
+  created() {
     sessionStorage.clear();
   },
   methods: {
-    openErrorModal(errorMessage) {
-      this.errorMessage = errorMessage;
-      this.showError = true;
-    },
-    closeErrorModal() {
-      this.showError = false;
-      this.errorMessage = '';
-    },
-    formatarCPF() {
+    openErrorModal(errorMessage) { this.errorMessage = errorMessage; this.showError = true; },
+    closeErrorModal() { this.showError = false; this.errorMessage = ''; }, formatarCPF() {
       // Remova quaisquer caracteres não numéricos do valor do campo
       this.username = this.username.replace(/\D/g, '');
     },
-    validarCPF(cpf){
-      return cpf.length == 11 ? true: false; 
-    },
+    validarCPF(cpf) { return cpf.length == 11 ? true : false; },
     togglePasswordVisibility() {
       console.log("Clicado")
-      this.passwordVisible = !this.passwordVisible;
-      console.log(this.passwordVisible)
+      this.passwordVisible = !this.passwordVisible; console.log(this.passwordVisible)
     },
     submitForm() {
       const cpfValido = this.validarCPF(this.username);
       const md5Password = CryptoJS.MD5(this.password).toString();
-      const data = {
-        cpf: this.username,
-        senha: md5Password
-      };
+      const data = { cpf: this.username, senha: md5Password };
 
-      if(cpfValido){
-      axios.post('https://localhost:7146/Usuario/Login', data)
-        .then(response => {
-          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
-          if (response.status === 200) {
-            sessionStorage.setItem('token', response.data.token);
-            sessionStorage.setItem('usuario', JSON.stringify(response.data.usuario));
-            console.log(sessionStorage.getItem('usuario'))
-            this.$router.push('/Agendamentos');
-          } else {
-            console.log("Erro: " + response.message);
-          }
-        })
-        .catch(error => {
-          console.log(error.response.data);
-          this.openErrorModal(error.response.data);
-        });
+      if (cpfValido) {
+        axios.post('https://localhost:7146/Usuario/Login', data)
+          .then(response => {
+            // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+            if (response.status === 200) {
+              sessionStorage.setItem('token', response.data.token);
+              sessionStorage.setItem('usuario', JSON.stringify(response.data.usuario));
+              console.log(sessionStorage.getItem('usuario'))
+              this.$router.push('/Agendamentos');
+            } else {
+              console.log("Erro: " + response.message);
+            }
+          })
+          .catch(error => {
+            console.log(error.response.data);
+            this.openErrorModal(error.response.data);
+          });
       }
     },
-    cadastrar(){
+    cadastrar() {
       this.$router.push('/Cadastro')
     }
   },
@@ -186,6 +111,7 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/cssz?family=El+Messiri:wght@700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -198,7 +124,7 @@ body {
 }
 
 .fas {
-  width: 32px;  
+  width: 32px;
 }
 
 section {
@@ -215,9 +141,11 @@ section {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -235,7 +163,7 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 15px;
   animation: square 10s linear infinite;
-  animation-delay: calc( -1s * var(--i));
+  animation-delay: calc(-1s * var(--i));
 }
 
 @keyframes square {
@@ -263,7 +191,7 @@ section {
   width: 150px;
   height: 150px;
   top: 180px;
-  right: 45px; 
+  right: 45px;
 }
 
 /* 3º lado Direito   */
@@ -272,7 +200,7 @@ section {
   height: 150px;
   top: 400px;
   left: 1100px;
-  
+
 }
 
 /* 1º lado Esquerdo   */
@@ -290,6 +218,7 @@ section {
   top: 150px;
   left: 45px;
 }
+
 /* 3º lado Esquerdo   */
 .box .square:nth-child(4) {
   width: 150px;
@@ -323,8 +252,7 @@ section {
   left: 5px;
   border-radius: 5px;
   pointer-events: none;
-  background: linear-gradient
-    (to bottom, rgba(154, 23, 23, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
+  background: linear-gradient (to bottom, rgba(154, 23, 23, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
 }
 
 .form {
@@ -358,7 +286,7 @@ section {
   margin-left: 30px;
 }
 
-  /* config para Login e Passoword  */
+/* config para Login e Passoword  */
 .form .inputBx input {
   width: 80%;
   outline: none;
@@ -425,10 +353,9 @@ form .inputBx button[type="submit"] {
   transition: 1.5s;
 }
 
-  /* config ao passar o mouse por cima do botão  */
+/* config ao passar o mouse por cima do botão  */
 .form .inputBx button[type="submit"]:hover {
-  background: linear-gradient
-    (115deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.25));
+  background: linear-gradient (115deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.25));
   color: #0920cd;
   transition: 0.5s;
 }
@@ -448,11 +375,13 @@ form .inputBx button[type="submit"] {
   pointer-events: none;
 }
 
-.form .inputBx input:focus ~ span ,
-.form .inputBx input:invalid ~ span,  form .inputBx input:valid ~ span {
+.form .inputBx input:focus~span,
+.form .inputBx input:invalid~span,
+form .inputBx input:valid~span {
   transform: translateX(-30px) translateY(-25px);
   font-size: 16px;
 }
+
 .form p {
   color: #fff;
   font-size: 16px;
@@ -463,7 +392,7 @@ form .inputBx button[type="submit"] {
   color: #fff;
 }
 
-  /* config ao passar o mouse por cima  */
+/* config ao passar o mouse por cima  */
 .form p a:hover {
   background-image: linear-gradient (to right, #434343 0%, black 100%);
   -webkit-text-fill-color: black;
@@ -482,10 +411,12 @@ form .inputBx button[type="submit"] {
   .rt-container {
     width: 500px;
   }
+
   [class="col-rt-"] {
     float: left;
     width: 49.9999999999%;
   }
+
   .col-rt-6,
   .col-rt-12 {
     width: 100%;
@@ -496,24 +427,30 @@ form .inputBx button[type="submit"] {
   .rt-container {
     width: 1170px;
   }
+
   .col-rt-1 {
     width: 16.6%;
   }
+
   .col-rt-2 {
     width: 30.33%;
   }
+
   .col-rt-3 {
     width: 50%;
   }
+
   .col-rt-4 {
     width: 67.664%;
   }
+
   .col-rt-5 {
     width: 83.33%;
   }
 }
 
 @media only screen and (min-width: 240px) and (max-width: 768px) {
+
   .ScriptTop h1,
   .ScriptTop ul {
     text-align: center;
@@ -542,6 +479,7 @@ form .inputBx button[type="submit"] {
     float: none;
   }
 }
+
 .rt-container {
   margin: 0 auto;
   padding-left: 12px;
@@ -578,6 +516,7 @@ form .inputBx button[type="submit"] {
   display: flex;
   justify-content: space-between;
 }
+
 .modal {
   position: fixed;
   top: 0;
@@ -585,7 +524,8 @@ form .inputBx button[type="submit"] {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999; /* Garante que o modal esteja acima de outros elementos */
+  z-index: 999;
+  /* Garante que o modal esteja acima de outros elementos */
 }
 
 .modal-content {
@@ -619,7 +559,7 @@ form .inputBx button[type="submit"] {
 }
 
 /* Config 'Esqueceu a senha?' */
-.configsenha{
+.configsenha {
   position: relative;
   color: #fff;
   cursor: pointer;
@@ -627,12 +567,10 @@ form .inputBx button[type="submit"] {
 }
 
 /* Config 'Novo Cadastro' */
-.novocadastro{
+.novocadastro {
   position: relative;
   color: #fff;
   cursor: pointer;
   transform: translateX(170px) translateY(-75px);
 }
-
 </style>
-
