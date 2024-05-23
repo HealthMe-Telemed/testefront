@@ -137,7 +137,7 @@ import { vMaska } from "maska";
                 <button class="btnVoltar" formnovalidate v-on:click="voltar">
                   Voltar
                 </button>
-                <button class="btnConfirmar" v-on:click="confirmar" :disabled="!validatePhoneNumber(telefone)">
+                <button class="btnConfirmar" :disabled="!validatePhoneNumber(telefone)">
                   Cadastrar
                 </button>
               </div>
@@ -271,6 +271,8 @@ export default {
           } else {
             console.log("Erro: " + response.message);
           }
+        }).catch(error => {
+          alert(error.response.data);
         });
 
       await axios

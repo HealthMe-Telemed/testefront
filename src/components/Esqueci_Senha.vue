@@ -126,7 +126,7 @@ export default {
         .then(response => {
           // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
           if (response.status === 200) {
-            window.alert("Um link de redefinição de senha será enviado ao email fornecido")
+            window.alert("Um link de redefinição de senha será enviado ao email fornecido. Lembre-se também de conferir no seu lixo eletrônico!")
             this.$router.push('/');
           } 
         })
