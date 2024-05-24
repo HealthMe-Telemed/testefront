@@ -1,29 +1,23 @@
 # testefront
 
-This template should help get you started developing with Vue 3 in Vite.
+Este repositório é responsável pelo front-end do HealthMe
 
-## Recommended IDE Setup
+## Softwares necessários
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[VSCode](https://code.visualstudio.com/) + [NodeJs](https://nodejs.org/en/download/package-manager).
 
-## Customize configuration
+## Requisitos Adicionais
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+[Banco de dados Base](https://github.com/HealthMe-Telemed/BD), [API de Usuario](https://github.com/HealthMe-Telemed/UsuarioWebAPI), [API de Agendamento](https://github.com/HealthMe-Telemed/AgendamentoWebAPI) e [API de consulta](https://github.com/HealthMe-Telemed/ConsultaWebAPI) executando.
 
-## Project Setup
+## Instalação dos pacotes npm
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compilação e execução da aplicação
 
 ```sh
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
 ```
