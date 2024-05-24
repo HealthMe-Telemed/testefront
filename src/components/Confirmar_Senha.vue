@@ -1,5 +1,4 @@
 <script setup>
-import Layout from './Layout.vue';
 import Titulos from './Titulos.vue';
 </script>
 

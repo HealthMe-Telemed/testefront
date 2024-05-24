@@ -1,6 +1,5 @@
 <script setup>
 import Layout from './Layout.vue';
-import ConsultaExemplo from './ConsultaExemplo.vue';
 </script>
 
 <template>

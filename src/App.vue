@@ -9,6 +9,8 @@ import Confirmar_Senha from './components/Confirmar_Senha.vue';
 import Editar_Consulta from'./components/Editar_Consulta.vue';
 import Titulos from './components/Titulos.vue';
 import Botoes_Agendamento from './components/Botoes_Agendamento.vue';
+import ConsultaExemplo from './components/ConsultaExemplo.vue';
+import DadosPerfil from './components/DadosPerfil.vue';
 
 </script>
 
@@ -30,7 +32,9 @@ import Botoes_Agendamento from './components/Botoes_Agendamento.vue';
       Editar_Consulta,      
       Layout,
       Titulos,
-      Botoes_Agendamento
+      Botoes_Agendamento,
+      DadosPerfil,
+      ConsultaExemplo
     },
   };
   </script>

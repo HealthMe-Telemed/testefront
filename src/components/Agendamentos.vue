@@ -4,19 +4,15 @@ import Botoes_Agendamento from './Botoes_Agendamento.vue';
 
 <template>
   <section>
-
-    <Botoes_Agendamento :cabecalho="'Agendamento'"></Botoes_Agendamento>
-
+    <Botoes_Agendamento :cabecalho="'Agendamento'" :nome="nome"></Botoes_Agendamento>
       <div class="container" v-if="agendamentos.length != 0" v-for="(agendamento, indice) in agendamentos"
         :key="indice">
-
         <div class="esquerda">
           <div class="item">
             <img src="../assets/Icons/AguardandoCalendário.png" style="
               width: 80px;
               height: 80px;
               margin-top: 15px;" />
-
             <div class="subtitulo">Agendamento {{ indice + 1 }}</div>
             <p v-if="agendamento.medicoId !== medicoId">Médico: {{ agendamento.nomeMedico }}</p>
             <p v-else>Paciente: {{ agendamento.nomePaciente }}</p>
@@ -25,10 +21,8 @@ import Botoes_Agendamento from './Botoes_Agendamento.vue';
             <p>Data agendamento: {{ formattedDate(agendamento.dataAgendamento) }}</p>
           </div>
         </div>
-
         <div v-if="agendamento.statusConsultaId === 1" class="direita">
-
-          <a :href="agendamento.linkConsulta" target="_blank"><button class="botao-consulta">
+          <a :href="agendamento.linkConsulta" target="_blank" v-on:click="finalizarConsulta(agendamento)"><button class="botao-consulta">
             <img src="../assets/Icons/AceitarCalendário.png" style="width: 70px; height: 70px;"/>
             <p>Entrar na Consulta</p></button></a>
 
@@ -40,7 +34,6 @@ import Botoes_Agendamento from './Botoes_Agendamento.vue';
             <img src="../assets/Icons/CancelarCalendário.png" style="width: 50px; height: 50px;"/>
             <p>Cancelar</p></button>
         </div>
-
         <div v-else class="direita" style="margin: auto">
           <div class="cancelado">{{ agendamento.statusConsulta }}</div>
         </div>
@@ -70,6 +63,7 @@ export default {
   created() {
     this.token = sessionStorage.getItem("token");
     this.usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    this.nome = this.usuario.nome;
     this.perfis = this.usuario.perfis
     if (this.perfis.length > 1 || this.perfis[0].idPerfil == 2)
       this.medicoId = this.perfis.find(x => x.idPerfil == 2).idMedico
@@ -137,10 +131,24 @@ export default {
         axiosConfig)
       window.location.reload()
     },
+    async finalizarConsulta(agendamento) {
+      
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      }
+      await axios.delete(`https://localhost:7231/Agendamentos/${agendamento.id}/encerrar`,
+        axiosConfig)
+      window.location.reload()
+    },
     acessarConsulta(agendamento) {
       let reuniaoId = (agendamento.linkConsulta.substr(25)).split('?');
       localStorage.setItem("linkConsulta", reuniaoId);
       this.$router.push("/Consulta");
+    },
+    dadosusuario(){
+      this.$router.push("/DadosPerfil");
     },
     novoAgendamento() {
       this.$router.push("/Novo_Agendamento");

@@ -1,6 +1,10 @@
 <template>
     <header>
 
+      <button class="perfil" v-on:click="dadosusuario">
+        <img src="../assets/Icons/Icon Usuario.png" style="width: 50px; height: 50px;"/>
+        <p>{{ nome }}</p></button>
+
       <button class="novo" v-on:click="novoAgendamento">
         <img src="../assets/Icons/Adicionar.png" style="width: 50px; height: 50px;"/>
         <p> Novo Agendamento </p></button>
@@ -85,17 +89,31 @@ button {
   font-size: 40px;
   align-items: center;
 }
+
+.perfil {
+  margin: 20px;
+  padding: 10px;
+  font-size: 20px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  color: #fff;
+  text-align: center;
+}
 </style>
 
 <script>
 export default{
-    props:['cabecalho'],
+    props:['cabecalho', 'nome'],
     methods: {
         Logout() {
             this.$router.push("/");
         },
         novoAgendamento(){
           this.$router.push("/Novo_Agendamento");
+        },
+        dadosusuario(){
+          this.$router.push("/DadosPerfil");
         }
     }
 }
