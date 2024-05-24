@@ -37,39 +37,39 @@ import { vMaska } from "maska";
             <form @submit.prevent="Dados">
 
               <div class="iconUsuario">
-              <img src="../assets/Icons/Icon Usuario.png" style="width: 40px; height: 40px;"/>
+                <img src="../assets/Icons/Icon Usuario.png" style="width: 40px; height: 40px;" />
               </div>
 
               <div class="inputBx">
-                <input type="text" required="true" :placeholder="nome" disabled v-model="nome"/>
+                <input type="text" required="true" :placeholder="nome" disabled v-model="nome" />
               </div>
 
               <div class="iconEmail">
-              <img src="../assets/Icons/Email2.png" style="width: 40px; height: 40px;"/>
+                <img src="../assets/Icons/Email2.png" style="width: 40px; height: 40px;" />
               </div>
 
               <div class="inputBx">
-                <input type="text" required="true" :placeholder="email" disabled v-model="email"/>
+                <input type="text" required="true" :placeholder="email" disabled v-model="email" />
               </div>
 
               <div class="iconTelefone">
-              <img src="../assets/Icons/Telefone.png" style="width: 40px; height: 40px;"/>
+                <img src="../assets/Icons/Telefone.png" style="width: 40px; height: 40px;" />
               </div>
 
               <div class="inputBx">
-              <input type="text" required="true" :placeholder="telefone" disabled v-model="telefone"/>
+                <input type="text" required="true" :placeholder="telefone" disabled v-model="telefone" />
               </div>
 
               <div class="iconData">
-              <img src="../assets/Icons/Calendário2.png" style="width: 40px; height: 40px;"/>
+                <img src="../assets/Icons/Calendário2.png" style="width: 40px; height: 40px;" />
               </div>
 
               <div class="inputBx">
-              <input type="text" required="true" :placeholder="dataNascimento" disabled v-model="dataNasciomento"/>
+                <input type="text" required="true" :placeholder="dataNascimento" disabled v-model="dataNasciomento"/>
               </div>
-              
+
               <div class="iconCPF">
-              <img src="../assets/Icons/CPF.png" style="width: 40px; height: 40px;"/>
+                <img src="../assets/Icons/CPF.png" style="width: 40px; height: 40px;"/>
               </div>
 
               <div class="inputBx">
@@ -77,32 +77,21 @@ import { vMaska } from "maska";
               </div>
 
               <div class="inputBx" v-if="checked">
-                <input type="text" required="true" :placeholder="especialidade" disabled v-model="especialidade"/>
+                <div class="iconEsp">
+                  <img src="../assets/Icons/Icon Médico.png" style="width: 40px; height: 40px;"/>
+                </div>
+                <input type="text" required="true" :placeholder="especialidade" v-model="especialidade" />
               </div>
 
               <div class="inputBx" v-if="checked">
-
-                <div class="iconesp">
-                <img src="../assets/Icons/Icon Médico.png"/>
+                <div class="iconNumCRM">
+                <img src="../assets/Icons/Icon NumCRM.png" style="width: 40px; height: 40px;"/>
                 </div>
-
-                <div class="iconcrm">
-                <img src="../assets/Icons/Icon CRM.png"/>
-                </div>
-
-                <div class="iconnumcrm">
-                <img src="../assets/Icons/Icon NumCRM.png"/>
-                </div>
-
-                <input type="text" required="true" :placeholder="uf" disabled v-model="uf"/>
-              </div>
-
-              <div class="inputBx" v-if="checked">
-                <input type="text" required="true" :placeholder="crm" disabled v-model="crm"/>
+                <input type="text" required="true" :placeholder="crm" disabled v-model="crm" />
               </div>
 
               <div class="inputBx editar">
-                <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button> 
+                <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
                 <!-- <button type="submit" class="btnAlterar">Alterar</button> -->
               </div>
             </form>
@@ -135,12 +124,11 @@ export default {
       medico: 0,
       nome: "",
       email: "",
-      telefone:"",
-      dataNascimento:"",
-      cpf:"",
-      especialidade:"",
-      crm:"",
-      uf:"",
+      telefone: "",
+      dataNascimento: "",
+      cpf: "",
+      especialidade: "",
+      crm: "",
       checked: false
     };
   },
@@ -149,27 +137,21 @@ export default {
     this.token = sessionStorage.getItem("token");
     this.usuario = JSON.parse(sessionStorage.getItem("usuario"));
     const perfis = this.usuario.perfis
-    if(perfis.length === 2) this.checked = true
+    if (perfis.length === 2) this.checked = true
     this.nome = this.usuario.nome;
     this.email = this.usuario.email;
     this.telefone = this.usuario.numero;
-    this.dataNascimento =   moment(this.usuario.dataNascimento).format('DD/MM/YYYY');
+    this.dataNascimento = moment(this.usuario.dataNascimento).format('DD/MM/YYYY');
     this.cpf = this.usuario.cpf;
     this.especialidade = this.usuario.especialidade;
-    this.uf = this.usuario.uf;
     this.crm = this.usuario.crm;
     this.selectedMedicos = this.agendamento.medicoId;
     this.buscarIdPaciente();
     this.buscarIdMedico();
   },
 
-  mounted() {
-    this.selectedEspecialidade = this.agendamento.especialidadeId;
-    this.especialidade = this.agendamento.especialidade;
-  },
-
   methods: {
-    buscarAgendamento(){
+    buscarAgendamento() {
       axios
         .get(
           `https://localhost:7231/Agendamentos/${this.$route.params.id}`
@@ -188,7 +170,7 @@ export default {
           console.log(error.response.data);
         });
     },
-    
+
     atualizaDatas() {
       this.dataConsulta = '';
       this.horarioConsulta = '';
@@ -367,7 +349,7 @@ export default {
     voltar() {
       this.$router.push('/Agendamentos');
     },
-    alterar(){
+    alterar() {
       this.$router.push('./Agendamentos')
     }
   }
@@ -642,5 +624,19 @@ header {
   position: absolute;
   margin-top: -41px;
   margin-left: -55px;
+}
+
+.iconEsp {
+  display: flex;
+  position: absolute;
+  margin-top: -89px;
+  margin-left: -74px;
+}
+
+.iconNumCRM {
+  display: flex;
+  position: absolute;
+  margin-top: -89px;
+  margin-left: -74px;
 }
 </style>
