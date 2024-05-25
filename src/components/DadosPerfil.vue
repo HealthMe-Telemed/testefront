@@ -151,6 +151,26 @@ export default {
   },
 
   methods: {
+    deleteUser(){
+      if(window.confirm("Deseja excluir esse usuário. Lembre-se que essa operação é IRREVERSÍVEL!!")){
+        axios.delete(`https://localhost:7146/Usuario/${this.usuario.id}/Excluir`).
+        then((response) => {
+          // Verificar se a resposta da API indica sucesso (por exemplo, status 200)
+          if (response.status === 200) {
+            // Redirecionar para a página de sucesso
+            console.log(response.data);
+            alert(response.data)
+            this.$router.push("/")
+          } else {
+            console.log("Erro: " + response.message);
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+
+      }
+    },
     buscarAgendamento() {
       axios
         .get(
