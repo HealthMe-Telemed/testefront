@@ -4,31 +4,36 @@ import Botoes_Agendamento from './Botoes_Agendamento.vue';
 
 <template>
   <section>
+
     <Botoes_Agendamento :cabecalho="'Agendamento'" :nome="nome"></Botoes_Agendamento>
-      <div class="container" v-if="agendamentos.length != 0" v-for="(agendamento, indice) in agendamentos"
-        :key="indice">
+
+      <div class="container" v-if="agendamentos.length != 0" v-for="(agendamento, indice) in agendamentos" :key="indice">
+
         <div class="esquerda">
+
           <div class="item">
             <img src="../assets/Icons/AguardandoCalendário.png" style="
               width: 80px;
               height: 80px;
               margin-top: 15px;" />
-            <div class="subtitulo">Agendamento {{ indice + 1 }}</div>
-            <p v-if="agendamento.medicoId !== medicoId">Médico: {{ agendamento.nomeMedico }}</p>
-            <p v-else>Paciente: {{ agendamento.nomePaciente }}</p>
-            <p>Especialidade: {{ agendamento.especialidade }}</p>
-            <p>Tipo da consulta: {{ agendamento.tipoConsulta }}</p>
-            <p>Data agendamento: {{ formattedDate(agendamento.dataAgendamento) }}</p>
-          </div>
+
+              <div class="subtitulo">Agendamento {{ indice + 1 }}</div>
+              <p v-if="agendamento.medicoId !== medicoId">Médico: {{ agendamento.nomeMedico }}</p>
+              <p v-else>Paciente: {{ agendamento.nomePaciente }}</p>
+              <p>Especialidade: {{ agendamento.especialidade }}</p>
+              <p>Tipo da consulta: {{ agendamento.tipoConsulta }}</p>
+              <p>Data agendamento: {{ formattedDate(agendamento.dataAgendamento) }}</p>
+          </div>         
         </div>
         <div v-if="agendamento.statusConsultaId === 1" class="direita">
-          <a :href="agendamento.linkConsulta" target="_blank" v-on:click="finalizarConsulta(agendamento)"><button class="botao-consulta">
+          <a :href="agendamento.linkConsulta" target="_blank" v-on:click="finalizarConsulta(agendamento)">
+            <button class="botao-consulta">
             <img src="../assets/Icons/AceitarCalendário.png" style="width: 70px; height: 70px;"/>
             <p>Entrar na Consulta</p></button></a>
 
           <button class="botao-secundario editar" v-on:click="editarAgendamento(agendamento)">
             <img src="../assets/Icons/EditarCalendário.png" style="width: 50px; height: 50px;"/>
-            <p>Editar</p></button>
+            <p>Alterar</p></button>
 
           <button class="botao-secundario cancelar" v-on:click="cancelarAgendamento(agendamento)">
             <img src="../assets/Icons/CancelarCalendário.png" style="width: 50px; height: 50px;"/>
@@ -57,7 +62,7 @@ export default {
       perfis: [],
       medicoId: 0,
       pacienteId: 0,
-      linkConsulta: ''
+      linkConsulta: '',
     };
   },
   created() {
@@ -69,6 +74,7 @@ export default {
       this.medicoId = this.perfis.find(x => x.idPerfil == 2).idMedico
     this.pacienteId = this.perfis.find(x => x.idPerfil == 1).idPaciente
   },
+
   mounted() {
     const axiosConfig = {
       headers: {
@@ -95,6 +101,7 @@ export default {
           console.log(error.response.data);
         });
     }
+
     if (this.usuario !== null && this.medicoId !== 0) {
       axios
         .get(
@@ -116,10 +123,12 @@ export default {
         });
     }
   },
+
   methods: {
     Logout() {
       this.$router.push("/");
     },
+
     async cancelarAgendamento(agendamento) {
       
       const axiosConfig = {
@@ -131,6 +140,7 @@ export default {
         axiosConfig)
       window.location.reload()
     },
+
     async finalizarConsulta(agendamento) {
       
       const axiosConfig = {
@@ -142,6 +152,7 @@ export default {
         axiosConfig)
       window.location.reload()
     },
+
     acessarConsulta(agendamento) {
       let reuniaoId = (agendamento.linkConsulta.substr(25)).split('?');
       localStorage.setItem("linkConsulta", reuniaoId);

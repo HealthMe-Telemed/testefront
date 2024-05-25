@@ -8,7 +8,7 @@ import { vMaska } from "maska";
 <template>
   <section>
 
-    <Titulos :cabecalho="'Editar Agendamento'"></Titulos>
+    <Titulos :cabecalho="'Alterar Agendamento'"></Titulos>
 
     <main>
       <div class="container">

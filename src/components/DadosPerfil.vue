@@ -1,14 +1,13 @@
 <script setup>
 import { NavigationFailureType } from 'vue-router';
-import Layout from "./Layout.vue";
-import Titulos from './Titulos.vue';
 import { vMaska } from "maska";
+import Botoes_DadosPerfil from './Botoes_DadosPerfil.vue';
 </script>
 
 <template>
   <section>
 
-    <Titulos :cabecalho="'Dados de Perfil'"></Titulos>
+    <Botoes_DadosPerfil :cabecalho="'Dados de Perfil'"></Botoes_DadosPerfil>
 
     <main>
       <div class="container">
@@ -91,7 +90,7 @@ import { vMaska } from "maska";
               </div>
 
               <div class="inputBx editar">
-                <button class="btnVoltar" formnovalidate v-on:click="voltar">Voltar</button>
+                <button class="btnDeletar" v-on:click="deleteUser">Excluir Conta</button>
                 <!-- <button type="submit" class="btnAlterar">Alterar</button> -->
               </div>
             </form>
@@ -103,6 +102,7 @@ import { vMaska } from "maska";
 </template>
 <script>
 import moment from 'moment';
+import Botoes_DadosPerfil from './Botoes_DadosPerfil.vue';
 
 export default {
   data() {
@@ -346,11 +346,8 @@ export default {
           console.log(error.response.data);
         });
     },
-    voltar() {
-      this.$router.push('/Agendamentos');
-    },
     alterar() {
-      this.$router.push('./Agendamentos')
+      this.$router.push('./Agendamentos');
     }
   }
 };
@@ -499,7 +496,7 @@ header {
   width: 100%;
   top: 50px;
   left: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 /* Barras de Medico e CRM  */
@@ -565,8 +562,23 @@ header {
   outline: none;
   border: none;
   border: 1px solid #102fac33;
-  background: rgb(71, 71, 71);
+  background:rgb(0, 94, 255);
   margin-right: 8px;
+  padding: 8px 10px;
+  padding-left: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transform: translateY(-80px);
+}
+
+.form .inputBx .btnDeletar {
+  width: 50%;
+  outline: none;
+  border: none;
+  border: 1px solid #102fac33;
+  background: rgb(71, 71, 71);
   padding: 8px 10px;
   padding-left: 10px;
   border-radius: 10px;
